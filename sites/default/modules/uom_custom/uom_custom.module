@@ -21,6 +21,36 @@ function uom_custom_menu() {
 }
 
 /**
+ * Implements hook_menu_alter().
+ */
+function uom_custom_menu_alter(&$items) {
+  $items['admin/config/people/accounts']['access arguments'] = array('change user settings');
+
+  // DONE: wysiwyg profiles	(administer text formats)
+  // DONE: text formats		(administer text formats)
+
+  // TODO: URL aliases
+  // TODO: URL redirects
+}
+
+/**
+ * Implements hook_permission().
+ *
+ * Create an extra permission so that admins with 'Administer Users' permission
+ * cannot actually change the user settings. That is reserved for site admins.
+ * Admins do still need to be able to create and edit users, though.
+ */
+function uom_custom_permission() {
+  return array(
+    'change user settings' => array(
+      'title' => t('Change User Settings'),
+      'description' => t('Change the way users register with the site.'),
+      'restrict access' => TRUE,
+    ),
+  );
+}
+
+/**
  * Implements hook_user_view().
  */
 function uom_custom_user_view($account, $view_mode, $langcode) {
