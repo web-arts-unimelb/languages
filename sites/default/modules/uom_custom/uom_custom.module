@@ -22,15 +22,23 @@ function uom_custom_menu() {
 
 /**
  * Implements hook_menu_alter().
+ *
+ * The URL aliases and URL redirect permissions assume you will move
+ * the respective Management Menu entries to a different place in that
+ * menu; e.g.: under admin/content
  */
 function uom_custom_menu_alter(&$items) {
+  // Change the required permission for the User Settings page.
   $items['admin/config/people/accounts']['access arguments'] = array('change user settings');
 
-  // DONE: wysiwyg profiles	(administer text formats)
-  // DONE: text formats		(administer text formats)
+  // Change the permission needed to list and edit URL aliases.
+  $items['admin/config/search/path']['access arguments'] = array('edit url aliases');
+  $items['admin/config/search/path/edit/%path']['access arguments'] = array('edit url aliases');
+  $items['admin/config/search/path/delete/%path']['access arguments'] = array('edit url aliases');
 
-  // TODO: URL aliases
-  // TODO: URL redirects
+  // Change the permission needed to list and edit URL redirects.
+  $items['admin/config/search/redirect']['access arguments'] = array('edit url redirects');
+  $items['admin/config/search/redirect/404']['access arguments'] = array('edit url redirects');
 }
 
 /**
@@ -46,6 +54,14 @@ function uom_custom_permission() {
       'title' => t('Change User Settings'),
       'description' => t('Change the way users register with the site.'),
       'restrict access' => TRUE,
+    ),
+    'edit url aliases' => array(
+      'title' => t('Edit URL Aliases'),
+      'description' => t('View and edit URL aliases, but not URL alias settings or bulk updates.'),
+    ),
+    'edit url redirects' => array(
+      'title' => t('Edit URL Redirects'),
+      'description' => t('View and edit URL redirects, but not URL redirect settings.'),
     ),
   );
 }
