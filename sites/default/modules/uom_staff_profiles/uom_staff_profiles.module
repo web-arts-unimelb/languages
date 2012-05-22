@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the UoM Staff Profiles feature.
+ */
+
+include_once 'uom_staff_profiles.features.inc';
