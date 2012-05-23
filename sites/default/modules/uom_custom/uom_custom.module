@@ -80,7 +80,7 @@ function uom_custom_user_view($account, $view_mode, $langcode) {
     if (in_array($rid, $staff_rids)) {
       $role_link = _uom_custom_staff_type_link($role);
       $profile_links[$role_link] = array(
-        'title' => t('To view your @role profile, please visit <a href="!link">this page</a>.', array('@role' => $role, '!link' => url('about-us/'. $role_link .'/'. check_plain($account->name)))),
+        'title' => t('To view your <a href="!link">@role profile</a>.', array('@role' => $role, '!link' => url('about-us/'. $role_link .'/'. check_plain($account->name)))),
         'html' => TRUE,
       );
     }
