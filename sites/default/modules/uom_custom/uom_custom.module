@@ -1,0 +1,167 @@
+<?php
+/**
+ * @file
+ * Custom module for Faculty of Arts Drupal sites.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function uom_custom_menu() {
+  $items['admin/config/people/uom-staff-profiles'] = array(
+    'title' => t('UoM Staff Profiles'),
+    'description' => t('UoM Staff Profiles'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('uom_custom_admin_settings'),
+    'access arguments' => array('administer permissions'),
+    'file' => 'uom_custom.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_menu_alter().
+ *
+ *
+ * The URL aliases and URL redirect permissions assume you will move
+ * the respective Management Menu entries to a different place in that
+ * menu; e.g.: under admin/content
+ */
+function uom_custom_menu_alter(&$items) {
+  // Change the required permission for the User Settings page.
+  $items['admin/config/people/accounts']['access arguments'] = array('change user settings');
+
+  // Change the permission needed to list and edit URL aliases.
+  $items['admin/config/search/path']['access arguments'] = array('edit url aliases');
+  $items['admin/config/search/path/edit/%path']['access arguments'] = array('edit url aliases');
+  $items['admin/config/search/path/delete/%path']['access arguments'] = array('edit url aliases');
+
+  // Change the permission needed to list and edit URL redirects.
+  $items['admin/config/search/redirect']['access arguments'] = array('edit url redirects');
+  $items['admin/config/search/redirect/404']['access arguments'] = array('edit url redirects');
+}
+
+/**
+ * Implements hook_permission().
+ *
+ * Create an extra permission so that admins with 'Administer Users' permission
+ * cannot actually change the user settings. That is reserved for site admins.
+ * Admins do still need to be able to create and edit users, though.
+ */
+function uom_custom_permission() {
+  return array(
+    'change user settings' => array(
+      'title' => t('Change User Settings'),
+      'description' => t('Change the way users register with the site.'),
+      'restrict access' => TRUE,
+    ),
+    'edit url aliases' => array(
+      'title' => t('Edit URL Aliases'),
+      'description' => t('View and edit URL aliases, but not URL alias settings or bulk updates.'),
+    ),
+    'edit url redirects' => array(
+      'title' => t('Edit URL Redirects'),
+      'description' => t('View and edit URL redirects, but not URL redirect settings.'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_user_view().
+ */
+function uom_custom_user_view($account, $view_mode, $langcode) {
+  $profile_links = array();
+
+  // Which roles to create links for.
+  $staff_rids = array_filter(variable_get('uom-staff-roles', array()));
+
+  foreach ($account->roles as $rid => $role) {
+    if (in_array($rid, $staff_rids)) {
+      $role_link = _uom_custom_staff_type_link($role);
+      $profile_links[$role_link] = array(
+        'title' => t('To view your <a href="!link">@role profile</a>.', array('@role' => $role, '!link' => url('about-us/'. $role_link .'/'. check_plain($account->name)))),
+        'html' => TRUE,
+      );
+    }
+  }
+
+  $account->content['profile_links'] = theme('links', array('links' => $profile_links));
+}
+
+/**
+ * Implements hook_token_info().
+ */
+function uom_custom_token_info() {
+  $user['uom-staff-type'] = array(
+    'name' => t('UoM Staff Type'),
+    'description' => t('The staff type, as determined by the user\'s roles.'),
+  );
+
+  return array(
+    'tokens' => array('user' => $user),
+  );
+}
+
+/**
+ * Implements hook_tokens().
+ */
+function uom_custom_tokens($type, $tokens, array $data = array(), array $options = array()) {
+
+  $url_options = array('absolute' => TRUE);
+  if (isset($options['language'])) {
+    $url_options['language'] = $options['language'];
+    $language_code = $options['language']->language;
+  }
+  else {
+    $language_code = NULL;
+  }
+  $sanitize = !empty($options['sanitize']);
+
+  $replacements = array();
+
+  if ($type == 'user' && !empty($data['user'])) {
+    $account = $data['user'];
+
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        case 'uom-staff-type':
+          $staff = _uom_custom_staff_type($account);
+          $replacements[$original] = ($sanitize) ? check_plain($staff) : $staff;
+          break;
+      }
+    }
+  }
+  return $replacements;
+}
+
+// TODO: Formatters that allow users to be linked to a defined staff type
+// profile page as defined via views.
+
+/**
+ * Helper that returns a sanitised (for use in URL) staff type string.
+ *
+ * If a user has multiple staff type roles assigned, the "highest" level
+ * one will be used. Only roles set on the settings page will be used.
+ *
+ * @param $account
+ *   A valid user object.
+ * @return
+ *   A string.
+ */
+function _uom_custom_staff_type($account) {
+  // Which roles to create links for.
+  $staff_rids = array_filter(variable_get('uom-staff-roles', array()));
+  foreach ($account->roles as $rid => $role) {
+    if (in_array($rid, $staff_rids)) {
+      return _uom_custom_staff_type_link($role);
+    }
+  }
+}
+
+/**
+ * Helper to sanely format a role name for user in a link.
+ */
+function _uom_custom_staff_type_link($role) {
+  return preg_replace('/[^a-zA-z0-9]/', '-', $role);
+}

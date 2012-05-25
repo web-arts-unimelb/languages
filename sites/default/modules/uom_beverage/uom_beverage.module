@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the UoM Beverage feature.
+ */
+
+include_once 'uom_beverage.features.inc';
