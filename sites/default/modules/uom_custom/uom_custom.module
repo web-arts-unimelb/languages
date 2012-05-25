@@ -21,6 +21,18 @@ function uom_custom_menu() {
 }
 
 /**
+ * Implements hook_init().
+ */
+function uom_custom_init() {
+  global $user;
+
+  // Hide the admin menu icon (and its links) for non site-admin users.
+  if (!in_array('site admin', $user->roles)) {
+    drupal_add_css('#admin-menu .dropdown li.admin-menu-icon { display: none; }', array('type' => 'inline'));
+  }
+}
+
+/**
  * Implements hook_menu_alter().
  *
  *
