@@ -32,6 +32,9 @@ function uom_custom_menu_alter(&$items) {
   // Change the required permission for the User Settings page.
   $items['admin/config/people/accounts']['access arguments'] = array('change user settings');
 
+  // Change the permission for the Permissions page.
+  $items['admin/people/permissions']['access arguments'] = array('change role permissions');
+
   // Change the permission needed to list and edit URL aliases.
   $items['admin/config/search/path']['access arguments'] = array('edit url aliases');
   $items['admin/config/search/path/edit/%path']['access arguments'] = array('edit url aliases');
@@ -57,6 +60,12 @@ function uom_custom_form_alter(&$form, &$form_state, $form_id) {
       // Inject a validate handler that run before the one in user.module. If
       // the 'academic staff' role is checked, the discipline field becomes mandatory again.
       array_unshift($form['#validate'], 'uom_custom_user_profile_form_validate');
+    }
+
+    // Only site admins can create more site admins.
+    if (!in_array('site admin', $user->roles)) {
+      $role = db_select('role', 'r')->fields('r')->condition('name', 'site admin', '=')->execute()->fetchObject();
+      unset ($form['account']['roles']['#options'][$role->rid]);
     }
   }
 }
@@ -93,6 +102,11 @@ function uom_custom_permission() {
     'change user settings' => array(
       'title' => t('Change User Settings'),
       'description' => t('Change the way users register with the site.'),
+      'restrict access' => TRUE,
+    ),
+    'change role permissions' => array(
+      'title' => t('Change Role Permissions'),
+      'description' => t('Change the permissions assigned to roles.'),
       'restrict access' => TRUE,
     ),
     'edit url aliases' => array(
