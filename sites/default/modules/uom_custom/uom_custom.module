@@ -49,9 +49,9 @@ function uom_custom_form_alter(&$form, &$form_state, $form_id) {
   global $user;
 
   // The discipline field should be mandatory *only* for academic staff editing their own profile.
-  if ($form_id == 'user_profile_form') {
-    $language_code = $form['field_discipline']['#language'];
+  if ($form_id == 'user_profile_form' || $form_id == 'user_register_form') {
     if (!in_array('academic staff', $user->roles)) {
+      $language_code = $form['field_discipline']['#language'];
       $form['field_discipline'][$language_code]['#required'] = FALSE;
 
       // Inject a validate handler that run before the one in user.module. If
