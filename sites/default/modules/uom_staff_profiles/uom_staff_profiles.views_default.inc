@@ -925,6 +925,33 @@ function uom_staff_profiles_views_default_views() {
   $handler->display->display_options['fields']['uid']['empty_zero'] = 0;
   $handler->display->display_options['fields']['uid']['hide_alter_empty'] = 0;
   $handler->display->display_options['fields']['uid']['link_to_user'] = 0;
+  /* Field: User: Name */
+  $handler->display->display_options['fields']['name']['id'] = 'name';
+  $handler->display->display_options['fields']['name']['table'] = 'users';
+  $handler->display->display_options['fields']['name']['field'] = 'name';
+  $handler->display->display_options['fields']['name']['label'] = '';
+  $handler->display->display_options['fields']['name']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['name']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['name']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['name']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['name']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['name']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['name']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['name']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['name']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['name']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['name']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['name']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['name']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['name']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['name']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['name']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['name']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['name']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['name']['link_to_user'] = 0;
+  $handler->display->display_options['fields']['name']['overwrite_anonymous'] = 0;
+  $handler->display->display_options['fields']['name']['format_username'] = 1;
   /* Field: User: Given name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
@@ -1036,7 +1063,7 @@ function uom_staff_profiles_views_default_views() {
   $handler->display->display_options['fields']['field_discipline']['field'] = 'field_discipline';
   $handler->display->display_options['fields']['field_discipline']['label'] = '';
   $handler->display->display_options['fields']['field_discipline']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_discipline']['alter']['alter_text'] = 1;
+  $handler->display->display_options['fields']['field_discipline']['alter']['alter_text'] = 0;
   $handler->display->display_options['fields']['field_discipline']['alter']['text'] = '<h3>Disciplines</h3>
 [field_discipline]';
   $handler->display->display_options['fields']['field_discipline']['alter']['make_link'] = 0;
@@ -1056,8 +1083,7 @@ function uom_staff_profiles_views_default_views() {
   $handler->display->display_options['fields']['field_discipline']['hide_empty'] = 1;
   $handler->display->display_options['fields']['field_discipline']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_discipline']['hide_alter_empty'] = 1;
-  $handler->display->display_options['fields']['field_discipline']['click_sort_column'] = 'value';
-  $handler->display->display_options['fields']['field_discipline']['type'] = 'text_default';
+  $handler->display->display_options['fields']['field_discipline']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_discipline']['group_column'] = 'value';
   $handler->display->display_options['fields']['field_discipline']['field_api_classes'] = 0;
   /* Field: User: E-mail */
@@ -1375,33 +1401,33 @@ function uom_staff_profiles_views_default_views() {
   $handler->display->display_options['fields']['field_presentations']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_presentations']['hide_alter_empty'] = 1;
   $handler->display->display_options['fields']['field_presentations']['field_api_classes'] = 0;
-  /* Field: User: Bibliography link */
-  $handler->display->display_options['fields']['field_bibliography_link']['id'] = 'field_bibliography_link';
-  $handler->display->display_options['fields']['field_bibliography_link']['table'] = 'field_data_field_bibliography_link';
-  $handler->display->display_options['fields']['field_bibliography_link']['field'] = 'field_bibliography_link';
-  $handler->display->display_options['fields']['field_bibliography_link']['label'] = '';
-  $handler->display->display_options['fields']['field_bibliography_link']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_bibliography_link']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['field_bibliography_link']['alter']['make_link'] = 1;
-  $handler->display->display_options['fields']['field_bibliography_link']['alter']['path'] = 'about-us/academic-staff/[uid]/bibliography';
-  $handler->display->display_options['fields']['field_bibliography_link']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['field_bibliography_link']['alter']['external'] = 0;
-  $handler->display->display_options['fields']['field_bibliography_link']['alter']['replace_spaces'] = 0;
-  $handler->display->display_options['fields']['field_bibliography_link']['alter']['trim_whitespace'] = 0;
-  $handler->display->display_options['fields']['field_bibliography_link']['alter']['link_class'] = 'bibliography_link';
-  $handler->display->display_options['fields']['field_bibliography_link']['alter']['nl2br'] = 0;
-  $handler->display->display_options['fields']['field_bibliography_link']['alter']['word_boundary'] = 1;
-  $handler->display->display_options['fields']['field_bibliography_link']['alter']['ellipsis'] = 1;
-  $handler->display->display_options['fields']['field_bibliography_link']['alter']['more_link'] = 0;
-  $handler->display->display_options['fields']['field_bibliography_link']['alter']['strip_tags'] = 0;
-  $handler->display->display_options['fields']['field_bibliography_link']['alter']['trim'] = 0;
-  $handler->display->display_options['fields']['field_bibliography_link']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['field_bibliography_link']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_bibliography_link']['element_default_classes'] = 0;
-  $handler->display->display_options['fields']['field_bibliography_link']['hide_empty'] = 1;
-  $handler->display->display_options['fields']['field_bibliography_link']['empty_zero'] = 0;
-  $handler->display->display_options['fields']['field_bibliography_link']['hide_alter_empty'] = 1;
-  $handler->display->display_options['fields']['field_bibliography_link']['field_api_classes'] = 0;
+  /* Field: User: Bibliography */
+  $handler->display->display_options['fields']['field_bibliography']['id'] = 'field_bibliography';
+  $handler->display->display_options['fields']['field_bibliography']['table'] = 'field_data_field_bibliography';
+  $handler->display->display_options['fields']['field_bibliography']['field'] = 'field_bibliography';
+  $handler->display->display_options['fields']['field_bibliography']['label'] = '';
+  $handler->display->display_options['fields']['field_bibliography']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_bibliography']['alter']['alter_text'] = 1;
+  $handler->display->display_options['fields']['field_bibliography']['alter']['text'] = '<h3>Bibliography</h3>
+<a href="/about-us/academic-staff/[name]/bibliography">More</a>';
+  $handler->display->display_options['fields']['field_bibliography']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_bibliography']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_bibliography']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_bibliography']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_bibliography']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_bibliography']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_bibliography']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_bibliography']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_bibliography']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['field_bibliography']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_bibliography']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_bibliography']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_bibliography']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_bibliography']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_bibliography']['hide_empty'] = 1;
+  $handler->display->display_options['fields']['field_bibliography']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_bibliography']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['field_bibliography']['field_api_classes'] = 0;
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing_3']['id'] = 'nothing_3';
   $handler->display->display_options['fields']['nothing_3']['table'] = 'views';
@@ -1412,9 +1438,9 @@ function uom_staff_profiles_views_default_views() {
 <div class="col-4 first">
 <h2>[field_first_name] [field_last_name]</h2>
 <h5>[field_position]</h5>
+[field_discipline]<br />
 [mail]<br/>
-[field_room]<br/>
-[field_building]<br/>
+[field_room] [field_building]<br/>
 [field_phone]
 </div>
 
@@ -1422,7 +1448,6 @@ function uom_staff_profiles_views_default_views() {
 [field_profile_image]
 </div>
 
-[field_discipline]
 [field_qualifications]
 [field_research_interest]
 [field_biography]
@@ -1431,7 +1456,7 @@ function uom_staff_profiles_views_default_views() {
 [field_awards_and_grants]
 [field_teaching]
 [field_presentations]
-[field_bibliography_link]';
+[field_bibliography]';
   $handler->display->display_options['fields']['nothing_3']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['nothing_3']['alter']['absolute'] = 0;
   $handler->display->display_options['fields']['nothing_3']['alter']['external'] = 0;

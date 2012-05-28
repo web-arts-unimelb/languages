@@ -53,15 +53,6 @@ function uom_staff_profiles_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
-  // Exported permission: create field_bibliography_link.
-  $permissions['create field_bibliography_link'] = array(
-    'name' => 'create field_bibliography_link',
-    'roles' => array(
-      0 => 'anonymous user',
-    ),
-    'module' => 'field_permissions',
-  );
-
   // Exported permission: create field_biography.
   $permissions['create field_biography'] = array(
     'name' => 'create field_biography',
@@ -262,17 +253,6 @@ function uom_staff_profiles_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
-  // Exported permission: edit field_bibliography_link.
-  $permissions['edit field_bibliography_link'] = array(
-    'name' => 'edit field_bibliography_link',
-    'roles' => array(
-      0 => 'academic staff',
-      1 => 'admin',
-      2 => 'site admin',
-    ),
-    'module' => 'field_permissions',
-  );
-
   // Exported permission: edit field_biography.
   $permissions['edit field_biography'] = array(
     'name' => 'edit field_biography',
@@ -459,17 +439,6 @@ function uom_staff_profiles_user_default_permissions() {
   // Exported permission: edit own field_bibliography.
   $permissions['edit own field_bibliography'] = array(
     'name' => 'edit own field_bibliography',
-    'roles' => array(
-      0 => 'academic staff',
-      1 => 'admin',
-      2 => 'site admin',
-    ),
-    'module' => 'field_permissions',
-  );
-
-  // Exported permission: edit own field_bibliography_link.
-  $permissions['edit own field_bibliography_link'] = array(
-    'name' => 'edit own field_bibliography_link',
     'roles' => array(
       0 => 'academic staff',
       1 => 'admin',
@@ -678,19 +647,6 @@ function uom_staff_profiles_user_default_permissions() {
   // Exported permission: view field_bibliography.
   $permissions['view field_bibliography'] = array(
     'name' => 'view field_bibliography',
-    'roles' => array(
-      0 => 'academic staff',
-      1 => 'admin',
-      2 => 'anonymous user',
-      3 => 'authenticated user',
-      4 => 'site admin',
-    ),
-    'module' => 'field_permissions',
-  );
-
-  // Exported permission: view field_bibliography_link.
-  $permissions['view field_bibliography_link'] = array(
-    'name' => 'view field_bibliography_link',
     'roles' => array(
       0 => 'academic staff',
       1 => 'admin',
@@ -929,16 +885,6 @@ function uom_staff_profiles_user_default_permissions() {
       0 => 'academic staff',
       1 => 'admin',
       2 => 'site admin',
-    ),
-    'module' => 'field_permissions',
-  );
-
-  // Exported permission: view own field_bibliography_link.
-  $permissions['view own field_bibliography_link'] = array(
-    'name' => 'view own field_bibliography_link',
-    'roles' => array(
-      0 => 'admin',
-      1 => 'site admin',
     ),
     'module' => 'field_permissions',
   );
