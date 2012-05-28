@@ -82,6 +82,18 @@ function uom_custom_form_alter(&$form, &$form_state, $form_id) {
       unset ($form['account']['roles']['#options'][$role->rid]);
     }
   }
+
+  // VBO Administer People. Ensure admins cannot delete site admins.
+  if ($form_id == 'views_form_peopel_1_page' && !in_array('site admin', $user->roles)) {
+    foreach ($form['views_bulk_operations'] as $idx => $item) {
+      if (is_array($item)) {
+        $account = user_load($item['#return_value']);
+        if (in_array('site admin', $account->roles)) {
+          $form['views_bulk_operations'][$idx]['#access'] = FALSE;
+        }
+      }
+    }
+  }
 }
 
 /**
