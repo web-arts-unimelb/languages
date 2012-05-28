@@ -27,8 +27,10 @@ function uom_custom_init() {
   global $user;
 
   // Hide the admin menu icon (and its links) for non site-admin users.
+  // And the blocks references on the structure > menus page.
   if (!in_array('site admin', $user->roles)) {
     drupal_add_css('#admin-menu .dropdown li.admin-menu-icon { display: none; }', array('type' => 'inline'));
+    drupal_add_css('.page-admin-structure-menu #block-system-help { display: none; }', array('type' => 'inline'));
   }
 }
 
@@ -145,8 +147,8 @@ function uom_custom_user_view($account, $view_mode, $langcode) {
     if (in_array($rid, $staff_rids)) {
       $role_link = _uom_custom_staff_type_link($role);
       $profile_links[$role_link] = array(
-        'title' => t('To view your <a href="!link">@role profile</a>.', array('@role' => $role, '!link' => url('about-us/'. $role_link .'/'. check_plain($account->name)))),
-        'html' => TRUE,
+        'title' => t('View @role profile.', array('@role' => $role)),
+        'href' => url('about-us/'. $role_link .'/'. check_plain($account->name), array('absolute' => TRUE)),
       );
     }
   }
