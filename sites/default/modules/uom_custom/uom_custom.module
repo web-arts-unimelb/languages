@@ -219,7 +219,9 @@ function uom_custom_filter_info() {
  */
 function _uom_custom_node_link($text, $filter) {
   // The match pattern should include quotes, to avoid replacing only part
-  // of a node link, such as 'node/42' on what is actually 'node/427'.
+  // of a node link, such as 'node/42' on what is actually 'node/427'. The
+  // braces around the node nid regex part means I get the pure node nids
+  // in a second array, so I don't need to substr() the whole matched string.
   $pattern = '/"\/node\/([0-9]+)"/';
   $count = preg_match_all($pattern, $text, $matches);
 
@@ -228,6 +230,7 @@ function _uom_custom_node_link($text, $filter) {
     return $text;
   }
 
+  // Array of replacements.
   $replace = array();
 
   // Grab the relative node link, and rewrite it to the alias. Then
