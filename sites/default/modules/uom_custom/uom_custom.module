@@ -13,7 +13,7 @@ function uom_custom_menu() {
     'description' => t('UoM Staff Profiles'),
     'page callback' => 'drupal_get_form',
     'page arguments' => array('uom_custom_admin_settings'),
-    'access arguments' => array('administer permissions'),
+    'access arguments' => array('change role permissions'),
     'file' => 'uom_custom.admin.inc',
     'type' => MENU_LOCAL_TASK,
   );
