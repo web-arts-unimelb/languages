@@ -200,6 +200,53 @@ function uom_custom_tokens($type, $tokens, array $data = array(), array $options
   return $replacements;
 }
 
+/**
+ * Implements hook_filter_info()
+ */
+function uom_custom_filter_info() {
+  return array(
+    'uom_custom_node_link' => array(
+      'title' => t('UoM Node Link'),
+      'description' => t('Rewrite internal <em>/node/NN</em> links to use the node alias instead.'),
+      'process callback' => '_uom_custom_node_link',
+      'tips callback' => '_uom_custom_node_link_tips',
+    ),
+  );
+}
+
+/**
+ * Filter callback for uom_custom_node_link.
+ */
+function _uom_custom_node_link($text, $filter) {
+  // The match pattern should include quotes, to avoid replacing only part
+  // of a node link, such as 'node/42' on what is actually 'node/427'.
+  $pattern = '/"\/node\/([0-9]+)"/';
+  $count = preg_match_all($pattern, $text, $matches);
+
+  // Early return if there are no matches.
+  if (empty($count)) {
+    return $text;
+  }
+
+  $replace = array();
+
+  // Grab the relative node link, and rewrite it to the alias. Then
+  // add it to the array of replacements to perform.
+  for($i = 0; $i < $count; $i++) {
+    $replace[$matches[0][$i]] = '"'. url('node/'. $matches[1][$i]) .'"';
+  }
+
+  // Replace the links in the text, return it.
+  return strtr($text, $replace);
+}
+
+/**
+ * Filter tips callback for uom_custom_node_link.
+ */
+function _uom_custom_node_link_tips($filter, $format, $long = FALSE) {
+  return t('Internal links in the form <em>node/nid</em> are rewritten to use the node alias, if available.');
+}
+
 // TODO: Formatters that allow users to be linked to a defined staff type
 // profile page as defined via views.
 
