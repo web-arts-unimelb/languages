@@ -338,74 +338,6 @@ function uom_staff_profiles_field_default_fields() {
     ),
   );
 
-  // Exported field: 'user-user-field_bibliography_link'
-  $fields['user-user-field_bibliography_link'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'field_bibliography_link',
-      'field_permissions' => array(
-        'type' => '2',
-      ),
-      'foreign keys' => array(
-        'format' => array(
-          'columns' => array(
-            'format' => 'format',
-          ),
-          'table' => 'filter_format',
-        ),
-      ),
-      'global_block_settings' => '1',
-      'indexes' => array(
-        'format' => array(
-          0 => 'format',
-        ),
-      ),
-      'module' => 'text',
-      'settings' => array(),
-      'translatable' => '0',
-      'type' => 'text_long',
-    ),
-    'field_instance' => array(
-      'bundle' => 'user',
-      'default_value' => array(
-        0 => array(
-          'value' => 'Bibliography',
-        ),
-      ),
-      'deleted' => '0',
-      'description' => '',
-      'display' => array(
-        'default' => array(
-          'label' => 'above',
-          'module' => 'text',
-          'settings' => array(),
-          'type' => 'text_default',
-          'weight' => '42',
-        ),
-      ),
-      'entity_type' => 'user',
-      'field_name' => 'field_bibliography_link',
-      'label' => 'Bibliography link',
-      'required' => 0,
-      'settings' => array(
-        'text_processing' => '0',
-        'user_register_form' => 0,
-      ),
-      'widget' => array(
-        'active' => 1,
-        'module' => 'text',
-        'settings' => array(
-          'rows' => '5',
-        ),
-        'type' => 'text_textarea',
-        'weight' => '27',
-      ),
-    ),
-  );
-
   // Exported field: 'user-user-field_biography'
   $fields['user-user-field_biography'] = array(
     'field_config' => array(
@@ -1557,7 +1489,6 @@ function uom_staff_profiles_field_default_fields() {
   // Included for use with string extractors like potx.
   t('Awards and grants');
   t('Bibliography');
-  t('Bibliography link');
   t('Biography');
   t('Building');
   t('Discipline/s');
