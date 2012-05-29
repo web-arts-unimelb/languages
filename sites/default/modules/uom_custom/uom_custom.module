@@ -264,6 +264,80 @@ function _uom_custom_node_link_tips($filter, $format, $long = FALSE) {
   return t('Internal links in the form <em>node/nid</em> are rewritten to use the node alias, if available.');
 }
 
+/**
+ * Implements hook_formatter_info().
+ */
+function uom_custom_field_formatter_info() {
+  return array(
+    'uom_html5_phone_link' => array(
+      'label' => t('HTML5 Phone Link'),
+      'field types' => array('text'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function uom_custom_field_formatter_view($obj_type, $object, $field, $instance, $langcode, $items, $display) {
+  $element = array();
+
+  // Build variables array for formatter.
+  $variables = array(
+    '#obj_type' => $obj_type,
+    '#object' => $object,
+    '#field' => $field,
+    '#instance' => $instance,
+    '#langcode' => $langcode,
+    '#items' => $items,
+    '#display' => $display,
+  );
+
+  if (function_exists($function = "{$display['module']}_field_formatter_{$display['type']}")) {
+    $element[0] = array(
+      '#markup' => $function($variables),
+    );
+  }
+
+  return $element;
+}
+
+/**
+ * Field Formatter; HTML5 Phone Link.
+ *
+ * Contains a little bit of smarts to render full international
+ * numbers if possible.
+ */
+function uom_custom_field_formatter_uom_html5_phone_link($variables) {
+  // Check for an Australian mobile number.
+  if (strpos($variables['#items'][0]['safe_value'], '04') === 0) {
+    $phone = substr($variables['#items'][0]['safe_value'], 1);
+    $phone = strtr($phone, array(' ' => ''));
+    return '<a href="tel:+61'. $phone .'">'. $variables['#items'][0]['safe_value'] .'</a>';
+  }
+  // Check for a landline number with the Victoria/Tassie prefix.
+  else if (strpos($variables['#items'][0]['safe_value'], '03') === 0) {
+    $phone = substr($variables['#items'][0]['safe_value'], 1);
+    $phone = strtr($phone, array(' ' => ''));
+    return '<a href="tel:+61'. $phone .'">'. $variables['#items'][0]['safe_value'] .'</a>';
+  }
+  // Check for an interstate number.
+  else if (strpos($variables['#items'][0]['safe_value'], '0') === 0) {
+    $phone = strtr($variables['#items'][0]['safe_value'], array(' ' => ''));
+    return '<a href="tel:'. $phone .'">'. $variables['#items'][0]['safe_value'] .'</a>';
+  }
+  // Check for an international number.
+  else if (strpos($variables['#items'][0]['safe_value'], '+') === 0) {
+    $phone = strtr($variables['#items'][0]['safe_value'], array(' ' => ''));
+    return '<a href="tel:'. $phone .'">'. $variables['#items'][0]['safe_value'] .'</a>';
+  }
+
+  // Must be unprefixed local. Just add prefix.
+  $phone = strtr($variables['#items'][0]['safe_value'], array(' ' => ''));
+  return '<a href="tel:+613'. $phone .'">'. $variables['#items'][0]['safe_value'] .'</a>';
+}
+
+
 // TODO: Formatters that allow users to be linked to a defined staff type
 // profile page as defined via views.
 
