@@ -513,7 +513,7 @@ function uom_staff_profiles_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
-          'weight' => 46,
+          'weight' => '46',
         ),
       ),
       'entity_type' => 'user',
@@ -716,9 +716,9 @@ function uom_staff_profiles_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'inline',
-          'module' => 'text',
+          'module' => 'uom_custom',
           'settings' => array(),
-          'type' => 'text_default',
+          'type' => 'uom_html5_phone_link',
           'weight' => '7',
         ),
       ),

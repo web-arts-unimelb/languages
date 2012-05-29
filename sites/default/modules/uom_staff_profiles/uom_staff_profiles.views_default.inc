@@ -330,6 +330,7 @@ function uom_staff_profiles_views_default_views() {
   $handler->display->display_options['fields']['field_phone']['alter']['nl2br'] = 0;
   $handler->display->display_options['fields']['field_phone']['alter']['word_boundary'] = 1;
   $handler->display->display_options['fields']['field_phone']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_phone']['alter']['more_link'] = 0;
   $handler->display->display_options['fields']['field_phone']['alter']['strip_tags'] = 0;
   $handler->display->display_options['fields']['field_phone']['alter']['trim'] = 0;
   $handler->display->display_options['fields']['field_phone']['alter']['html'] = 0;
@@ -338,6 +339,7 @@ function uom_staff_profiles_views_default_views() {
   $handler->display->display_options['fields']['field_phone']['hide_empty'] = 1;
   $handler->display->display_options['fields']['field_phone']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_phone']['hide_alter_empty'] = 0;
+  $handler->display->display_options['fields']['field_phone']['type'] = 'uom_html5_phone_link';
   $handler->display->display_options['fields']['field_phone']['field_api_classes'] = 0;
   /* Field: User: E-mail */
   $handler->display->display_options['fields']['mail']['id'] = 'mail';
@@ -1184,6 +1186,7 @@ function uom_staff_profiles_views_default_views() {
   $handler->display->display_options['fields']['field_phone']['hide_empty'] = 0;
   $handler->display->display_options['fields']['field_phone']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_phone']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['field_phone']['type'] = 'uom_html5_phone_link';
   $handler->display->display_options['fields']['field_phone']['field_api_classes'] = 0;
   /* Field: User: Qualifications */
   $handler->display->display_options['fields']['field_qualifications']['id'] = 'field_qualifications';
@@ -1756,6 +1759,7 @@ function uom_staff_profiles_views_default_views() {
   $handler->display->display_options['fields']['field_phone']['hide_empty'] = 0;
   $handler->display->display_options['fields']['field_phone']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_phone']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['field_phone']['type'] = 'uom_html5_phone_link';
   $handler->display->display_options['fields']['field_phone']['field_api_classes'] = 0;
   /* Field: User: Responsibilities */
   $handler->display->display_options['fields']['field_responsibilities']['id'] = 'field_responsibilities';
