@@ -65,11 +65,12 @@ function uom_custom_menu_alter(&$items) {
 function uom_custom_form_alter(&$form, &$form_state, $form_id) {
   global $user;
 
-  // The discipline field should be mandatory *only* for academic staff editing their own profile.
+  // The some fields should be mandatory *only* for academic staff editing their own profile.
   if ($form_id == 'user_profile_form' || $form_id == 'user_register_form') {
     if (!in_array('academic staff', $user->roles)) {
       $language_code = $form['field_discipline']['#language'];
       $form['field_discipline'][$language_code]['#required'] = FALSE;
+	  $form['field_academic_staff_type'][$language_code]['#required'] = FALSE;	
 
       // Inject a validate handler that run before the one in user.module. If
       // the 'academic staff' role is checked, the discipline field becomes mandatory again.
@@ -103,7 +104,7 @@ function uom_custom_form_alter(&$form, &$form_state, $form_id) {
 function uom_custom_user_profile_form_validate($form, &$form_state) {
   global $user;
 
-  // If the user being edited or created is 'academic staff', the discipline field
+  // If the user being edited or created is 'academic staff', the some fields
   // behaves as if it is mandatory.
   $role = db_select('role', 'r')->fields('r')->condition('name', 'academic staff', '=')->execute()->fetchObject();
 
@@ -112,6 +113,10 @@ function uom_custom_user_profile_form_validate($form, &$form_state) {
     $language_code = $form['field_discipline']['#language'];
     if (empty($form_state['values']['field_discipline'][$language_code][0]['tid'])) {
       form_set_error('field_discipline', t('Discipline/s field is required for Academic staff'));
+    }
+
+	if (empty($form_state['values']['field_academic_staff_type'][$language_code][0]['tid'])) {
+      form_set_error('field_academic_staff_type', t('Academic staff type field is required for Academic staff'));
     }
   }
 }
