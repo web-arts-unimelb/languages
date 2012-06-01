@@ -181,9 +181,16 @@ function uom_custom_token_info() {
     'name' => t('UoM Staff Type'),
     'description' => t('The staff type, as determined by the user\'s roles.'),
   );
+  $node['uom-zone-path'] = array(
+    'name' => t('UoM Zone Path'),
+    'description' => t('The URL path of the zone vocabulary this node is classified under.'),
+  );
 
   return array(
-    'tokens' => array('user' => $user),
+    'tokens' => array(
+      'user' => $user,
+      'node' => $node,
+    ),
   );
 }
 
@@ -216,6 +223,18 @@ function uom_custom_tokens($type, $tokens, array $data = array(), array $options
       }
     }
   }
+
+  if ($type == 'node' && !empty($data['node'])) {
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        case 'uom-zone-path':
+          $path = _uom_custom_zone_path($data['node']);
+          $replacements[$original] = ($sanitize) ? check_plain($path) : $path;
+          break;
+      }
+    }
+  }
+
   return $replacements;
 }
 
@@ -314,6 +333,11 @@ function uom_custom_field_formatter_view($obj_type, $object, $field, $instance, 
  * numbers if possible.
  */
 function uom_custom_field_formatter_uom_html5_phone_link($variables) {
+  // Early return.
+  if (empty($variables['#items'])) {
+    return;
+  }
+
   // Check for an Australian mobile number.
   if (strpos($variables['#items'][0]['safe_value'], '04') === 0) {
     $phone = substr($variables['#items'][0]['safe_value'], 1);
@@ -372,4 +396,28 @@ function _uom_custom_staff_type($account) {
  */
 function _uom_custom_staff_type_link($role) {
   return preg_replace('/[^a-zA-z0-9]/', '-', $role);
+}
+
+/**
+ * Helper to turn a zone field value into a url path snippet.
+ *
+ * @param $node
+ *   A valid node object.
+ * @return
+ *   A string.
+ */
+function _uom_custom_zone_path($node) {
+  if (empty($node->field_zone[$node->language][0])) {
+    return;
+  }
+
+  $path = array();
+
+  $terms = taxonomy_get_parents_all($node->field_zone[$node->language][0]['tid']);
+  foreach ($terms as $term) {
+    $path[] = pathauto_cleanstring($term->name);
+  }
+
+  // Reverse this array and turn it into a pretty directory path.
+  return implode('/', array_reverse($path));
 }
