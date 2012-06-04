@@ -183,7 +183,23 @@ function uom_custom_token_info() {
   );
   $node['uom-zone-path'] = array(
     'name' => t('UoM Zone Path'),
-    'description' => t('The URL path of the zone vocabulary this node is classified under.'),
+    'description' => t('The URL path of the site section vocabulary this node is classified under.'),
+  );
+  $node['uom-event-path'] = array(
+    'name' => t('UoM Event Path'),
+    'description' => t('The URL path for the date this event will be held.'),
+  );
+  $node['uom-event-path-day'] = array(
+    'name' => t('UoM Event Day'),
+    'description' => t('The numeric day of the month this event will be held.'),
+  );
+  $node['uom-event-path-month'] = array(
+    'name' => t('UoM Event Month'),
+    'description' => t('The numeric month for the date this event will be held.'),
+  );
+  $node['uom-event-path-year'] = array(
+    'name' => t('UoM Event Year'),
+    'description' => t('The full year for the date this event will be held.'),
   );
 
   return array(
@@ -229,6 +245,24 @@ function uom_custom_tokens($type, $tokens, array $data = array(), array $options
       switch ($name) {
         case 'uom-zone-path':
           $path = _uom_custom_zone_path($data['node']);
+          $replacements[$original] = ($sanitize) ? check_plain($path) : $path;
+          break;
+
+        case 'uom-event-path':
+          $path = _uom_custom_event_path($data['node']);
+          $replacements[$original] = ($sanitize) ? check_plain($path) : $path;
+          break;
+
+        case 'uom-event-path-day':
+          $path = _uom_custom_event_path($data['node'], '%d');
+          $replacements[$original] = ($sanitize) ? check_plain($path) : $path;
+          break;
+        case 'uom-event-path-month':
+          $path = _uom_custom_event_path($data['node'], '%m');
+          $replacements[$original] = ($sanitize) ? check_plain($path) : $path;
+          break;
+        case 'uom-event-path-year':
+          $path = _uom_custom_event_path($data['node'], '%Y');
           $replacements[$original] = ($sanitize) ? check_plain($path) : $path;
           break;
       }
@@ -420,4 +454,21 @@ function _uom_custom_zone_path($node) {
 
   // Reverse this array and turn it into a pretty directory path.
   return implode('/', array_reverse($path));
+}
+
+/**
+ * Helper to turn an event date field value into a url path snippet.
+ *
+ * @param $node
+ *   A valid node object.
+ * @return
+ *   A string.
+ */
+function _uom_custom_event_path($node, $format = '%Y/%m/%d') {
+  if (empty($node->field_dates[$node->language][0])) {
+    return;
+  }
+
+  $date = strtotime($node->field_dates[$node->language][0]['value']);
+  return strftime($format, $date);
 }
