@@ -162,6 +162,11 @@ function uom_custom_permission() {
  * Implements hook_user_view().
  */
 function uom_custom_user_view($account, $view_mode, $langcode) {
+  // Early return if the profile is not public.
+  if ($account->field_share_profile['und'][0]['value'] == 'No') {
+    return;
+  }
+
   $profile_links = array();
 
   // Which roles to create links for.
