@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Related Items feature.
+ */
+
+include_once 'uom_related_items.features.inc';
