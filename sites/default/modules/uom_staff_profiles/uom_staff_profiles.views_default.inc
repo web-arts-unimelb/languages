@@ -1059,7 +1059,7 @@ function uom_staff_profiles_views_default_views() {
   $handler->display->display_options['fields']['field_position']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_position']['hide_alter_empty'] = 1;
   $handler->display->display_options['fields']['field_position']['field_api_classes'] = 0;
-  /* Field: User: Discipline/s */
+  /* Field: User: Discipline */
   $handler->display->display_options['fields']['field_discipline']['id'] = 'field_discipline';
   $handler->display->display_options['fields']['field_discipline']['table'] = 'field_data_field_discipline';
   $handler->display->display_options['fields']['field_discipline']['field'] = 'field_discipline';

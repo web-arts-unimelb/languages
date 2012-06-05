@@ -105,16 +105,6 @@ function uom_staff_profiles_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
-  // Exported permission: create field_page_highlight.
-  $permissions['create field_page_highlight'] = array(
-    'name' => 'create field_page_highlight',
-    'roles' => array(
-      0 => 'admin',
-      1 => 'site admin',
-    ),
-    'module' => 'field_permissions',
-  );
-
   // Exported permission: create field_page_image.
   $permissions['create field_page_image'] = array(
     'name' => 'create field_page_image',
@@ -303,16 +293,6 @@ function uom_staff_profiles_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
-  // Exported permission: edit field_page_highlight.
-  $permissions['edit field_page_highlight'] = array(
-    'name' => 'edit field_page_highlight',
-    'roles' => array(
-      0 => 'admin',
-      1 => 'site admin',
-    ),
-    'module' => 'field_permissions',
-  );
-
   // Exported permission: edit field_page_image.
   $permissions['edit field_page_image'] = array(
     'name' => 'edit field_page_image',
@@ -492,16 +472,6 @@ function uom_staff_profiles_user_default_permissions() {
   // Exported permission: edit own field_page_document.
   $permissions['edit own field_page_document'] = array(
     'name' => 'edit own field_page_document',
-    'roles' => array(
-      0 => 'admin',
-      1 => 'site admin',
-    ),
-    'module' => 'field_permissions',
-  );
-
-  // Exported permission: edit own field_page_highlight.
-  $permissions['edit own field_page_highlight'] = array(
-    'name' => 'edit own field_page_highlight',
     'roles' => array(
       0 => 'admin',
       1 => 'site admin',
@@ -719,16 +689,6 @@ function uom_staff_profiles_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
-  // Exported permission: view field_page_highlight.
-  $permissions['view field_page_highlight'] = array(
-    'name' => 'view field_page_highlight',
-    'roles' => array(
-      0 => 'admin',
-      1 => 'site admin',
-    ),
-    'module' => 'field_permissions',
-  );
-
   // Exported permission: view field_page_image.
   $permissions['view field_page_image'] = array(
     'name' => 'view field_page_image',
@@ -934,16 +894,6 @@ function uom_staff_profiles_user_default_permissions() {
   // Exported permission: view own field_page_document.
   $permissions['view own field_page_document'] = array(
     'name' => 'view own field_page_document',
-    'roles' => array(
-      0 => 'admin',
-      1 => 'site admin',
-    ),
-    'module' => 'field_permissions',
-  );
-
-  // Exported permission: view own field_page_highlight.
-  $permissions['view own field_page_highlight'] = array(
-    'name' => 'view own field_page_highlight',
     'roles' => array(
       0 => 'admin',
       1 => 'site admin',

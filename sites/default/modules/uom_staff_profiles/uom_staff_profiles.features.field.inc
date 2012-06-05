@@ -460,7 +460,7 @@ function uom_staff_profiles_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '12',
+        'weight' => '14',
       ),
     ),
   );
@@ -518,7 +518,7 @@ function uom_staff_profiles_field_default_fields() {
       ),
       'entity_type' => 'user',
       'field_name' => 'field_discipline',
-      'label' => 'Discipline/s',
+      'label' => 'Discipline',
       'required' => 1,
       'settings' => array(
         'user_register_form' => 1,
@@ -528,7 +528,7 @@ function uom_staff_profiles_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '9',
+        'weight' => '12',
       ),
     ),
   );
@@ -737,7 +737,7 @@ function uom_staff_profiles_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '13',
+        'weight' => '15',
       ),
     ),
   );
@@ -1098,7 +1098,7 @@ function uom_staff_profiles_field_default_fields() {
           'rows' => '8',
         ),
         'type' => 'text_textarea',
-        'weight' => '14',
+        'weight' => '16',
       ),
     ),
   );
@@ -1162,7 +1162,7 @@ function uom_staff_profiles_field_default_fields() {
           'rows' => '10',
         ),
         'type' => 'text_textarea',
-        'weight' => '19',
+        'weight' => '23',
       ),
     ),
   );
@@ -1226,7 +1226,7 @@ function uom_staff_profiles_field_default_fields() {
           'rows' => '10',
         ),
         'type' => 'text_textarea',
-        'weight' => '34',
+        'weight' => '24',
       ),
     ),
   );
@@ -1353,7 +1353,7 @@ function uom_staff_profiles_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '11',
+        'weight' => '13',
       ),
     ),
   );
@@ -1491,7 +1491,7 @@ function uom_staff_profiles_field_default_fields() {
   t('Bibliography');
   t('Biography');
   t('Building');
-  t('Discipline/s');
+  t('Discipline');
   t('Document uploader');
   t('Family name');
   t('Given name');
