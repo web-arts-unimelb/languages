@@ -65,8 +65,18 @@ function uom_custom_menu_alter(&$items) {
 function uom_custom_form_alter(&$form, &$form_state, $form_id) {
   global $user;
 
-  // The some fields should be mandatory *only* for academic staff editing their own profile.
   if ($form_id == 'user_profile_form' || $form_id == 'user_register_form') {
+
+    // Rearrange user.module core fields a bit.
+    $form['account']['name']['#weight'] = -10;
+    $form['account']['mail']['#weight'] =  -9;
+    $form['account']['pass']['#weight'] =  -8;
+    $form['account']['current_pass']['#weight'] =  -7;
+    $form['account']['current_pass_required_values']['#weight'] =  -6;
+
+    $form['account']['current_pass']['#description'] =  t('If you want to change your <em class="placeholder">E-mail address</em> or <em class="placeholder">Password</em>, you must enter your current password to confirm. <a href="/user/password" title="Request new password via e-mail.">Request new password</a>.');
+
+    // Some fields should be mandatory *only* for academic staff editing their own profile.
     if (!in_array('academic staff', $user->roles)) {
       $language_code = $form['field_discipline']['#language'];
       $form['field_discipline'][$language_code]['#required'] = FALSE;
@@ -183,6 +193,60 @@ function uom_custom_user_view($account, $view_mode, $langcode) {
   }
 
   $account->content['profile_links'] = theme('links', array('links' => $profile_links));
+}
+
+/**
+ * Implemnets hook_element_info_alter().
+ */
+function uom_custom_element_info_alter(&$type) {
+  if (isset($type['password_confirm'])) {
+    $type['password_confirm']['#process'][] = '_uom_custom_process_password_confirm';
+  }
+}
+
+/**
+ * Mess with the password_confirm form element.
+ */
+function _uom_custom_process_password_confirm($element) {
+  if ($element['#array_parents'][0] == 'account') {
+    $element['pass1']['#title'] = t('New password');
+    $element['pass2']['#title'] = t('Confirm new password');
+  }
+  return $element;
+}
+
+/**
+ * Implements hook_field_widget_form_alter().
+ *
+ * Add WYSIWYG treatment to textarea summary form items.
+ */
+function uom_custom_field_widget_form_alter(&$element, &$form_state, $context) {
+  if (isset($element['summary'])) {
+    drupal_add_css(drupal_get_path('module', 'uom_custom') . '/css/textarea-summary.css');
+    drupal_add_js(drupal_get_path('module', 'uom_custom') . '/js/textarea-summary.js');
+    $element['summary']['#type'] = 'text_format';
+    $element['summary']['#format'] = $element['#format'];
+  }
+}
+
+/**
+ * Implements hook_field_attach_presave().
+ */
+function uom_custom_field_attach_presave($entity_type, $entity) {
+  list($id, $vid, $bundle) = entity_extract_ids($entity_type, $entity);
+
+  foreach (field_info_instances($entity_type, $bundle) as $instance) {
+    $field = field_info_field_by_id($instance['field_id']);
+    $field_name = $field['field_name'];
+    if ($field['type'] == 'text_with_summary' && !empty($entity->$field_name)) {
+      $language = $entity->language;
+      foreach ($entity->{$field_name}[$language] as $id => &$value) {
+        if (is_array($value['summary'])) {
+          $value['summary'] = $value['summary']['value'];
+        }
+      }
+    }
+  }
 }
 
 /**
