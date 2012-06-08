@@ -262,6 +262,8 @@ function uom_related_items_views_default_views() {
 
   /* Display: Related Websites Block */
   $handler = $view->new_display('block', 'Related Websites Block', 'block_2');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Related Websites';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Related websites */
