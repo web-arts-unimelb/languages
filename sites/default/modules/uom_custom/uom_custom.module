@@ -377,7 +377,7 @@ function _uom_custom_node_link($text, $filter) {
   // of a node link, such as 'node/42' on what is actually 'node/427'. The
   // braces around the node nid regex part means I get the pure node nids
   // in a second array, so I don't need to substr() the whole matched string.
-  $pattern = '/"\/node\/([0-9]+)"/';
+  $pattern = '/"\/node\/([0-9]+)(#[\w]+)?(\?[^\"]+)?"/';
   $count = preg_match_all($pattern, $text, $matches);
 
   // Early return if there are no matches.
@@ -391,7 +391,7 @@ function _uom_custom_node_link($text, $filter) {
   // Grab the relative node link, and rewrite it to the alias. Then
   // add it to the array of replacements to perform.
   for($i = 0; $i < $count; $i++) {
-    $replace[$matches[0][$i]] = '"'. url('node/'. $matches[1][$i]) .'"';
+    $replace[$matches[0][$i]] = '"'. url('node/'. $matches[1][$i]) . $matches[2][$i] . $matches[3][$i] .'"';
   }
 
   // Replace the links in the text, return it.
