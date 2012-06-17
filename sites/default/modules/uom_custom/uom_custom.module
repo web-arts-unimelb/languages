@@ -543,7 +543,7 @@ function uom_custom_field_formatter_uom_image_floater($variables) {
     if (!empty($variables['#display']['settings']['image_float'])) {
       $item['attributes'] = array(
         'align' => $variables['#display']['settings']['image_float'],
-        'class' => 'wysiwyg_field-float,'. $variables['#display']['settings']['image_float'];
+        'class' => 'wysiwyg_field-float,'. $variables['#display']['settings']['image_float'],
       );
     }
     $elements[$delta] = array(
