@@ -366,6 +366,12 @@ function uom_custom_filter_info() {
       'process callback' => '_uom_custom_node_link',
       'tips callback' => '_uom_custom_node_link_tips',
     ),
+    'uom_custom_nostealth' => array(
+      'title' => t('UoM No Paragraph Spacing'),
+      'description' => t('Remove lines that contain only space in a paragraph tag.'),
+      'process callback' => '_uom_custom_nostealth',
+      'tips callback' => '_uom_custom_nostealth_tips',
+    ),
   );
 }
 
@@ -403,6 +409,20 @@ function _uom_custom_node_link($text, $filter) {
  */
 function _uom_custom_node_link_tips($filter, $format, $long = FALSE) {
   return t('Internal links in the form <em>node/nid</em> are rewritten to use the node alias, if available.');
+}
+
+/**
+ * Filter callback for uom_custom_nostealth.
+ */
+function _uom_custom_nostealth($text, $filter) {
+  return preg_replace('/<p>(&nbsp;|[\s])+<\/p>/', '', $text);
+}
+
+/**
+ * Filter tips callback for uom_custom_nostealth.
+ */
+function _uom_custom_nostealth_tips($filter, $format, $long = FALSE) {
+  return t('Remove empty paragraph tags that have been added to provide extra line spacing.');
 }
 
 /**
