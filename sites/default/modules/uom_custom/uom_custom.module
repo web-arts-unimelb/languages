@@ -32,6 +32,13 @@ function uom_custom_init() {
     drupal_add_css('#admin-menu .dropdown li.admin-menu-icon { display: none; }', array('type' => 'inline'));
     drupal_add_css('.page-admin-structure-menu #block-system-help { display: none; }', array('type' => 'inline'));
   }
+
+  // Hide format selection on text areas.
+  drupal_add_css('fieldset.filter-wrapper { display: none; }', array('type' => 'inline'));
+
+  // Hide wysiwyg field original content.
+  drupal_add_css('.insert.form-item.container-inline { display: none; }', array('type' => 'inline'));
+  drupal_add_css('.filefield-source-views .field-container { display: none; }', array('type' => 'inline'));
 }
 
 /**
@@ -434,7 +441,49 @@ function uom_custom_field_formatter_info() {
       'label' => t('HTML5 Phone Link'),
       'field types' => array('text'),
     ),
+    'uom_image_floater' => array(
+      'label' => t('Floated Image'),
+      'field types' => array('image'),
+      'settings' => array('image_style' => '', 'image_link' => '', 'image_float' => ''),
+    ),
   );
+}
+
+/**
+ * Implements hook_field_formatter_settings_form().
+ */
+function uom_custom_field_formatter_settings_form($field, $instance, $view_mode, $form, &$form_state) {
+  $element = image_field_formatter_settings_form($field, $instance, $view_mode, $form, $form_state);
+  $settings = $instance['display'][$view_mode]['settings'];
+  if ($field['cardinality'] != 1) {
+    $element['image_float'] = array(
+      '#title' => t('Float the image'),
+      '#type' => 'select',
+      '#options' => array('' => t('N/A'), 'left' => t('Left'), 'right' => t('Right')),
+      '#description' => t('Float the image.'),
+      '#default_value' => $settings['image_float'],
+      '#empty_option' => t('N/A'),
+    );
+  }
+  return $element;
+}
+
+/**
+ * Implements hook_field_formatter_settings_summary().
+ */
+function uom_custom_field_formatter_settings_summary($field, $instance, $view_mode) {
+  if (!empty($instance['settings']['wysiwyg_fields'])) {
+    $settings = $instance['display'][$view_mode]['settings'];
+
+    $summary = explode('<br />', image_field_formatter_settings_summary($field, $instance, $view_mode));
+
+    // Display this setting only if image limit is setted.
+    if (isset($settings['image_float']) && !empty($settings['image_float'])) {
+      $summary[] = t('Image Float: @float', array('@float' => $settings['image_float']));
+    }
+
+    return implode('<br />', $summary);
+  }
 }
 
 /**
@@ -461,6 +510,51 @@ function uom_custom_field_formatter_view($obj_type, $object, $field, $instance, 
   }
 
   return $element;
+}
+
+/**
+ * Field formatter; Floated Image.
+ */
+function uom_custom_field_formatter_uom_image_floater($variables) {
+  // Early return.
+  if (empty($variables['#items'])) {
+    return;
+  }
+
+  $elements = array();
+
+  // Check if the formatter involves a link.
+  if(!empty($variables['#display']['settings']['image_link'])) {
+    if ($variables['#display']['settings']['image_link'] == 'content') {
+      $uri = entity_uri($entity_type, $entity);
+    }
+    elseif ($variables['#display']['settings']['image_link'] == 'file') {
+      $link_file = TRUE;
+    }
+  }
+
+  foreach ($variables['#items'] as $delta => $item) {
+    if (isset($link_file)) {
+      $uri = array(
+        'path' => file_create_url($item['uri']),
+        'options' => array(),
+      );
+    }
+    if (!empty($variables['#display']['settings']['image_float'])) {
+      $item['attributes'] = array(
+        'align' => $variables['#display']['settings']['image_float'],
+        'class' => 'wysiwyg_field-float,'. $variables['#display']['settings']['image_float'];
+      );
+    }
+    $elements[$delta] = array(
+      '#theme' => 'image_formatter',
+      '#item' => $item,
+      '#image_style' => !empty($variables['#display']['settings']['image_style']) ? $variables['#display']['settings']['image_style'] : '',
+      '#path' => isset($uri) ? $uri : '',
+    );
+  }
+
+  return render($elements);
 }
 
 /**
@@ -502,6 +596,9 @@ function uom_custom_field_formatter_uom_html5_phone_link($variables) {
   $phone = strtr($variables['#items'][0]['safe_value'], array(' ' => ''));
   return '<a href="tel:+613'. $phone .'">'. $variables['#items'][0]['safe_value'] .'</a>';
 }
+
+/**
+ *
 
 
 // TODO: Formatters that allow users to be linked to a defined staff type
