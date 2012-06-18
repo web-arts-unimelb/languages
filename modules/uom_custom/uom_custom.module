@@ -574,18 +574,6 @@ function uom_custom_field_formatter_view($obj_type, $object, $field, $instance, 
 }
 
 /**
- * Field formatter; Date.
- */
-function uom_custom_field_formatter_uom_datetime($variables) {
-	dpm($variables);
-  // Early return.
-  if (empty($variables['#items'])) {
-    return;
-  }
-  return theme('file', $variables['#items'][0]);
-}
-
-/**
  * Field formatter; Attached File.
  */
 function uom_custom_field_formatter_uom_attached_file($variables) {
@@ -786,4 +774,14 @@ function uom_custom_entity_info_alter(&$entity_info) {
   $entity_info['file']['view modes']['medium_left'] = array('label' => t('Medium Left'), 'custom settings' => TRUE);
   $entity_info['file']['view modes']['medium_right'] = array('label' => t('Medium Right'), 'custom settings' => TRUE);
   $entity_info['file']['view modes']['attached_file'] = array('label' => t('Attached File'), 'custom settings' => TRUE);
+}
+
+/**
+ * Implements hook_media_browser_plugin_info_alter().
+ */
+function uom_custom_media_browser_plugin_info_alter(&$info) {
+  // Use only views to list media.
+  if (!empty($info['library'])) {
+    unset($info['library']);
+  }
 }
