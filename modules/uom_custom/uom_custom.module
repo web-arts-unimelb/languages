@@ -626,10 +626,14 @@ function uom_custom_field_formatter_uom_html5_phone_link($variables) {
     $phone = strtr($variables['#items'][0]['safe_value'], array(' ' => ''));
     return '<a href="tel:'. $phone .'">'. $variables['#items'][0]['safe_value'] .'</a>';
   }
+  // Assuming unprefixed local. Just add prefix.
+  else if (is_numeric($variables['#items'][0]['safe_value']{0})) {
+    $phone = strtr($variables['#items'][0]['safe_value'], array(' ' => ''));
+    return '<a href="tel:+613'. $phone .'">'. $variables['#items'][0]['safe_value'] .'</a>';
+  }
 
-  // Must be unprefixed local. Just add prefix.
-  $phone = strtr($variables['#items'][0]['safe_value'], array(' ' => ''));
-  return '<a href="tel:+613'. $phone .'">'. $variables['#items'][0]['safe_value'] .'</a>';
+  // Not numeric, just return it and don't link it to anything.
+  return $variables['#items'][0]['safe_value'];
 }
 
 /**
