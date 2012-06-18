@@ -423,8 +423,12 @@ function uom_custom_field_formatter_info() {
     ),
     'uom_image_floater' => array(
       'label' => t('Floated Image'),
-      'field types' => array('image'),
+      'field types' => array('file', 'image'),
       'settings' => array('image_style' => '', 'image_link' => '', 'image_float' => ''),
+    ),
+    'uom_attached_file' => array(
+      'label' => t('Attached File'),
+      'field types' => array('file'),
     ),
   );
 }
@@ -433,19 +437,21 @@ function uom_custom_field_formatter_info() {
  * Implements hook_field_formatter_settings_form().
  */
 function uom_custom_field_formatter_settings_form($field, $instance, $view_mode, $form, &$form_state) {
-  $element = image_field_formatter_settings_form($field, $instance, $view_mode, $form, $form_state);
-  $settings = $instance['display'][$view_mode]['settings'];
-  if ($field['cardinality'] != 1) {
-    $element['image_float'] = array(
-      '#title' => t('Float the image'),
-      '#type' => 'select',
-      '#options' => array('' => t('N/A'), 'left' => t('Left'), 'right' => t('Right')),
-      '#description' => t('Float the image.'),
-      '#default_value' => $settings['image_float'],
-      '#empty_option' => t('N/A'),
-    );
+  if ($instance['display'][$view_mode]['type'] == 'uom_image_floater') {
+    $element = image_field_formatter_settings_form($field, $instance, $view_mode, $form, $form_state);
+    $settings = $instance['display'][$view_mode]['settings'];
+    if ($field['cardinality'] != 1) {
+      $element['image_float'] = array(
+        '#title' => t('Float the image'),
+        '#type' => 'select',
+        '#options' => array('' => t('N/A'), 'left' => t('Left'), 'right' => t('Right')),
+        '#description' => t('Float the image.'),
+        '#default_value' => $settings['image_float'],
+        '#empty_option' => t('N/A'),
+      );
+    }
+    return $element;
   }
-  return $element;
 }
 
 /**
@@ -472,6 +478,8 @@ function uom_custom_field_formatter_settings_summary($field, $instance, $view_mo
 function uom_custom_field_formatter_view($obj_type, $object, $field, $instance, $langcode, $items, $display) {
   $element = array();
 
+  if (empty($display['module'])) $display['module'] = 'uom_custom';
+
   // Build variables array for formatter.
   $variables = array(
     '#obj_type' => $obj_type,
@@ -490,6 +498,17 @@ function uom_custom_field_formatter_view($obj_type, $object, $field, $instance, 
   }
 
   return $element;
+}
+
+/**
+ * Field formatter; Attached File.
+ */
+function uom_custom_field_formatter_uom_attached_file($variables) {
+  // Early return.
+  if (empty($variables['#items'])) {
+    return;
+  }
+  return theme('file', $variables['#items'][0]);
 }
 
 /**
@@ -514,6 +533,20 @@ function uom_custom_field_formatter_uom_image_floater($variables) {
   }
 
   foreach ($variables['#items'] as $delta => $item) {
+    if (!empty($item['field_description']) && (empty($item['alt']) || empty($item['title']))) {
+      $language = empty($item['language']) ? 'und' : $item['language'];
+      $title = $item['field_description'][$language][0]['safe_value'];
+      $item['alt'] = $item['title'] = $title;
+    }
+
+    // Make *certain* an alt and title attribute are present.
+    else if (empty($item['alt'])) {
+      $item['alt'] = t('Unnamed Image');
+    }
+    if (!isset($item['title'])) {
+      $item['title'] = '';
+    }
+
     if (isset($link_file)) {
       $uri = array(
         'path' => file_create_url($item['uri']),
@@ -522,8 +555,10 @@ function uom_custom_field_formatter_uom_image_floater($variables) {
     }
     if (!empty($variables['#display']['settings']['image_float'])) {
       $item['attributes'] = array(
+        'alt' => $item['alt'],
+        'title' => $item['title'],
         'align' => $variables['#display']['settings']['image_float'],
-        'class' => 'wysiwyg_field-float,'. $variables['#display']['settings']['image_float'];
+        'class' => 'image-float-'. $variables['#display']['settings']['image_float'],
       );
     }
     $elements[$delta] = array(
@@ -651,4 +686,15 @@ function _uom_custom_event_path($node, $format = '%Y/%m/%d') {
 
   $date = strtotime($node->field_dates[$node->language][0]['value']);
   return strftime($format, $date);
+}
+
+/**
+ * Implements hook_entity_info_alter().
+ */
+function uom_custom_entity_info_alter(&$entity_info) {
+  $entity_info['file']['view modes']['thumb_left'] = array('label' => t('Thumbnail Left'), 'custom settings' => TRUE);
+  $entity_info['file']['view modes']['thumb_right'] = array('label' => t('Thumbnail Right'), 'custom settings' => TRUE);
+  $entity_info['file']['view modes']['medium_left'] = array('label' => t('Medium Left'), 'custom settings' => TRUE);
+  $entity_info['file']['view modes']['medium_right'] = array('label' => t('Medium Right'), 'custom settings' => TRUE);
+  $entity_info['file']['view modes']['attached_file'] = array('label' => t('Attached File'), 'custom settings' => TRUE);
 }
