@@ -94,7 +94,6 @@ function uom_custom_form_alter(&$form, &$form_state, $form_id) {
       array_unshift($form['#validate'], 'uom_custom_user_profile_form_validate');
     }
 
-
     // Org unit is optional for site admins (who are ABC IT and not SoLL staff)
     if (in_array('site admin', $user->roles)) {
       $language_code = $form['field_discipline']['#language'];
@@ -105,6 +104,11 @@ function uom_custom_form_alter(&$form, &$form_state, $form_id) {
     if (!in_array('site admin', $user->roles)) {
       $role = db_select('role', 'r')->fields('r')->condition('name', 'site admin', '=')->execute()->fetchObject();
       unset ($form['account']['roles']['#options'][$role->rid]);
+    }
+
+    // Hide URL redirects on the user profile form.
+    if (!empty($form['redirect'])) {
+      $form['redirect']['#access'] = FALSE;
     }
   }
 
