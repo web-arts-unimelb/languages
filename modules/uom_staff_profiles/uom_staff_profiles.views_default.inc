@@ -24,6 +24,7 @@ function uom_staff_profiles_views_default_views() {
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Profiles';
   $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['perm'] = 'administer users';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['query_comment'] = FALSE;
@@ -901,6 +902,14 @@ function uom_staff_profiles_views_default_views() {
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: View area */
+  $handler->display->display_options['header']['view']['id'] = 'view';
+  $handler->display->display_options['header']['view']['table'] = 'views';
+  $handler->display->display_options['header']['view']['field'] = 'view';
+  $handler->display->display_options['header']['view']['empty'] = FALSE;
+  $handler->display->display_options['header']['view']['view_to_insert'] = 'profiles:block_1';
+  $handler->display->display_options['header']['view']['inherit_arguments'] = 0;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: User: Uid */
   $handler->display->display_options['fields']['uid']['id'] = 'uid';
@@ -1188,6 +1197,32 @@ function uom_staff_profiles_views_default_views() {
   $handler->display->display_options['fields']['field_phone']['hide_alter_empty'] = 1;
   $handler->display->display_options['fields']['field_phone']['type'] = 'uom_html5_phone_link';
   $handler->display->display_options['fields']['field_phone']['field_api_classes'] = 0;
+  /* Field: User: External Profile */
+  $handler->display->display_options['fields']['field_external_profile']['id'] = 'field_external_profile';
+  $handler->display->display_options['fields']['field_external_profile']['table'] = 'field_data_field_external_profile';
+  $handler->display->display_options['fields']['field_external_profile']['field'] = 'field_external_profile';
+  $handler->display->display_options['fields']['field_external_profile']['label'] = '';
+  $handler->display->display_options['fields']['field_external_profile']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_external_profile']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_external_profile']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_external_profile']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_external_profile']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_external_profile']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_external_profile']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_external_profile']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_external_profile']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_external_profile']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['field_external_profile']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_external_profile']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_external_profile']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_external_profile']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_external_profile']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_external_profile']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_external_profile']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_external_profile']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['field_external_profile']['click_sort_column'] = 'url';
+  $handler->display->display_options['fields']['field_external_profile']['type'] = 'link_url';
+  $handler->display->display_options['fields']['field_external_profile']['field_api_classes'] = 0;
   /* Field: User: Qualifications */
   $handler->display->display_options['fields']['field_qualifications']['id'] = 'field_qualifications';
   $handler->display->display_options['fields']['field_qualifications']['table'] = 'field_data_field_qualifications';
@@ -1444,7 +1479,8 @@ function uom_staff_profiles_views_default_views() {
 [field_discipline]<br />
 [mail]<br/>
 [field_room] [field_building]<br/>
-[field_phone]
+[field_phone]<br />
+[field_external_profile]
 </div>
 
 <div class="col-2 last">
@@ -1530,6 +1566,14 @@ function uom_staff_profiles_views_default_views() {
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: View area */
+  $handler->display->display_options['header']['view']['id'] = 'view';
+  $handler->display->display_options['header']['view']['table'] = 'views';
+  $handler->display->display_options['header']['view']['field'] = 'view';
+  $handler->display->display_options['header']['view']['empty'] = FALSE;
+  $handler->display->display_options['header']['view']['view_to_insert'] = 'profiles:block_1';
+  $handler->display->display_options['header']['view']['inherit_arguments'] = 0;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: User: Uid */
   $handler->display->display_options['fields']['uid']['id'] = 'uid';
@@ -1864,6 +1908,51 @@ function uom_staff_profiles_views_default_views() {
   );
   $handler->display->display_options['filters']['rid']['reduce_duplicates'] = 0;
   $handler->display->display_options['path'] = 'about-us/professional-staff/%';
+
+  /* Display: Edit */
+  $handler = $view->new_display('block', 'Edit', 'block_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: User: Uid */
+  $handler->display->display_options['fields']['uid']['id'] = 'uid';
+  $handler->display->display_options['fields']['uid']['table'] = 'users';
+  $handler->display->display_options['fields']['uid']['field'] = 'uid';
+  $handler->display->display_options['fields']['uid']['label'] = '';
+  $handler->display->display_options['fields']['uid']['alter']['alter_text'] = 1;
+  $handler->display->display_options['fields']['uid']['alter']['text'] = '<p><a href="/user/[uid]/edit">Edit this profile</a>.';
+  $handler->display->display_options['fields']['uid']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['uid']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['uid']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['uid']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['uid']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['uid']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['uid']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['uid']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['uid']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['uid']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['uid']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['uid']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['uid']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['uid']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['uid']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['uid']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['uid']['hide_alter_empty'] = 0;
+  $handler->display->display_options['fields']['uid']['link_to_user'] = 0;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: User: Active */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'users';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
+  $handler->display->display_options['filters']['status']['group'] = 0;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: User: Share Profile (field_share_profile) */
+  $handler->display->display_options['filters']['field_share_profile_value']['id'] = 'field_share_profile_value';
+  $handler->display->display_options['filters']['field_share_profile_value']['table'] = 'field_data_field_share_profile';
+  $handler->display->display_options['filters']['field_share_profile_value']['field'] = 'field_share_profile_value';
+  $handler->display->display_options['filters']['field_share_profile_value']['value'] = array(
+    'Yes' => 'Yes',
+  );
   $export['profiles'] = $view;
 
   return $export;

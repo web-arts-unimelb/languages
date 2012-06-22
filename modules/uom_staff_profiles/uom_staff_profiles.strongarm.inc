@@ -26,13 +26,13 @@ function uom_staff_profiles_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'redirect' => array(
-          'weight' => '17',
+          'weight' => '18',
         ),
         'account' => array(
           'weight' => '0',
         ),
         'timezone' => array(
-          'weight' => '26',
+          'weight' => '27',
         ),
         'contact' => array(
           'weight' => '25',

@@ -10,6 +10,74 @@
 function uom_staff_profiles_field_default_fields() {
   $fields = array();
 
+  // Exported field: 'user-user-field_academic_staff_type'
+  $fields['user-user-field_academic_staff_type'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '-1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_academic_staff_type',
+      'field_permissions' => array(
+        'type' => '2',
+      ),
+      'foreign keys' => array(
+        'tid' => array(
+          'columns' => array(
+            'tid' => 'tid',
+          ),
+          'table' => 'taxonomy_term_data',
+        ),
+      ),
+      'global_block_settings' => '1',
+      'indexes' => array(
+        'tid' => array(
+          0 => 'tid',
+        ),
+      ),
+      'module' => 'taxonomy',
+      'settings' => array(
+        'allowed_values' => array(
+          0 => array(
+            'vocabulary' => 'academic_staff_type',
+            'parent' => '0',
+          ),
+        ),
+      ),
+      'translatable' => '0',
+      'type' => 'taxonomy_term_reference',
+    ),
+    'field_instance' => array(
+      'bundle' => 'user',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'taxonomy',
+          'settings' => array(),
+          'type' => 'taxonomy_term_reference_link',
+          'weight' => 48,
+        ),
+      ),
+      'entity_type' => 'user',
+      'field_name' => 'field_academic_staff_type',
+      'label' => 'Academic staff type',
+      'required' => 1,
+      'settings' => array(
+        'user_register_form' => 1,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(),
+        'type' => 'options_select',
+        'weight' => '11',
+      ),
+    ),
+  );
+
   // Exported field: 'user-user-field_account_document'
   $fields['user-user-field_account_document'] = array(
     'field_config' => array(
@@ -323,6 +391,10 @@ function uom_staff_profiles_field_default_fields() {
       'label' => 'Bibliography',
       'required' => 0,
       'settings' => array(
+        'linkit' => array(
+          'enable' => 0,
+          'insert_plugin' => '',
+        ),
         'text_processing' => '1',
         'user_register_form' => 1,
       ),
@@ -387,6 +459,10 @@ function uom_staff_profiles_field_default_fields() {
       'label' => 'Biography',
       'required' => 0,
       'settings' => array(
+        'linkit' => array(
+          'enable' => 0,
+          'insert_plugin' => '',
+        ),
         'text_processing' => '1',
         'user_register_form' => 1,
       ),
@@ -533,6 +609,90 @@ function uom_staff_profiles_field_default_fields() {
     ),
   );
 
+  // Exported field: 'user-user-field_external_profile'
+  $fields['user-user-field_external_profile'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_external_profile',
+      'field_permissions' => array(
+        'type' => '0',
+      ),
+      'foreign keys' => array(),
+      'global_block_settings' => '1',
+      'indexes' => array(),
+      'module' => 'link',
+      'settings' => array(
+        'attributes' => array(
+          'class' => '',
+          'rel' => '',
+          'target' => 'default',
+        ),
+        'display' => array(
+          'url_cutoff' => 80,
+        ),
+        'enable_tokens' => 1,
+        'title' => 'optional',
+        'title_maxlength' => 128,
+        'title_value' => '',
+        'url' => 0,
+      ),
+      'translatable' => '0',
+      'type' => 'link_field',
+    ),
+    'field_instance' => array(
+      'bundle' => 'user',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => 'Add an optional external profile link. E.g.: Your <em>Find an expert</em> page. Enter the whole link address, including http://',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'link',
+          'settings' => array(),
+          'type' => 'link_default',
+          'weight' => 49,
+        ),
+      ),
+      'entity_type' => 'user',
+      'field_name' => 'field_external_profile',
+      'label' => 'External Profile',
+      'required' => 0,
+      'settings' => array(
+        'attributes' => array(
+          'class' => '',
+          'configurable_title' => 0,
+          'rel' => 'nofollow',
+          'target' => 'default',
+          'title' => '',
+        ),
+        'display' => array(
+          'url_cutoff' => '80',
+        ),
+        'enable_tokens' => 1,
+        'linkit' => array(
+          'enable' => 0,
+          'insert_plugin' => '',
+        ),
+        'title' => 'none',
+        'title_maxlength' => '128',
+        'title_value' => '',
+        'url' => 0,
+        'user_register_form' => 1,
+        'validate_url' => 1,
+      ),
+      'widget' => array(
+        'active' => 0,
+        'module' => 'link',
+        'settings' => array(),
+        'type' => 'link_field',
+        'weight' => '16',
+      ),
+    ),
+  );
+
   // Exported field: 'user-user-field_first_name'
   $fields['user-user-field_first_name'] = array(
     'field_config' => array(
@@ -675,6 +835,74 @@ function uom_staff_profiles_field_default_fields() {
         ),
         'type' => 'text_textfield',
         'weight' => '7',
+      ),
+    ),
+  );
+
+  // Exported field: 'user-user-field_org_unit'
+  $fields['user-user-field_org_unit'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '-1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_org_unit',
+      'field_permissions' => array(
+        'type' => '2',
+      ),
+      'foreign keys' => array(
+        'tid' => array(
+          'columns' => array(
+            'tid' => 'tid',
+          ),
+          'table' => 'taxonomy_term_data',
+        ),
+      ),
+      'global_block_settings' => '1',
+      'indexes' => array(
+        'tid' => array(
+          0 => 'tid',
+        ),
+      ),
+      'module' => 'taxonomy',
+      'settings' => array(
+        'allowed_values' => array(
+          0 => array(
+            'vocabulary' => 'org_unit',
+            'parent' => '0',
+          ),
+        ),
+      ),
+      'translatable' => '0',
+      'type' => 'taxonomy_term_reference',
+    ),
+    'field_instance' => array(
+      'bundle' => 'user',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'taxonomy',
+          'settings' => array(),
+          'type' => 'taxonomy_term_reference_link',
+          'weight' => 47,
+        ),
+      ),
+      'entity_type' => 'user',
+      'field_name' => 'field_org_unit',
+      'label' => 'Organisation unit',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => 1,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(),
+        'type' => 'options_select',
+        'weight' => '9',
       ),
     ),
   );
@@ -854,6 +1082,10 @@ function uom_staff_profiles_field_default_fields() {
       'label' => 'Presentations',
       'required' => 0,
       'settings' => array(
+        'linkit' => array(
+          'enable' => 0,
+          'insert_plugin' => '',
+        ),
         'text_processing' => '1',
         'user_register_form' => 1,
       ),
@@ -1024,6 +1256,10 @@ function uom_staff_profiles_field_default_fields() {
       'label' => 'Publications',
       'required' => 0,
       'settings' => array(
+        'linkit' => array(
+          'enable' => 0,
+          'insert_plugin' => '',
+        ),
         'text_processing' => '1',
         'user_register_form' => 1,
       ),
@@ -1088,6 +1324,10 @@ function uom_staff_profiles_field_default_fields() {
       'label' => 'Qualifications',
       'required' => 0,
       'settings' => array(
+        'linkit' => array(
+          'enable' => 0,
+          'insert_plugin' => '',
+        ),
         'text_processing' => '1',
         'user_register_form' => 1,
       ),
@@ -1098,7 +1338,7 @@ function uom_staff_profiles_field_default_fields() {
           'rows' => '8',
         ),
         'type' => 'text_textarea',
-        'weight' => '16',
+        'weight' => '17',
       ),
     ),
   );
@@ -1152,6 +1392,10 @@ function uom_staff_profiles_field_default_fields() {
       'label' => 'Research interests/areas of supervision',
       'required' => 0,
       'settings' => array(
+        'linkit' => array(
+          'enable' => 0,
+          'insert_plugin' => '',
+        ),
         'text_processing' => '1',
         'user_register_form' => 1,
       ),
@@ -1216,6 +1460,10 @@ function uom_staff_profiles_field_default_fields() {
       'label' => 'Research projects',
       'required' => 0,
       'settings' => array(
+        'linkit' => array(
+          'enable' => 0,
+          'insert_plugin' => '',
+        ),
         'text_processing' => '1',
         'user_register_form' => 1,
       ),
@@ -1280,6 +1528,10 @@ function uom_staff_profiles_field_default_fields() {
       'label' => 'Responsibilities',
       'required' => 0,
       'settings' => array(
+        'linkit' => array(
+          'enable' => 0,
+          'insert_plugin' => '',
+        ),
         'text_processing' => '1',
         'user_register_form' => 1,
       ),
@@ -1470,6 +1722,10 @@ function uom_staff_profiles_field_default_fields() {
       'label' => 'Teaching',
       'required' => 0,
       'settings' => array(
+        'linkit' => array(
+          'enable' => 0,
+          'insert_plugin' => '',
+        ),
         'text_processing' => '0',
         'user_register_form' => 1,
       ),
@@ -1487,15 +1743,19 @@ function uom_staff_profiles_field_default_fields() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Academic staff type');
+  t('Add an optional external profile link. E.g.: Your <em>Find an expert</em> page. Enter the whole link address, including http://');
   t('Awards and grants');
   t('Bibliography');
   t('Biography');
   t('Building');
   t('Discipline');
   t('Document uploader');
+  t('External Profile');
   t('Family name');
   t('Given name');
   t('Image uploader');
+  t('Organisation unit');
   t('Phone');
   t('Position');
   t('Presentations');
