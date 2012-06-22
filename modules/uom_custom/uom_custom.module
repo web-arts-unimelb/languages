@@ -496,11 +496,11 @@ function uom_custom_field_formatter_info() {
     ),
     'uom_image_floater' => array(
       'label' => t('Floated Image'),
-      'field types' => array('file', 'image'),
+      'field types' => array('image', 'file'),
       'settings' => array('image_style' => '', 'image_link' => '', 'image_float' => ''),
     ),
-    'uom_attached_file' => array(
-      'label' => t('Attached File'),
+    'uom_inline_file' => array(
+      'label' => t('Inline File Link'),
       'field types' => array('file'),
     ),
   );
@@ -510,7 +510,7 @@ function uom_custom_field_formatter_info() {
  * Implements hook_field_formatter_settings_form().
  */
 function uom_custom_field_formatter_settings_form($field, $instance, $view_mode, $form, &$form_state) {
-  if ($instance['display'][$view_mode]['type'] == 'uom_image_floater') {
+ if ($instance['display'][$view_mode]['type'] == 'uom_image_floater') {
     $element = image_field_formatter_settings_form($field, $instance, $view_mode, $form, $form_state);
     $settings = $instance['display'][$view_mode]['settings'];
     if ($field['cardinality'] != 1) {
@@ -531,17 +531,19 @@ function uom_custom_field_formatter_settings_form($field, $instance, $view_mode,
  * Implements hook_field_formatter_settings_summary().
  */
 function uom_custom_field_formatter_settings_summary($field, $instance, $view_mode) {
-  if (!empty($instance['settings']['wysiwyg_fields'])) {
-    $settings = $instance['display'][$view_mode]['settings'];
+  if (isset($instance['settings']['wysiwyg_fields'])) {
+    if ($instance['widget']['type'] == 'image_image') {
+      $settings = $instance['display'][$view_mode]['settings'];
 
-    $summary = explode('<br />', image_field_formatter_settings_summary($field, $instance, $view_mode));
+      $summary = explode('<br />', image_field_formatter_settings_summary($field, $instance, $view_mode));
 
-    // Display this setting only if image limit is setted.
-    if (isset($settings['image_float']) && !empty($settings['image_float'])) {
-      $summary[] = t('Image Float: @float', array('@float' => $settings['image_float']));
+      // Display this setting only if image limit is setted.
+      if (isset($settings['image_float']) && !empty($settings['image_float'])) {
+        $summary[] = t('Image Float: @float', array('@float' => $settings['image_float']));
+      }
+
+      return implode('<br />', $summary);
     }
-
-    return implode('<br />', $summary);
   }
 }
 
@@ -573,15 +575,8 @@ function uom_custom_field_formatter_view($obj_type, $object, $field, $instance, 
   return $element;
 }
 
-/**
- * Field formatter; Attached File.
- */
-function uom_custom_field_formatter_uom_attached_file($variables) {
-  // Early return.
-  if (empty($variables['#items'])) {
-    return;
-  }
-  return theme('file', $variables['#items'][0]);
+function uom_custom_field_formatter_uom_inline_file($variables) {
+  return theme('uom_inline_file', array('item' => $variables['#items'][0]));
 }
 
 /**
@@ -691,7 +686,44 @@ function uom_custom_field_formatter_uom_html5_phone_link($variables) {
 
 /**
  *
+ */
+function theme_uom_inline_file($variables) {
+  $file = (object) $variables['item'];
 
+  $url = file_create_url($file->uri);
+
+  $options = array(
+    'attributes' => array(
+      'type' => $file->filemime . '; length=' . $file->filesize,
+    ),
+  );
+
+  // Use the description as the link text if available.
+  if (!empty($file->field_description)) {
+    $link_text = $file->field_description['und'][0]['safe_value'];
+    $options['attributes']['title'] = check_plain($file->filename);
+  }
+  else if (!empty($file->description)) {
+    $link_text = $file->description;
+    $options['attributes']['title'] = check_plain($file->filename);
+  }
+  else {
+    $link_text = $file->filename;
+  }
+
+  return '<span class="file">' . l($link_text, $url, $options) . '</span> <span class="filesize">(' . format_size($file->filesize) . ')</span>';
+}
+
+/**
+ *
+ */
+function uom_custom_theme($existing, $type, $theme, $path) {
+  return array(
+    'uom_inline_file' => array(
+      'variables' => array('item' => NULL)
+    ),
+  );
+}
 
 // TODO: Formatters that allow users to be linked to a defined staff type
 // profile page as defined via views.
@@ -773,15 +805,89 @@ function uom_custom_entity_info_alter(&$entity_info) {
   $entity_info['file']['view modes']['thumb_right'] = array('label' => t('Thumbnail Right'), 'custom settings' => TRUE);
   $entity_info['file']['view modes']['medium_left'] = array('label' => t('Medium Left'), 'custom settings' => TRUE);
   $entity_info['file']['view modes']['medium_right'] = array('label' => t('Medium Right'), 'custom settings' => TRUE);
-  $entity_info['file']['view modes']['attached_file'] = array('label' => t('Attached File'), 'custom settings' => TRUE);
 }
 
 /**
- * Implements hook_media_browser_plugin_info_alter().
+ * Implements hook_wysiwyg_editor_settings_alter()
  */
-function uom_custom_media_browser_plugin_info_alter(&$info) {
-  // Use only views to list media.
-  if (!empty($info['library'])) {
-    unset($info['library']);
+function uom_custom_wysiwyg_editor_settings_alter(&$settings, $context) {
+  // The $context variable contains information about the wysiwyg profile we're using
+  // In this case we just need to check that the editor being used is ckeditor
+  if ($context['profile']->editor == 'ckeditor') {
+    // The $settings variable contains all the config options ckeditor uses. 
+    // The array keys correspond directly with any setting that can be applied 
+    // to CKEditor - as outlined in the CKEditor docs: 
+    // http://docs.cksource.com/ckeditor_api/symbols/CKEDITOR.config.html 
+    // Another way to override configuration is to use your own configuration javascript
+    // file. In this case, we're going to add our own configuration file that will
+    // Hold our stylesSet customizations... 
+    $settings['customConfig'] = base_path() . drupal_get_path('module', 'uom_custom') . '/js/ckeditor_config.js';
+
+    // We are also going to specify a custom body id and class
+    $settings['bodyId'] = 'ckeditor_uom_custom_id';
+    $settings['bodyClass'] = 'ckeditor_uom_custom_class';
+
+    // To see what's in $settings and $context, install the devel module 
+    // And run the variables through the dpm() function. 
+  }
+
+  // Make sure the toolbar is there
+  if (!empty($settings['toolbar'])) {
+    // These are our desired groupings. Buttons that aren't listed here will be
+    // Grouped in one big group at the end
+    $preferred_groupings[] = array('Source', 'Format', 'Styles');
+    $preferred_groupings[] = array('Bold', 'Italic', 'Underline', 'Strike', 'Blockquote');
+    $preferred_groupings[] = array('JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', 'BulletedList', 'NumberedList', 'Outdent', 'Indent');
+    $preferred_groupings[] = array('Undo', 'Redo');
+    $preferred_groupings[] = array('TextColor', 'BGColor');
+    $preferred_groupings[] = array('Superscript', 'Subscript');
+    $preferred_groupings[] = array('HorizontalRule', 'break');
+    $preferred_groupings[] = array('Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord');
+    $preferred_groupings[] = array('ShowBlocks', 'RemoveFormat', 'SpecialChar', '/');
+    $preferred_groupings[] = array('Font', 'FontSize', 'Table');
+    $preferred_groupings[] = array('SelectAll', 'Find', 'Replace');
+    $preferred_groupings[] = array('Flash', 'Smiley');
+    $preferred_groupings[] = array('Anchor', 'Image', 'Linkit', 'Link', 'Unlink', 'Image uploader', 'Document uploader');
+    $preferred_groupings[] = array('CreateDiv', 'SpellChecker', 'Scayt', 'Maximize');
+
+    // An array to hold our newly grouped buttons
+    $new_grouped_toolbar = array();
+
+    // Compare each desired groupings to the configured buttons in the toolbar
+    // and add them if they are there
+    foreach($preferred_groupings as $button_group){
+      // array_intersect() compares two arrays and returns an array of values
+      // That are present in both arrays.
+      $matching_buttons = array_intersect($button_group, $settings['toolbar'][0]);
+
+      if (!empty($matching_buttons)) {
+        // If there are matching buttons, we add it as an array to our
+        // $new_grouped_toolbar. We run $matching_buttons through array_values()
+        // to reset the array keys back to starting from 0.
+        $new_grouped_toolbar[] = array_values($matching_buttons);
+      }
+    }
+
+    // For extra safety, we're going to find any remaining buttons that we
+    // missed. To do this we need to flatten our grouped buttons and compare
+    // that against the original toolbar to see if we missed anything
+    $new_flattened_toolbar = array();
+
+    // Flatten our grouped buttons
+    foreach ($new_grouped_toolbar as $key => $group) {
+      $new_flattened_toolbar = array_merge($new_flattened_toolbar, $group);
+    }
+
+    // Array diff returns the keys that are present in the first argument, but
+    // not not present in the second
+    $remaining_buttons = array_diff($settings['toolbar'][0], $new_flattened_toolbar);
+
+    if (!empty($remaining_buttons)) {
+      // reset the array keys and add it to the $new_grouped_toolbar
+      $new_grouped_toolbar[] = array_values($remaining_buttons);
+    }
+
+    // Replace the toolbar with our new, grouped toolbar.
+    $settings['toolbar'] = $new_grouped_toolbar;
   }
 }
