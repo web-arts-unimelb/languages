@@ -35,6 +35,7 @@ function uom_custom_init() {
 
   // Hide format selection on text areas.
   drupal_add_css('fieldset.filter-wrapper { display: none; }', array('type' => 'inline'));
+  drupal_add_css('div.wysiwyg-toggle-wrapper { display: none; }', array('type' => 'inline'));
 
   // Hide wysiwyg field original content.
   drupal_add_css('.insert.form-item.container-inline { display: none; }', array('type' => 'inline'));
@@ -851,7 +852,7 @@ function uom_custom_wysiwyg_editor_settings_alter(&$settings, $context) {
     $preferred_groupings[] = array('Font', 'FontSize', 'Table');
     $preferred_groupings[] = array('SelectAll', 'Find', 'Replace');
     $preferred_groupings[] = array('Flash', 'Smiley');
-    $preferred_groupings[] = array('Anchor', 'Image', 'Linkit', 'Link', 'Unlink', 'Image uploader', 'Document uploader');
+    $preferred_groupings[] = array('Anchor', 'Image', 'linkit', 'Link', 'Unlink', 'wysiwyg_fields_field_page_image', 'wysiwyg_fields_field_page_document');
     $preferred_groupings[] = array('CreateDiv', 'SpellChecker', 'Scayt', 'Maximize');
 
     // An array to hold our newly grouped buttons
@@ -893,5 +894,24 @@ function uom_custom_wysiwyg_editor_settings_alter(&$settings, $context) {
 
     // Replace the toolbar with our new, grouped toolbar.
     $settings['toolbar'] = $new_grouped_toolbar;
+  }
+}
+
+/**
+ * Implementation of hook_wysiwyg_plugin().
+ */
+function uom_custom_wysiwyg_plugin($editor) {
+  if ($editor == 'ckeditor') {
+    $path = 'sites/all/libraries/ckeditor/plugins/tableresize';
+    if (file_exists("$path/plugin.js")) {
+      return array(
+        'tableresize' => array(
+          'type' => 'buttons',
+          'buttons' => array('TableResize' => t('Resize Table')),
+          'path' => 'sites/all/libraries/ckeditor/plugins/tableresize',
+          'load' => TRUE,
+        ),
+      );
+    }
   }
 }
