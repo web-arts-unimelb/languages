@@ -503,7 +503,26 @@ function uom_custom_field_formatter_info() {
     'uom_image_floater' => array(
       'label' => t('Floated Image'),
       'field types' => array('image', 'file'),
-      'settings' => array('image_style' => '', 'image_link' => '', 'image_float' => ''),
+      'settings' => array(
+        'image_style' => '',
+        'image_link' => '',
+        'image_float' => '',
+      ),
+    ),
+    'uom_image_colourbox' => array(
+      'label' => t('Colourbox Image'),
+      'field types' => array('image', 'file'),
+      'settings' => array(
+        'colorbox_node_style' => '',
+        'colorbox_image_style' => '',
+        'colorbox_gallery' => 'post',
+        'colorbox_gallery_custom' => '',
+        'colorbox_caption' => 'auto',
+        'colorbox_caption_custom' => '',
+        'image_style' => '',
+        'image_link' => '',
+        'image_float' => '',
+      ),
     ),
     'uom_inline_file' => array(
       'label' => t('Inline File Link'),
@@ -516,62 +535,48 @@ function uom_custom_field_formatter_info() {
  * Implements hook_field_formatter_settings_form().
  */
 function uom_custom_field_formatter_settings_form($field, $instance, $view_mode, $form, &$form_state) {
- if ($instance['display'][$view_mode]['type'] == 'uom_image_floater') {
-    $element = image_field_formatter_settings_form($field, $instance, $view_mode, $form, $form_state);
-    $settings = $instance['display'][$view_mode]['settings'];
-    if ($field['cardinality'] != 1) {
-      $element['image_float'] = array(
-        '#title' => t('Float the image'),
-        '#type' => 'select',
-        '#options' => array('' => t('N/A'), 'left' => t('Left'), 'right' => t('Right')),
-        '#description' => t('Float the image.'),
-        '#default_value' => $settings['image_float'],
-        '#empty_option' => t('N/A'),
-      );
-      if (!empty($settings['image_float'])) {
-        $element['image_float']['#default_value'] = $settings['image_float'];
-      }
+  $display = $instance['display'][$view_mode];
+  $settings = $display['settings'];
 
-      $element['image_widget'] = array(
-        '#title' => t('Image widget'),
-        '#type' => 'select',
-        '#options' => _uom_ustom_image_formatters(),
-        '#description' => t('Choose an image widget to display the image.'),
-        '#empty_option' => t('ColorBox'),
-      );
-      if (!empty($settings['image_widget'])) {
-        $element['image_widget']['#default_value'] = $settings['image_widget'];
-      }
+  // Settings for the floated image formatter.
+  if ($display['type'] == 'uom_image_floater') {
+    $element = image_field_formatter_settings_form($field, $instance, $view_mode, $form, $form_state);
+    if ($field['cardinality'] != 1) {
+      $element['image_float'] = _uom_custom_image_float_element($settings['image_float']);
+    }
+    return $element;
+  }
+
+  // Settings for the colourbox image formatter.
+  if ($display['type'] == 'uom_image_colourbox') {
+    $element = colorbox_field_formatter_settings_form($field, $instance, $view_mode, $form, $form_state);
+    if ($field['cardinality'] != 1) {
+      $element['image_float'] = _uom_custom_image_float_element($settings['image_float']);
     }
     return $element;
   }
 }
 
 /**
- * Helper to fetch a list of image formatters.
+ * Helper that returns an image float control.
  */
-function _uom_ustom_image_formatters($formatter = NULL) {
-  static $formatters;
-
-  if (empty($formatters)) {
-    $formatters['image_formatter'] = t('Default');
-    if (module_exists('colorbox')) {
-      $formatters['colorbox_image_formatter'] = t('ColorBox');
-    }
-  }
-
-  if (!empty($formatter)) {
-    return $formatters[$formatter];
-  }
-
-  return $formatters;
+function _uom_custom_image_float_element($default) {
+  return array(
+    '#title' => t('Float the image'),
+    '#type' => 'select',
+    '#options' => array('' => t('N/A'), 'left' => t('Left'), 'right' => t('Right')),
+    '#description' => t('Float the image. If set to left or right, text will flow around the image.'),
+    '#empty_option' => t('N/A'),
+    '#default_value' => (!empty($default)) ? $default : '',
+    '#weight' => -1,
+  );
 }
 
 /**
  * Implements hook_field_formatter_settings_summary().
  */
 function uom_custom_field_formatter_settings_summary($field, $instance, $view_mode) {
-  if (isset($instance['settings']['wysiwyg_fields'])) {
+  if ($instance['display'][$view_mode]['type'] == 'uom_image_floater') {
     if ($instance['widget']['type'] == 'image_image') {
       $settings = $instance['display'][$view_mode]['settings'];
 
@@ -582,9 +587,19 @@ function uom_custom_field_formatter_settings_summary($field, $instance, $view_mo
         $summary[] = t('Image Float: @float', array('@float' => $settings['image_float']));
       }
 
-      // Display this setting only if image widget is set.
-      if (isset($settings['image_widget']) && !empty($settings['image_widget'])) {
-        $summary[] = t('Image widget: @widget', array('@widget' => _uom_ustom_image_formatters($settings['image_widget'])));
+      return implode('<br />', $summary);
+    }
+  }
+
+  if ($instance['display'][$view_mode]['type'] == 'uom_image_colourbox') {
+    if ($instance['widget']['type'] == 'image_image') {
+      $settings = $instance['display'][$view_mode]['settings'];
+
+      $summary = explode('<br />', colorbox_field_formatter_settings_summary($field, $instance, $view_mode));
+
+      // Display this setting only if image float is set.
+      if (isset($settings['image_float']) && !empty($settings['image_float'])) {
+        $summary[] = t('Image Float: @float', array('@float' => $settings['image_float']));
       }
 
       return implode('<br />', $summary);
@@ -621,7 +636,7 @@ function uom_custom_field_formatter_view($obj_type, $object, $field, $instance, 
 }
 
 function uom_custom_field_formatter_uom_inline_file($variables) {
-  return theme('uom_inline_file', array('item' => $variables['#items'][0]));
+  return theme('uom_custom_inline_file', array('item' => $variables['#items'][0]));
 }
 
 /**
@@ -675,21 +690,63 @@ function uom_custom_field_formatter_uom_image_floater($variables) {
       );
     }
 
-    $settings = array(
-      'colorbox_caption' => 'auto',
-      'colorbox_gallery' => 'custom',
-      'colorbox_node_style' => !empty($variables['#display']['settings']['image_style']) ? $variables['#display']['settings']['image_style'] : '',
-      'colorbox_image_style' => 'huge',
-      'colorbox_gallery_custom' => $item['attributes']['class'],
-    );
     $elements[$delta] = array(
-      '#theme' => (module_exists('colorbox')) ? 'colorbox_image_formatter' : 'image_formatter',
+      '#theme' => 'image_formatter',
+      '#item' => $item,
+      '#image_style' => !empty($variables['#display']['settings']['image_style']) ? $variables['#display']['settings']['image_style'] : '',
+      '#path' => isset($uri) ? $uri : '',
+    );
+  }
+
+  return render($elements);
+}
+
+/**
+ * Field formatter; Colorbox Image.
+ */
+function uom_custom_field_formatter_uom_image_colourbox($variables) {
+  // Early return.
+  if (empty($variables['#items'])) {
+    return;
+  }
+
+  $elements = array();
+
+  watchdog('uom_custom', print_r($variables, 1), array(), WATCHDOG_DEBUG);
+
+  foreach ($variables['#items'] as $delta => $item) {
+    if (!empty($item['field_description']) && (empty($item['alt']) || empty($item['title']))) {
+      $language = empty($item['language']) ? 'und' : $item['language'];
+      $title = $item['field_description'][$language][0]['safe_value'];
+      $item['alt'] = $item['title'] = $title;
+    }
+
+    // Make *certain* an alt and title attribute are present.
+    else if (empty($item['alt'])) {
+      $item['alt'] = t('Unnamed Image');
+    }
+    if (!isset($item['title'])) {
+      $item['title'] = '';
+    }
+
+    if (isset($link_file)) {
+      $uri = array(
+        'path' => file_create_url($item['uri']),
+        'options' => array(),
+      );
+    }
+    if (!empty($variables['#display']['settings']['image_float'])) {
+      $item['attributes'] = array(
+        'class' => 'image-float-'. $variables['#display']['settings']['image_float'],
+      );
+    }
+
+    $elements[$delta] = array(
+      '#theme' => 'uom_custom_colourbox_image_formatter',
       '#item' => $item,
       '#node' => $variables['#object'],
       '#field' => $variables['#field'],
-      '#image_style' => !empty($variables['#display']['settings']['image_style']) ? $variables['#display']['settings']['image_style'] : '',
-      '#path' => isset($uri) ? $uri : '',
-      '#display_settings' => $settings,
+      '#display_settings' => $variables['#display']['settings'],
     );
   }
 
@@ -741,46 +798,37 @@ function uom_custom_field_formatter_uom_html5_phone_link($variables) {
 }
 
 /**
- *
- */
-function theme_uom_inline_file($variables) {
-  $file = (object) $variables['item'];
-
-  $url = file_create_url($file->uri);
-
-  $options = array(
-    'attributes' => array(
-      'type' => $file->filemime . '; length=' . $file->filesize,
-    ),
-  );
-
-  // Use the description as the link text if available.
-  if (!empty($file->field_description)) {
-    $link_text = $file->field_description['und'][0]['safe_value'];
-    $options['attributes']['title'] = check_plain($file->filename);
-  }
-  else if (!empty($file->description)) {
-    $link_text = $file->description;
-    $options['attributes']['title'] = check_plain($file->filename);
-  }
-  else {
-    $link_text = $file->filename;
-  }
-
-  return '<span class="file">' . l($link_text, $url, $options) . '</span> <span class="filesize">(' . format_size($file->filesize) . ')</span>';
-}
-
-/**
- *
+ * Implements hook_theme().
  */
 function uom_custom_theme($existing, $type, $theme, $path) {
   return array(
-    'uom_inline_file' => array(
-      'variables' => array('item' => NULL)
+    'uom_custom_inline_file' => array(
+      'variables' => array(
+        'item' => NULL
+      ),
+      'file' => 'uom_custom.theme.inc',
+    ),
+    'uom_custom_colourbox_image_formatter' => array(
+      'variables' => array(
+        'item' => array(),
+        'node' => NULL,
+        'field' => NULL,
+        'display_settings' => array(),
+      ),
+      'file' => 'uom_custom.theme.inc',
+    ),
+    'uom_custom_colourbox_imagefield' => array(
+      'variables' => array(
+        'image' => array(),
+        'path' => NULL,
+        'title' => NULL,
+        'gid' => NULL,
+        'class' => NULL,
+      ),
+      'file' => 'uom_custom.theme.inc',
     ),
   );
 }
-
 
 // TODO: Formatters that allow users to be linked to a defined staff type
 // profile page as defined via views.
@@ -961,6 +1009,12 @@ function uom_custom_wysiwyg_plugin($editor) {
           'type' => 'buttons',
           'buttons' => array('TableResize' => t('Resize Table')),
           'path' => 'sites/all/libraries/ckeditor/plugins/tableresize',
+          'load' => TRUE,
+        ),
+        'tabletools' => array(
+          'type' => 'buttons',
+          'buttons' => array('TableTools' => t('Table Tools')),
+          'path' => 'sites/all/libraries/ckeditor/plugins/tabletools',
           'load' => TRUE,
         ),
       );
