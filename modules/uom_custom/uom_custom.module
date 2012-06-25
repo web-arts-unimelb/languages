@@ -528,15 +528,20 @@ function uom_custom_field_formatter_settings_form($field, $instance, $view_mode,
         '#default_value' => $settings['image_float'],
         '#empty_option' => t('N/A'),
       );
+      if (!empty($settings['image_float'])) {
+        $element['image_float']['#default_value'] = $settings['image_float'];
+      }
 
       $element['image_widget'] = array(
         '#title' => t('Image widget'),
         '#type' => 'select',
         '#options' => _uom_ustom_image_formatters(),
         '#description' => t('Choose an image widget to display the image.'),
-        '#default_value' => $settings['image_widget'],
-        '#empty_option' => t('image_formatter'),
+        '#empty_option' => t('ColorBox'),
       );
+      if (!empty($settings['image_widget'])) {
+        $element['image_widget']['#default_value'] = $settings['image_widget'];
+      }
     }
     return $element;
   }
