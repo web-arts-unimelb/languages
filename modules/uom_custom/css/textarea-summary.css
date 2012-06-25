@@ -1,2 +1,5 @@
 /* Hide the format fieldset on a summary field. */
 div.text-summary-wrapper fieldset.filter-wrapper { display: none; }
+
+/* Hide the toggle rich text link. */
+div.wysiwyg-toggle-wrapper { display: none; }
