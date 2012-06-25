@@ -14,7 +14,9 @@ CKEDITOR.editorConfig = function(config) {
     // Each style is an object whose properties define how it is displayed
     // in the dropdown, as well as what it outputs as html into the editor
     // text area.
-    { name : 'Notice'           , element : 'p', attributes : { 'class' : 'notice' } },
-    { name : 'Important Notice' , element : 'p', attributes : { 'class' : 'importantnotice' } },
+    { name : 'Notice'           , element : 'p'    , attributes : { 'class' : 'notice' } },
+    { name : 'Important Notice' , element : 'p'    , attributes : { 'class' : 'importantnotice' } },
+
+    { name : 'Borderless'       , element : 'table', attributes : { 'class' : 'borderless' } },
   ];
 }
