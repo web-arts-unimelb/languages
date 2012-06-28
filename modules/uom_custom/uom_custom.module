@@ -82,8 +82,27 @@ function uom_custom_form_alter(&$form, &$form_state, $form_id) {
     $form['account']['current_pass']['#weight'] =  -7;
     $form['account']['current_pass_required_values']['#weight'] =  -6;
 
-    $form['account']['mail']['#description'] = t('A valid e-mail address. All e-mails from the system will be sent to this addres. This email address will be listed on your profile page.');
+    $form['account']['mail']['#description'] = t('A valid e-mail address. All e-mails from the system will be sent to this address. This email address will be listed on your profile page.');
     $form['account']['current_pass']['#description'] =  t('If you want to change your <em class="placeholder">E-mail address</em> or <em class="placeholder">Password</em>, you must enter your current password to confirm. <a href="/user/password" title="Request new password via e-mail.">Request new password</a>.');
+
+    // LDAP module disabled some form items. If they're disabled, actually just hide them.
+    if (module_exists('ldap_authentication')) {
+      $ldap_link = FALSE;
+      foreach ($form['account'] as &$element) {
+        if (!empty($element['#disabled'])) {
+          $ldap_link = TRUE;
+          $element['#access'] = FALSE;
+        }
+      }
+      if ($ldap_link) {
+        $ldap = variable_get('ldap_authentication_conf', array());
+        $form['account']['ldap'] = array(
+          '#type' => 'markup',
+          '#markup' => t('You cannot change your password here. You must reset your @password via the directions at <a href="!link">@title</a>.', array('@password' => strtolower($ldap['loginUIPasswordTxt']), '!link' => $ldap['ldapUserHelpLinkUrl'], '@title' => $ldap['ldapUserHelpLinkText'])),
+          '#weight' => -8,
+        );
+      }
+    }
 
     // Some fields should be mandatory *only* for academic staff editing their own profile.
     if (!in_array('academic staff', $user->roles)) {
