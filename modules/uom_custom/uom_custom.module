@@ -972,7 +972,7 @@ function uom_custom_wysiwyg_editor_settings_alter(&$settings, $context) {
     $preferred_groupings[] = array('Font', 'FontSize', 'Table');
     $preferred_groupings[] = array('SelectAll', 'Find', 'Replace');
     $preferred_groupings[] = array('Flash', 'Smiley');
-    $preferred_groupings[] = array('Anchor', 'Image', 'linkit', 'Link', 'Unlink', 'wysiwyg_fields_field_page_image', 'wysiwyg_fields_field_page_document');
+	$preferred_groupings[] = array('Anchor', 'Image', 'linkit', 'Link', 'Unlink', 'wysiwyg_fields_field_page_image', 'wysiwyg_fields_field_page_document', 'wysiwyg_fields_field_event_image', 'wysiwyg_fields_field_event_document', 'wysiwyg_fields_field_landingpage_doc_uploader', 'wysiwyg_fields_field_account_document', 'wysiwyg_fields_field_account_image',);
     $preferred_groupings[] = array('CreateDiv', 'SpellChecker', 'Scayt', 'Maximize');
 
     // An array to hold our newly grouped buttons
