@@ -30,7 +30,8 @@ function theme_uom_custom_inline_file($variables) {
     $link_text = $file->filename;
   }
 
-  return '<span class="file">' . l($link_text, $url, $options) . '</span> <span class="filesize">(' . format_size($file->size) .')</span>';
+  // return '<span class="file">' . l($link_text, $url, $options) . '</span> <span class="filesize">(' . format_size($file->filesize) .')</span>';
+  return '<span class="file">' . l($link_text, $url, $options) . '</span>';
 }
 
 /**
