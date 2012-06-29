@@ -31,6 +31,7 @@ function uom_custom_init() {
   if (!in_array('site admin', $user->roles)) {
     drupal_add_css('#admin-menu .dropdown li.admin-menu-icon { display: none; }', array('type' => 'inline'));
     drupal_add_css('.page-admin-structure-menu #block-system-help { display: none; }', array('type' => 'inline'));
+    drupal_add_css('.page-admin-structure-menu ul.action-links { display: none; }', array('type' => 'inline'));
   }
 
   // Hide format selection on text areas.
