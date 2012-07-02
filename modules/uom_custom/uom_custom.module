@@ -5,6 +5,19 @@
  */
 
 /**
+ * Implements hook_element_info().
+ */
+function uom_custom_element_info() {
+  $types['theme_styles'] = array(
+    '#items' => array(),
+    '#pre_render' => array('drupal_pre_render_styles'),
+    '#group_callback' => 'drupal_group_css',
+    '#aggregate_callback' => 'drupal_aggregate_css',
+  );
+  return $types;
+}
+
+/**
  * Implements hook_menu().
  */
 function uom_custom_menu() {
