@@ -99,27 +99,23 @@ function uom_custom_form_alter(&$form, &$form_state, $form_id) {
     $form['account']['mail']['#description'] = t('A valid e-mail address. All e-mails from the system will be sent to this address. This email address will be listed on your profile page. ');
     $form['account']['current_pass']['#description'] =  t('If you want to change your <em class="placeholder">E-mail address</em> or <em class="placeholder">Password</em>, you must enter your current password to confirm. <a href="/user/password" title="Request new password via e-mail.">Request new password</a>.');
 
-    // Do not autocomplete username or password fields.
-    $form['account']['name']['#attributes']['autocomplete'] = 'false';
-    $form['account']['pass']['#attributes']['autocomplete'] = 'false';
+    // Do not autocomplete email or username fields.
+    $form['account']['mail']['#attributes']['autocomplete'] = 'off';
+    $form['account']['name']['#attributes']['autocomplete'] = 'off';
+    $form['account']['pass']['pass1']['#attributes']['autocomplete'] = 'off';
+    $form['account']['pass']['pass2']['#attributes']['autocomplete'] = 'off';
 
-    // If LDAP Query module is installed, offer to lookup the username.
-    if (module_exists("ldap_query")) {
-      $form['account']['name']['#description'] = t('Leave this field empty to lookup a username based on the <em>@unimelb.edu.au</em> email address entered above. Otherwise, spaces are allowed; punctuation is not allowed except for periods, hyphens, apostrophes, and underscores.');
-      // Do not bold the label on the username field.
-      drupal_add_css('.page-admin-people .form-item-name label { font-weight: normal; }', array('type' => 'inline'));
+    // Some fields should be mandatory *only* for academic staff editing their own profile.
+    if (!in_array('academic staff', $user->roles)) {
+      $language_code = $form['field_discipline']['#language'];
+      $form['field_discipline'][$language_code]['#required'] = FALSE;
+      $form['field_academic_staff_type'][$language_code]['#required'] = FALSE;	
 
-      // And add our extra validator :-)
-      array_unshift($form['#validate'], 'uom_custom_username_lookup_validate');
-
-      // If we're reloading due to an error, stick in a username and password now.
-      if (!empty($form_state['values']['mail']) && empty($form['account']['name']['#default_value'])) {
-        $form['account']['name']['#default_value'] = uom_custom_username_lookup($form_state['values']['mail']);
-        if (empty($form['account']['pass']['#default_value'])) {
-          $form['account']['pass']['#default_value'] = 'empty';
-        }
-      }
+      // Inject a validate handler that runs before the one in user.module. If
+      // the 'academic staff' role is checked, the discipline field becomes mandatory again.
+      array_unshift($form['#validate'], 'uom_custom_user_profile_form_validate');
     }
+
 
     // LDAP module disabled some form items. If they're disabled, actually just hide them.
     if (module_exists('ldap_authentication')) {
@@ -140,17 +136,6 @@ function uom_custom_form_alter(&$form, &$form_state, $form_id) {
       }
     }
 
-    // Some fields should be mandatory *only* for academic staff editing their own profile.
-    if (!in_array('academic staff', $user->roles)) {
-      $language_code = $form['field_discipline']['#language'];
-      $form['field_discipline'][$language_code]['#required'] = FALSE;
-      $form['field_academic_staff_type'][$language_code]['#required'] = FALSE;	
-
-      // Inject a validate handler that run before the one in user.module. If
-      // the 'academic staff' role is checked, the discipline field becomes mandatory again.
-      array_unshift($form['#validate'], 'uom_custom_user_profile_form_validate');
-    }
-
     // Org unit is optional for site admins (who are ABC IT and not SoLL staff)
     if (in_array('site admin', $user->roles)) {
       $language_code = $form['field_discipline']['#language'];
@@ -166,6 +151,19 @@ function uom_custom_form_alter(&$form, &$form_state, $form_id) {
     // Hide URL redirects on the user profile form.
     if (!empty($form['redirect'])) {
       $form['redirect']['#access'] = FALSE;
+    }
+  }
+
+  if ($form_id == 'user_register_form') {
+    // If LDAP Query module is installed, offer to lookup the username.
+    if (module_exists("ldap_query")) {
+
+      $form['account']['name']['#description'] = t('Leave this field empty to lookup a username based on the <em>@unimelb.edu.au</em> email address entered above. Otherwise, spaces are allowed; punctuation is not allowed except for periods, hyphens, apostrophes, and underscores.');
+      // Do not bold the label on the username field.
+      drupal_add_css('.page-admin-people .form-item-name label { font-weight: normal; }', array('type' => 'inline'));
+
+      // And add our extra validator :-)
+      array_unshift($form['#validate'], 'uom_custom_username_lookup_validate');
     }
   }
 
@@ -195,12 +193,18 @@ function uom_custom_form_alter(&$form, &$form_state, $form_id) {
  */
 function uom_custom_username_lookup_validate($form, &$form_state) {
   if ($name = uom_custom_username_lookup($form_state['values']['mail'])) {
-    form_set_value($form['account']['name'], $name, $form_state);
     drupal_set_message(t('Found username %name for %mail', array('%name' => $name, '%mail' => $form_state['values']['mail'])));
+
+    $form_state['input']['account']['name']['#value'] = $name;
+    $form_state['complete form']['account']['name']['#value'] = $name;
+    form_set_value($form['account']['name'], $name, $form_state);
+
+    form_set_value($form['field_position'], array(0 => $name), $form_state);
 
     // Set a random new password, LDAP pass will be used anyway.
     if (empty($form_state['values']['pass'])) {
-      form_set_value($form['account']['pass'], 'empty', $form_state);
+      form_set_value($form['account']['pass']['pass1'], 'empty', $form_state);
+      form_set_value($form['account']['pass']['pass2'], 'empty', $form_state);
     }
   }
 }
