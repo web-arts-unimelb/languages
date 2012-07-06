@@ -96,8 +96,18 @@ function uom_custom_form_alter(&$form, &$form_state, $form_id) {
     $form['account']['current_pass']['#weight'] =  -7;
     $form['account']['current_pass_required_values']['#weight'] =  -6;
 
-    $form['account']['mail']['#description'] = t('A valid e-mail address. All e-mails from the system will be sent to this address. This email address will be listed on your profile page.');
+    $form['account']['mail']['#description'] = t('A valid e-mail address. All e-mails from the system will be sent to this address. This email address will be listed on your profile page. ');
     $form['account']['current_pass']['#description'] =  t('If you want to change your <em class="placeholder">E-mail address</em> or <em class="placeholder">Password</em>, you must enter your current password to confirm. <a href="/user/password" title="Request new password via e-mail.">Request new password</a>.');
+
+    // If LDAP Query module is installed, offer to lookup the username.
+    if (module_exists("ldap_query")) {
+      $form['account']['name']['#description'] = t('Leave this field empty to lookup a username based on the <em>@unimelb.edu.au</em> email address entered above. Otherwise, spaces are allowed; punctuation is not allowed except for periods, hyphens, apostrophes, and underscores.');
+      // Do not bold the label on the username field.
+      drupal_add_css('.page-admin-people .form-item-name label { font-weight: normal; }', array('type' => 'inline'));
+
+      // And add our extra validator :-)
+      array_unshift($form['#validate'], 'uom_custom_username_lookup');
+    }
 
     // LDAP module disabled some form items. If they're disabled, actually just hide them.
     if (module_exists('ldap_authentication')) {
@@ -165,6 +175,15 @@ function uom_custom_form_alter(&$form, &$form_state, $form_id) {
       $form['actions']['preview_changes']['#access'] = FALSE;
     }
   }
+}
+
+/**
+ * Extra validation handler that tries to fetch a username from the Central ITS
+ * LDAP databse, based on the given email address.
+ */
+function uom_custom_username_lookup($form, &$form_state) {
+  $ldap_query = ldap_query_get_queries('uom_username_lookup', 'all', TRUE);
+  dpm($ldap_query);
 }
 
 /**
