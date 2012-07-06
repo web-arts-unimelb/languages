@@ -219,8 +219,6 @@ function uom_custom_username_lookup($mail) {
   return FALSE;
 }
 
-}
-
 /**
  * Extra validation handler for the user_profile_form form. This only runs if
  * the form is being submitted by an admin or site-admin user.
