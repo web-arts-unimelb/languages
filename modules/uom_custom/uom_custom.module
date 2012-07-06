@@ -90,8 +90,8 @@ function uom_custom_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'user_profile_form' || $form_id == 'user_register_form') {
 
     // Rearrange user.module core fields a bit.
-    $form['account']['name']['#weight'] = -10;
-    $form['account']['mail']['#weight'] =  -9;
+    $form['account']['mail']['#weight'] = -10;
+    $form['account']['name']['#weight'] =  -9;
     $form['account']['pass']['#weight'] =  -8;
     $form['account']['current_pass']['#weight'] =  -7;
     $form['account']['current_pass_required_values']['#weight'] =  -6;
@@ -669,7 +669,9 @@ function uom_custom_field_formatter_view($obj_type, $object, $field, $instance, 
 }
 
 function uom_custom_field_formatter_uom_inline_file($variables) {
-  return theme('uom_custom_inline_file', array('item' => $variables['#items'][0]));
+  if (!empty($variables['#items'][0])) {
+    return theme('uom_custom_inline_file', array('item' => $variables['#items'][0]));
+  }
 }
 
 /**
