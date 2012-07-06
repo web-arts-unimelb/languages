@@ -99,6 +99,10 @@ function uom_custom_form_alter(&$form, &$form_state, $form_id) {
     $form['account']['mail']['#description'] = t('A valid e-mail address. All e-mails from the system will be sent to this address. This email address will be listed on your profile page. ');
     $form['account']['current_pass']['#description'] =  t('If you want to change your <em class="placeholder">E-mail address</em> or <em class="placeholder">Password</em>, you must enter your current password to confirm. <a href="/user/password" title="Request new password via e-mail.">Request new password</a>.');
 
+    // Do not autocomplete username or password fields.
+    $form['account']['name']['#attributes']['autocomplete'] = 'false';
+    $form['account']['pass']['#attributes']['autocomplete'] = 'false';
+
     // If LDAP Query module is installed, offer to lookup the username.
     if (module_exists("ldap_query")) {
       $form['account']['name']['#description'] = t('Leave this field empty to lookup a username based on the <em>@unimelb.edu.au</em> email address entered above. Otherwise, spaces are allowed; punctuation is not allowed except for periods, hyphens, apostrophes, and underscores.');
@@ -106,7 +110,15 @@ function uom_custom_form_alter(&$form, &$form_state, $form_id) {
       drupal_add_css('.page-admin-people .form-item-name label { font-weight: normal; }', array('type' => 'inline'));
 
       // And add our extra validator :-)
-      array_unshift($form['#validate'], 'uom_custom_username_lookup');
+      array_unshift($form['#validate'], 'uom_custom_username_lookup_validate');
+
+      // If we're reloading due to an error, stick in a username and password now.
+      if (!empty($form_state['values']['mail']) && empty($form['account']['name']['#default_value'])) {
+        $form['account']['name']['#default_value'] = uom_custom_username_lookup($form_state['values']['mail']);
+        if (empty($form['account']['pass']['#default_value'])) {
+          $form['account']['pass']['#default_value'] = 'empty';
+        }
+      }
     }
 
     // LDAP module disabled some form items. If they're disabled, actually just hide them.
@@ -181,9 +193,32 @@ function uom_custom_form_alter(&$form, &$form_state, $form_id) {
  * Extra validation handler that tries to fetch a username from the Central ITS
  * LDAP databse, based on the given email address.
  */
-function uom_custom_username_lookup($form, &$form_state) {
+function uom_custom_username_lookup_validate($form, &$form_state) {
+  if ($name = uom_custom_username_lookup($form_state['values']['mail'])) {
+    form_set_value($form['account']['name'], $name, $form_state);
+    drupal_set_message(t('Found username %name for %mail', array('%name' => $name, '%mail' => $form_state['values']['mail'])));
+
+    // Set a random new password, LDAP pass will be used anyway.
+    if (empty($form_state['values']['pass'])) {
+      form_set_value($form['account']['pass'], 'empty', $form_state);
+    }
+  }
+}
+
+/**
+ * Lookup a username is LDAP.
+ */
+function uom_custom_username_lookup($mail) {
   $ldap_query = ldap_query_get_queries('uom_username_lookup', 'all', TRUE);
-  dpm($ldap_query);
+  $ldap_query->filter = sprintf('(&(ou=Arts)(auedupersontype=staff)(mail=%s))', $mail);
+  $result = $ldap_query->query();
+
+  if ($result['count'] == 1) {
+    return $result[0]['uid'][0];
+  }
+  return FALSE;
+}
+
 }
 
 /**
@@ -255,7 +290,7 @@ function _uom_custom_profile_links($account) {
   $profile_links = array();
 
   // Early return if the profile is not public.
-  if ($account->field_share_profile['und'][0]['value'] == 'No') {
+  if ($account->field_share_profile[LANGUAGE_NONE][0]['value'] == 'No') {
     return $profile_links;
   }
 
@@ -716,7 +751,7 @@ function uom_custom_field_formatter_uom_image_floater($variables) {
 
   foreach ($variables['#items'] as $delta => $item) {
     if (!empty($item['field_description']) && (empty($item['alt']) || empty($item['title']))) {
-      $language = empty($item['language']) ? 'und' : $item['language'];
+      $language = empty($item['language']) ? LANGUAGE_NONE : $item['language'];
       $title = $item['field_description'][$language][0]['safe_value'];
       $item['alt'] = $item['title'] = $title;
     }
@@ -770,7 +805,7 @@ function uom_custom_field_formatter_uom_image_colourbox($variables) {
 
   foreach ($variables['#items'] as $delta => $item) {
     if (!empty($item['field_description']) && (empty($item['alt']) || empty($item['title']))) {
-      $language = empty($item['language']) ? 'und' : $item['language'];
+      $language = empty($item['language']) ? LANGUAGE_NONE : $item['language'];
       $title = $item['field_description'][$language][0]['safe_value'];
       $item['alt'] = $item['title'] = $title;
     }
