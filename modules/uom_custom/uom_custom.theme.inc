@@ -56,7 +56,7 @@ function theme_uom_custom_colourbox_image_formatter($variables) {
     'alt' => $item['alt'],
     'title' => $item['title'],
     'style_name' => $settings['colorbox_node_style'],
-    'attributes' => $item['attributes'],
+    'attributes' => isset($item['attributes']) ? $item['attributes'] : array(),
     'align' => $settings['image_float'],
   );
 
@@ -65,7 +65,7 @@ function theme_uom_custom_colourbox_image_formatter($variables) {
     $image['height'] = $item['height'];
   }
 
-  $class = $item['attributes']['class'];
+  $class = isset($item['attributes']['class']) ? $item['attributes']['class'] : '';
 
   switch ($settings['colorbox_caption']) {
     case 'auto':
