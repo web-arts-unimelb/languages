@@ -1561,12 +1561,12 @@ function uom_staff_profiles_views_default_views() {
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = '';
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="col-4 first">
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="col-5 first">
 <h2>Bibliography</h2>
 <h5>[field_first_name] [field_last_name]</h5>
 </div>
 
-<div class="col-2 last">
+<div class="col-1 last">
 [field_profile_image]
 </div>
 
