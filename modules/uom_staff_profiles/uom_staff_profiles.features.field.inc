@@ -10,7 +10,7 @@
 function uom_staff_profiles_field_default_fields() {
   $fields = array();
 
-  // Exported field: 'user-user-field_academic_staff_type'
+  // Exported field: 'user-user-field_academic_staff_type'.
   $fields['user-user-field_academic_staff_type'] = array(
     'field_config' => array(
       'active' => '1',
@@ -35,6 +35,7 @@ function uom_staff_profiles_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -51,7 +52,7 @@ function uom_staff_profiles_field_default_fields() {
       'bundle' => 'user',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => '',
+      'description' => 'This field is used to further categorize academic staff. If the user is not a academic staff, you should select "none".',
       'display' => array(
         'default' => array(
           'label' => 'above',
@@ -63,26 +64,38 @@ function uom_staff_profiles_field_default_fields() {
       ),
       'entity_type' => 'user',
       'field_name' => 'field_academic_staff_type',
-      'label' => 'Academic staff type',
+      'label' => 'Academic staff category',
       'required' => 1,
       'settings' => array(
         'user_register_form' => 1,
+        'wysiwyg_fields' => array(
+          'settings' => array(
+            'advanced' => array(
+              'delete' => 1,
+              'hide' => 1,
+            ),
+            'formatters' => array(),
+            'icon' => '6f7621a02161e347e66d99d8ace540a3',
+            'label' => 'Academic staff type',
+          ),
+          'status' => 0,
+        ),
       ),
       'widget' => array(
         'active' => 1,
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '11',
+        'weight' => '12',
       ),
     ),
   );
 
-  // Exported field: 'user-user-field_account_document'
+  // Exported field: 'user-user-field_account_document'.
   $fields['user-user-field_account_document'] = array(
     'field_config' => array(
       'active' => '1',
-      'cardinality' => '1',
+      'cardinality' => '-1',
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_account_document',
@@ -103,6 +116,7 @@ function uom_staff_profiles_field_default_fields() {
           0 => 'fid',
         ),
       ),
+      'locked' => '0',
       'module' => 'file',
       'settings' => array(
         'display_default' => 0,
@@ -129,11 +143,25 @@ function uom_staff_profiles_field_default_fields() {
       'label' => 'Document uploader',
       'required' => 0,
       'settings' => array(
-        'description_field' => 0,
+        'description_field' => 1,
         'file_directory' => '',
-        'file_extensions' => 'txt',
+        'file_extensions' => 'txt pdf doc docx xls xlsx ppt pptx odt ods odp',
         'max_filesize' => '',
-        'user_register_form' => 1,
+        'user_register_form' => 0,
+        'wysiwyg_fields' => array(
+          'settings' => array(
+            'advanced' => array(
+              'delete' => 1,
+              'hide' => 1,
+            ),
+            'formatters' => array(
+              'uom_inline_file' => 'uom_inline_file',
+            ),
+            'icon' => '32c1419a9092fb94fcc30f95d7a66fb4',
+            'label' => 'Document uploader',
+          ),
+          'status' => 1,
+        ),
       ),
       'widget' => array(
         'active' => 1,
@@ -142,9 +170,9 @@ function uom_staff_profiles_field_default_fields() {
           'filefield_sources' => array(
             'filefield_sources' => array(
               'attach' => 0,
-              'imce' => 0,
               'reference' => 0,
               'remote' => 0,
+              'views' => 0,
             ),
             'source_attach' => array(
               'absolute' => '0',
@@ -154,20 +182,10 @@ function uom_staff_profiles_field_default_fields() {
             'source_reference' => array(
               'autocomplete' => '0',
             ),
+            'views' => array(
+              'views_filter' => '',
+            ),
           ),
-          'insert' => 1,
-          'insert_class' => '',
-          'insert_default' => 'image',
-          'insert_styles' => array(
-            'auto' => 0,
-            'image' => 'image',
-            'image_large' => 'image_large',
-            'image_medium' => 'image_medium',
-            'image_newsbanner' => 0,
-            'image_thumbnail' => 'image_thumbnail',
-            'link' => 0,
-          ),
-          'insert_width' => '',
           'progress_indicator' => 'throbber',
         ),
         'type' => 'file_generic',
@@ -176,11 +194,11 @@ function uom_staff_profiles_field_default_fields() {
     ),
   );
 
-  // Exported field: 'user-user-field_account_image'
+  // Exported field: 'user-user-field_account_image'.
   $fields['user-user-field_account_image'] = array(
     'field_config' => array(
       'active' => '1',
-      'cardinality' => '1',
+      'cardinality' => '-1',
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_account_image',
@@ -201,6 +219,7 @@ function uom_staff_profiles_field_default_fields() {
           0 => 'fid',
         ),
       ),
+      'locked' => '0',
       'module' => 'image',
       'settings' => array(
         'default_image' => 0,
@@ -226,15 +245,29 @@ function uom_staff_profiles_field_default_fields() {
       'label' => 'Image uploader',
       'required' => 0,
       'settings' => array(
-        'alt_field' => 0,
+        'alt_field' => 1,
         'default_image' => 0,
         'file_directory' => '',
         'file_extensions' => 'png gif jpg jpeg',
         'max_filesize' => '',
         'max_resolution' => '',
         'min_resolution' => '',
-        'title_field' => 0,
+        'title_field' => 1,
         'user_register_form' => 1,
+        'wysiwyg_fields' => array(
+          'settings' => array(
+            'advanced' => array(
+              'delete' => 1,
+              'hide' => 1,
+            ),
+            'formatters' => array(
+              'uom_image_floater' => 'uom_image_floater',
+            ),
+            'icon' => 'd50522754f0bc7cc44d2f5231a467fe8',
+            'label' => 'Image uploader',
+          ),
+          'status' => 1,
+        ),
       ),
       'widget' => array(
         'active' => 1,
@@ -243,9 +276,9 @@ function uom_staff_profiles_field_default_fields() {
           'filefield_sources' => array(
             'filefield_sources' => array(
               'attach' => 0,
-              'imce' => 0,
               'reference' => 0,
               'remote' => 0,
+              'views' => 0,
             ),
             'source_attach' => array(
               'absolute' => '0',
@@ -255,20 +288,10 @@ function uom_staff_profiles_field_default_fields() {
             'source_reference' => array(
               'autocomplete' => '0',
             ),
+            'views' => array(
+              'views_filter' => '',
+            ),
           ),
-          'insert' => 1,
-          'insert_class' => '',
-          'insert_default' => 'image',
-          'insert_styles' => array(
-            'auto' => 0,
-            'image' => 'image',
-            'image_large' => 'image_large',
-            'image_medium' => 'image_medium',
-            'image_newsbanner' => 0,
-            'image_thumbnail' => 'image_thumbnail',
-            'link' => 0,
-          ),
-          'insert_width' => '',
           'preview_image_style' => 'thumbnail',
           'progress_indicator' => 'throbber',
         ),
@@ -278,7 +301,7 @@ function uom_staff_profiles_field_default_fields() {
     ),
   );
 
-  // Exported field: 'user-user-field_awards_and_grants'
+  // Exported field: 'user-user-field_awards_and_grants'.
   $fields['user-user-field_awards_and_grants'] = array(
     'field_config' => array(
       'active' => '1',
@@ -303,6 +326,7 @@ function uom_staff_profiles_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(),
       'translatable' => '0',
@@ -342,7 +366,7 @@ function uom_staff_profiles_field_default_fields() {
     ),
   );
 
-  // Exported field: 'user-user-field_bibliography'
+  // Exported field: 'user-user-field_bibliography'.
   $fields['user-user-field_bibliography'] = array(
     'field_config' => array(
       'active' => '1',
@@ -367,6 +391,7 @@ function uom_staff_profiles_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(),
       'translatable' => '0',
@@ -410,7 +435,7 @@ function uom_staff_profiles_field_default_fields() {
     ),
   );
 
-  // Exported field: 'user-user-field_biography'
+  // Exported field: 'user-user-field_biography'.
   $fields['user-user-field_biography'] = array(
     'field_config' => array(
       'active' => '1',
@@ -435,6 +460,7 @@ function uom_staff_profiles_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(),
       'translatable' => '0',
@@ -473,12 +499,12 @@ function uom_staff_profiles_field_default_fields() {
           'rows' => '10',
         ),
         'type' => 'text_textarea',
-        'weight' => '28',
+        'weight' => '23',
       ),
     ),
   );
 
-  // Exported field: 'user-user-field_building'
+  // Exported field: 'user-user-field_building'.
   $fields['user-user-field_building'] = array(
     'field_config' => array(
       'active' => '1',
@@ -500,6 +526,7 @@ function uom_staff_profiles_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '255',
@@ -541,7 +568,7 @@ function uom_staff_profiles_field_default_fields() {
     ),
   );
 
-  // Exported field: 'user-user-field_discipline'
+  // Exported field: 'user-user-field_discipline'.
   $fields['user-user-field_discipline'] = array(
     'field_config' => array(
       'active' => '1',
@@ -550,7 +577,7 @@ function uom_staff_profiles_field_default_fields() {
       'entity_types' => array(),
       'field_name' => 'field_discipline',
       'field_permissions' => array(
-        'type' => '2',
+        'type' => '0',
       ),
       'foreign keys' => array(
         'tid' => array(
@@ -566,6 +593,7 @@ function uom_staff_profiles_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -589,7 +617,7 @@ function uom_staff_profiles_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
-          'weight' => '46',
+          'weight' => 51,
         ),
       ),
       'entity_type' => 'user',
@@ -598,18 +626,30 @@ function uom_staff_profiles_field_default_fields() {
       'required' => 1,
       'settings' => array(
         'user_register_form' => 1,
+        'wysiwyg_fields' => array(
+          'settings' => array(
+            'advanced' => array(
+              'delete' => 1,
+              'hide' => 1,
+            ),
+            'formatters' => array(),
+            'icon' => '6f7621a02161e347e66d99d8ace540a3',
+            'label' => 'Discipline',
+          ),
+          'status' => 0,
+        ),
       ),
       'widget' => array(
         'active' => 1,
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '12',
+        'weight' => '8',
       ),
     ),
   );
 
-  // Exported field: 'user-user-field_external_profile'
+  // Exported field: 'user-user-field_external_profile'.
   $fields['user-user-field_external_profile'] = array(
     'field_config' => array(
       'active' => '1',
@@ -623,6 +663,7 @@ function uom_staff_profiles_field_default_fields() {
       'foreign keys' => array(),
       'global_block_settings' => '1',
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'link',
       'settings' => array(
         'attributes' => array(
@@ -693,7 +734,7 @@ function uom_staff_profiles_field_default_fields() {
     ),
   );
 
-  // Exported field: 'user-user-field_first_name'
+  // Exported field: 'user-user-field_first_name'.
   $fields['user-user-field_first_name'] = array(
     'field_config' => array(
       'active' => '1',
@@ -718,6 +759,7 @@ function uom_staff_profiles_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '255',
@@ -766,7 +808,7 @@ function uom_staff_profiles_field_default_fields() {
     ),
   );
 
-  // Exported field: 'user-user-field_last_name'
+  // Exported field: 'user-user-field_last_name'.
   $fields['user-user-field_last_name'] = array(
     'field_config' => array(
       'active' => '1',
@@ -791,6 +833,7 @@ function uom_staff_profiles_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '255',
@@ -839,7 +882,7 @@ function uom_staff_profiles_field_default_fields() {
     ),
   );
 
-  // Exported field: 'user-user-field_org_unit'
+  // Exported field: 'user-user-field_org_unit'.
   $fields['user-user-field_org_unit'] = array(
     'field_config' => array(
       'active' => '1',
@@ -864,6 +907,7 @@ function uom_staff_profiles_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -902,12 +946,12 @@ function uom_staff_profiles_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '9',
+        'weight' => '10',
       ),
     ),
   );
 
-  // Exported field: 'user-user-field_phone'
+  // Exported field: 'user-user-field_phone'.
   $fields['user-user-field_phone'] = array(
     'field_config' => array(
       'active' => '1',
@@ -915,6 +959,9 @@ function uom_staff_profiles_field_default_fields() {
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_phone',
+      'field_permissions' => array(
+        'type' => '0',
+      ),
       'foreign keys' => array(
         'format' => array(
           'columns' => array(
@@ -929,6 +976,7 @@ function uom_staff_profiles_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '255',
@@ -940,7 +988,7 @@ function uom_staff_profiles_field_default_fields() {
       'bundle' => 'user',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => '',
+      'description' => 'e.g. 1234 5678',
       'display' => array(
         'default' => array(
           'label' => 'inline',
@@ -955,8 +1003,24 @@ function uom_staff_profiles_field_default_fields() {
       'label' => 'Phone',
       'required' => 0,
       'settings' => array(
+        'linkit' => array(
+          'enable' => 0,
+          'insert_plugin' => '',
+        ),
         'text_processing' => '0',
         'user_register_form' => 1,
+        'wysiwyg_fields' => array(
+          'settings' => array(
+            'advanced' => array(
+              'delete' => 1,
+              'hide' => 1,
+            ),
+            'formatters' => array(),
+            'icon' => '6f7621a02161e347e66d99d8ace540a3',
+            'label' => 'Phone',
+          ),
+          'status' => 0,
+        ),
       ),
       'widget' => array(
         'active' => 1,
@@ -970,7 +1034,7 @@ function uom_staff_profiles_field_default_fields() {
     ),
   );
 
-  // Exported field: 'user-user-field_position'
+  // Exported field: 'user-user-field_position'.
   $fields['user-user-field_position'] = array(
     'field_config' => array(
       'active' => '1',
@@ -992,6 +1056,7 @@ function uom_staff_profiles_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '255',
@@ -1028,12 +1093,12 @@ function uom_staff_profiles_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '8',
+        'weight' => '9',
       ),
     ),
   );
 
-  // Exported field: 'user-user-field_presentations'
+  // Exported field: 'user-user-field_presentations'.
   $fields['user-user-field_presentations'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1058,6 +1123,7 @@ function uom_staff_profiles_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(),
       'translatable' => '0',
@@ -1096,12 +1162,12 @@ function uom_staff_profiles_field_default_fields() {
           'rows' => '10',
         ),
         'type' => 'text_textarea',
-        'weight' => '32',
+        'weight' => '38',
       ),
     ),
   );
 
-  // Exported field: 'user-user-field_profile_image'
+  // Exported field: 'user-user-field_profile_image'.
   $fields['user-user-field_profile_image'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1126,6 +1192,7 @@ function uom_staff_profiles_field_default_fields() {
           0 => 'fid',
         ),
       ),
+      'locked' => '0',
       'module' => 'image',
       'settings' => array(
         'default_image' => 0,
@@ -1207,7 +1274,7 @@ function uom_staff_profiles_field_default_fields() {
     ),
   );
 
-  // Exported field: 'user-user-field_publications'
+  // Exported field: 'user-user-field_publications'.
   $fields['user-user-field_publications'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1232,6 +1299,7 @@ function uom_staff_profiles_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(),
       'translatable' => '0',
@@ -1270,12 +1338,12 @@ function uom_staff_profiles_field_default_fields() {
           'rows' => '10',
         ),
         'type' => 'text_textarea',
-        'weight' => '30',
+        'weight' => '36',
       ),
     ),
   );
 
-  // Exported field: 'user-user-field_qualifications'
+  // Exported field: 'user-user-field_qualifications'.
   $fields['user-user-field_qualifications'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1300,6 +1368,7 @@ function uom_staff_profiles_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(),
       'translatable' => '0',
@@ -1343,7 +1412,7 @@ function uom_staff_profiles_field_default_fields() {
     ),
   );
 
-  // Exported field: 'user-user-field_research_interest'
+  // Exported field: 'user-user-field_research_interest'.
   $fields['user-user-field_research_interest'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1368,6 +1437,7 @@ function uom_staff_profiles_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(),
       'translatable' => '0',
@@ -1411,7 +1481,7 @@ function uom_staff_profiles_field_default_fields() {
     ),
   );
 
-  // Exported field: 'user-user-field_research_projects'
+  // Exported field: 'user-user-field_research_projects'.
   $fields['user-user-field_research_projects'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1436,6 +1506,7 @@ function uom_staff_profiles_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(),
       'translatable' => '0',
@@ -1474,12 +1545,12 @@ function uom_staff_profiles_field_default_fields() {
           'rows' => '10',
         ),
         'type' => 'text_textarea',
-        'weight' => '24',
+        'weight' => '23',
       ),
     ),
   );
 
-  // Exported field: 'user-user-field_responsibilities'
+  // Exported field: 'user-user-field_responsibilities'.
   $fields['user-user-field_responsibilities'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1504,6 +1575,7 @@ function uom_staff_profiles_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(),
       'translatable' => '0',
@@ -1542,12 +1614,12 @@ function uom_staff_profiles_field_default_fields() {
           'rows' => '10',
         ),
         'type' => 'text_textarea',
-        'weight' => '10',
+        'weight' => '11',
       ),
     ),
   );
 
-  // Exported field: 'user-user-field_room'
+  // Exported field: 'user-user-field_room'.
   $fields['user-user-field_room'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1569,6 +1641,7 @@ function uom_staff_profiles_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '255',
@@ -1610,7 +1683,7 @@ function uom_staff_profiles_field_default_fields() {
     ),
   );
 
-  // Exported field: 'user-user-field_share_profile'
+  // Exported field: 'user-user-field_share_profile'.
   $fields['user-user-field_share_profile'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1625,6 +1698,7 @@ function uom_staff_profiles_field_default_fields() {
           0 => 'value',
         ),
       ),
+      'locked' => '0',
       'module' => 'list',
       'settings' => array(
         'allowed_values' => array(
@@ -1673,7 +1747,7 @@ function uom_staff_profiles_field_default_fields() {
     ),
   );
 
-  // Exported field: 'user-user-field_teaching'
+  // Exported field: 'user-user-field_teaching'.
   $fields['user-user-field_teaching'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1698,6 +1772,7 @@ function uom_staff_profiles_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(),
       'translatable' => '0',
@@ -1736,14 +1811,14 @@ function uom_staff_profiles_field_default_fields() {
           'rows' => '10',
         ),
         'type' => 'text_textarea',
-        'weight' => '31',
+        'weight' => '36',
       ),
     ),
   );
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Academic staff type');
+  t('Academic staff category');
   t('Add an optional external profile link. E.g.: Your <em>Find an expert</em> page. Enter the whole link address, including http://');
   t('Awards and grants');
   t('Bibliography');
@@ -1768,6 +1843,8 @@ function uom_staff_profiles_field_default_fields() {
   t('Room');
   t('Share Profile');
   t('Teaching');
+  t('This field is used to further categorize academic staff. If the user is not a academic staff, you should select "none".');
+  t('e.g. 1234 5678');
 
   return $fields;
 }

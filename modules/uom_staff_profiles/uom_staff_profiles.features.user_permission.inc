@@ -27,6 +27,7 @@ function uom_staff_profiles_user_default_permissions() {
     'roles' => array(
       0 => 'academic staff',
       1 => 'admin',
+      2 => 'site admin',
     ),
     'module' => 'field_permissions',
   );
@@ -64,23 +65,13 @@ function uom_staff_profiles_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
-  // Exported permission: create field_discipline.
-  $permissions['create field_discipline'] = array(
-    'name' => 'create field_discipline',
-    'roles' => array(
-      0 => 'academic staff',
-      1 => 'admin',
-      2 => 'site admin',
-    ),
-    'module' => 'field_permissions',
-  );
-
   // Exported permission: create field_event_document.
   $permissions['create field_event_document'] = array(
     'name' => 'create field_event_document',
     'roles' => array(
       0 => 'admin',
-      1 => 'site admin',
+      1 => 'authenticated user',
+      2 => 'site admin',
     ),
     'module' => 'field_permissions',
   );
@@ -88,7 +79,11 @@ function uom_staff_profiles_user_default_permissions() {
   // Exported permission: create field_event_image.
   $permissions['create field_event_image'] = array(
     'name' => 'create field_event_image',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'admin',
+      1 => 'authenticated user',
+      2 => 'site admin',
+    ),
     'module' => 'field_permissions',
   );
 
@@ -97,7 +92,8 @@ function uom_staff_profiles_user_default_permissions() {
     'name' => 'create field_page_document',
     'roles' => array(
       0 => 'admin',
-      1 => 'site admin',
+      1 => 'authenticated user',
+      2 => 'site admin',
     ),
     'module' => 'field_permissions',
   );
@@ -105,7 +101,11 @@ function uom_staff_profiles_user_default_permissions() {
   // Exported permission: create field_page_image.
   $permissions['create field_page_image'] = array(
     'name' => 'create field_page_image',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'admin',
+      1 => 'authenticated user',
+      2 => 'site admin',
+    ),
     'module' => 'field_permissions',
   );
 
@@ -247,22 +247,13 @@ function uom_staff_profiles_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
-  // Exported permission: edit field_discipline.
-  $permissions['edit field_discipline'] = array(
-    'name' => 'edit field_discipline',
-    'roles' => array(
-      0 => 'admin',
-      1 => 'site admin',
-    ),
-    'module' => 'field_permissions',
-  );
-
   // Exported permission: edit field_event_document.
   $permissions['edit field_event_document'] = array(
     'name' => 'edit field_event_document',
     'roles' => array(
       0 => 'admin',
-      1 => 'site admin',
+      1 => 'editor',
+      2 => 'site admin',
     ),
     'module' => 'field_permissions',
   );
@@ -270,7 +261,11 @@ function uom_staff_profiles_user_default_permissions() {
   // Exported permission: edit field_event_image.
   $permissions['edit field_event_image'] = array(
     'name' => 'edit field_event_image',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'admin',
+      1 => 'editor',
+      2 => 'site admin',
+    ),
     'module' => 'field_permissions',
   );
 
@@ -279,7 +274,8 @@ function uom_staff_profiles_user_default_permissions() {
     'name' => 'edit field_page_document',
     'roles' => array(
       0 => 'admin',
-      1 => 'site admin',
+      1 => 'editor',
+      2 => 'site admin',
     ),
     'module' => 'field_permissions',
   );
@@ -287,7 +283,11 @@ function uom_staff_profiles_user_default_permissions() {
   // Exported permission: edit field_page_image.
   $permissions['edit field_page_image'] = array(
     'name' => 'edit field_page_image',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'admin',
+      1 => 'editor',
+      2 => 'site admin',
+    ),
     'module' => 'field_permissions',
   );
 
@@ -426,23 +426,13 @@ function uom_staff_profiles_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
-  // Exported permission: edit own field_discipline.
-  $permissions['edit own field_discipline'] = array(
-    'name' => 'edit own field_discipline',
-    'roles' => array(
-      0 => 'academic staff',
-      1 => 'admin',
-      2 => 'site admin',
-    ),
-    'module' => 'field_permissions',
-  );
-
   // Exported permission: edit own field_event_document.
   $permissions['edit own field_event_document'] = array(
     'name' => 'edit own field_event_document',
     'roles' => array(
       0 => 'admin',
-      1 => 'site admin',
+      1 => 'authenticated user',
+      2 => 'site admin',
     ),
     'module' => 'field_permissions',
   );
@@ -450,7 +440,12 @@ function uom_staff_profiles_user_default_permissions() {
   // Exported permission: edit own field_event_image.
   $permissions['edit own field_event_image'] = array(
     'name' => 'edit own field_event_image',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'admin',
+      1 => 'authenticated user',
+      2 => 'editor',
+      3 => 'site admin',
+    ),
     'module' => 'field_permissions',
   );
 
@@ -459,7 +454,8 @@ function uom_staff_profiles_user_default_permissions() {
     'name' => 'edit own field_page_document',
     'roles' => array(
       0 => 'admin',
-      1 => 'site admin',
+      1 => 'authenticated user',
+      2 => 'site admin',
     ),
     'module' => 'field_permissions',
   );
@@ -467,7 +463,12 @@ function uom_staff_profiles_user_default_permissions() {
   // Exported permission: edit own field_page_image.
   $permissions['edit own field_page_image'] = array(
     'name' => 'edit own field_page_image',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'admin',
+      1 => 'authenticated user',
+      2 => 'editor',
+      3 => 'site admin',
+    ),
     'module' => 'field_permissions',
   );
 
@@ -622,18 +623,6 @@ function uom_staff_profiles_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
-  // Exported permission: view field_discipline.
-  $permissions['view field_discipline'] = array(
-    'name' => 'view field_discipline',
-    'roles' => array(
-      0 => 'academic staff',
-      1 => 'admin',
-      2 => 'professional staff',
-      3 => 'site admin',
-    ),
-    'module' => 'field_permissions',
-  );
-
   // Exported permission: view field_event_document.
   $permissions['view field_event_document'] = array(
     'name' => 'view field_event_document',
@@ -649,7 +638,10 @@ function uom_staff_profiles_user_default_permissions() {
   // Exported permission: view field_event_image.
   $permissions['view field_event_image'] = array(
     'name' => 'view field_event_image',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'anonymous user',
+      1 => 'authenticated user',
+    ),
     'module' => 'field_permissions',
   );
 
@@ -669,7 +661,10 @@ function uom_staff_profiles_user_default_permissions() {
   // Exported permission: view field_page_image.
   $permissions['view field_page_image'] = array(
     'name' => 'view field_page_image',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'anonymous user',
+      1 => 'authenticated user',
+    ),
     'module' => 'field_permissions',
   );
 
@@ -830,17 +825,6 @@ function uom_staff_profiles_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
-  // Exported permission: view own field_discipline.
-  $permissions['view own field_discipline'] = array(
-    'name' => 'view own field_discipline',
-    'roles' => array(
-      0 => 'academic staff',
-      1 => 'admin',
-      2 => 'site admin',
-    ),
-    'module' => 'field_permissions',
-  );
-
   // Exported permission: view own field_event_document.
   $permissions['view own field_event_document'] = array(
     'name' => 'view own field_event_document',
@@ -854,7 +838,11 @@ function uom_staff_profiles_user_default_permissions() {
   // Exported permission: view own field_event_image.
   $permissions['view own field_event_image'] = array(
     'name' => 'view own field_event_image',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'admin',
+      1 => 'editor',
+      2 => 'site admin',
+    ),
     'module' => 'field_permissions',
   );
 
@@ -863,7 +851,8 @@ function uom_staff_profiles_user_default_permissions() {
     'name' => 'view own field_page_document',
     'roles' => array(
       0 => 'admin',
-      1 => 'site admin',
+      1 => 'authenticated user',
+      2 => 'site admin',
     ),
     'module' => 'field_permissions',
   );
@@ -871,7 +860,12 @@ function uom_staff_profiles_user_default_permissions() {
   // Exported permission: view own field_page_image.
   $permissions['view own field_page_image'] = array(
     'name' => 'view own field_page_image',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'admin',
+      1 => 'anonymous user',
+      2 => 'authenticated user',
+      3 => 'site admin',
+    ),
     'module' => 'field_permissions',
   );
 
