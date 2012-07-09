@@ -86,7 +86,7 @@ function uom_staff_profiles_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '12',
+        'weight' => '13',
       ),
     ),
   );
@@ -563,7 +563,7 @@ function uom_staff_profiles_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '14',
+        'weight' => '15',
       ),
     ),
   );
@@ -644,7 +644,7 @@ function uom_staff_profiles_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '8',
+        'weight' => '9',
       ),
     ),
   );
@@ -729,7 +729,7 @@ function uom_staff_profiles_field_default_fields() {
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_field',
-        'weight' => '16',
+        'weight' => '17',
       ),
     ),
   );
@@ -803,7 +803,7 @@ function uom_staff_profiles_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '6',
+        'weight' => '7',
       ),
     ),
   );
@@ -877,7 +877,7 @@ function uom_staff_profiles_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '7',
+        'weight' => '8',
       ),
     ),
   );
@@ -946,7 +946,7 @@ function uom_staff_profiles_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '10',
+        'weight' => '11',
       ),
     ),
   );
@@ -1029,7 +1029,7 @@ function uom_staff_profiles_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '15',
+        'weight' => '16',
       ),
     ),
   );
@@ -1093,7 +1093,7 @@ function uom_staff_profiles_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '9',
+        'weight' => '10',
       ),
     ),
   );
@@ -1407,7 +1407,7 @@ function uom_staff_profiles_field_default_fields() {
           'rows' => '8',
         ),
         'type' => 'text_textarea',
-        'weight' => '17',
+        'weight' => '18',
       ),
     ),
   );
@@ -1614,7 +1614,7 @@ function uom_staff_profiles_field_default_fields() {
           'rows' => '10',
         ),
         'type' => 'text_textarea',
-        'weight' => '11',
+        'weight' => '12',
       ),
     ),
   );
@@ -1678,7 +1678,7 @@ function uom_staff_profiles_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '13',
+        'weight' => '14',
       ),
     ),
   );
@@ -1816,6 +1816,86 @@ function uom_staff_profiles_field_default_fields() {
     ),
   );
 
+  // Exported field: 'user-user-field_title'.
+  $fields['user-user-field_title'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_title',
+      'field_permissions' => array(
+        'type' => '0',
+      ),
+      'foreign keys' => array(),
+      'global_block_settings' => '1',
+      'indexes' => array(
+        'value' => array(
+          0 => 'value',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'list',
+      'settings' => array(
+        'allowed_values' => array(
+          'Dr' => 'Dr',
+          'Mr' => 'Mr',
+          'Ms' => 'Ms',
+          'Professor' => 'Professor',
+          'Associate Professor' => 'Associate Professor',
+          'Emeritus Professor' => 'Emeritus Professor',
+        ),
+        'allowed_values_function' => '',
+        'allowed_values_php' => '',
+      ),
+      'translatable' => '0',
+      'type' => 'list_text',
+    ),
+    'field_instance' => array(
+      'bundle' => 'user',
+      'default_value' => NULL,
+      'default_value_function' => '',
+      'default_value_php' => '',
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'list',
+          'settings' => array(),
+          'type' => 'list_default',
+          'weight' => 52,
+        ),
+      ),
+      'entity_type' => 'user',
+      'field_name' => 'field_title',
+      'label' => 'Title',
+      'required' => 1,
+      'settings' => array(
+        'user_register_form' => 1,
+        'wysiwyg_fields' => array(
+          'settings' => array(
+            'advanced' => array(
+              'delete' => 1,
+              'hide' => 1,
+            ),
+            'formatters' => array(),
+            'icon' => '6f7621a02161e347e66d99d8ace540a3',
+            'label' => 'Title',
+          ),
+          'status' => 0,
+        ),
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(),
+        'type' => 'options_select',
+        'weight' => '6',
+      ),
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Academic staff category');
@@ -1844,6 +1924,7 @@ function uom_staff_profiles_field_default_fields() {
   t('Share Profile');
   t('Teaching');
   t('This field is used to further categorize academic staff. If the user is not a academic staff, you should select "none".');
+  t('Title');
   t('e.g. 1234 5678');
 
   return $fields;
