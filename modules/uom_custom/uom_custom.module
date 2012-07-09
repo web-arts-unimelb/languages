@@ -155,15 +155,20 @@ function uom_custom_form_alter(&$form, &$form_state, $form_id) {
   }
 
   if ($form_id == 'user_register_form') {
-    // If LDAP Query module is installed, offer to lookup the username.
-    if (module_exists("ldap_query")) {
-
+    // If LDAP Query module is installed, offer to lookup the username.. but NOT if editing an existing user.
+    if (module_exists("ldap_query") && empty($form['#user']->uid)) {
       $form['account']['name']['#description'] = t('Leave this field empty to lookup a username based on the <em>@unimelb.edu.au</em> email address entered above. Otherwise, spaces are allowed; punctuation is not allowed except for periods, hyphens, apostrophes, and underscores.');
       // Do not bold the label on the username field.
       drupal_add_css('.page-admin-people .form-item-name label { font-weight: normal; }', array('type' => 'inline'));
 
       // And add our extra validator :-)
       array_unshift($form['#validate'], 'uom_custom_username_lookup_validate');
+    }
+  }
+
+  if ($form_id == 'user_profile_form') {
+    if (!in_array('site admin', $user->roles)) {
+      drupal_add_css('.page-user-edit .form-type-password-confirm { display: none; }', array('type' => 'inline'));
     }
   }
 
