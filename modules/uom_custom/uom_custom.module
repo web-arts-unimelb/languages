@@ -1138,3 +1138,11 @@ function uom_custom_wysiwyg_plugin($editor) {
     }
   }
 }
+
+/**
+ * Implements hook_views_api().
+ */
+function uom_custom_views_api() {
+  return array("version" => "3.0");
+}
+
