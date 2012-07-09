@@ -16,7 +16,11 @@ function uom_staff_profiles_menu_default_menu_links() {
     'link_path' => 'about/staff/academic-administrators',
     'router_path' => 'about/staff/academic-administrators',
     'link_title' => 'Academic Administrators',
-    'options' => array(),
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+    ),
     'module' => 'system',
     'hidden' => '0',
     'external' => '0',
@@ -31,7 +35,11 @@ function uom_staff_profiles_menu_default_menu_links() {
     'link_path' => 'about/staff/academic-staff',
     'router_path' => 'about/staff/academic-staff',
     'link_title' => 'Academic Staff',
-    'options' => array(),
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+    ),
     'module' => 'system',
     'hidden' => '0',
     'external' => '0',
@@ -46,7 +54,11 @@ function uom_staff_profiles_menu_default_menu_links() {
     'link_path' => 'about/staff/fellows',
     'router_path' => 'about/staff/fellows',
     'link_title' => 'Fellows',
-    'options' => array(),
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+    ),
     'module' => 'system',
     'hidden' => '0',
     'external' => '0',
@@ -61,7 +73,11 @@ function uom_staff_profiles_menu_default_menu_links() {
     'link_path' => 'about/staff/professional-staff',
     'router_path' => 'about/staff/professional-staff',
     'link_title' => 'Professional Staff',
-    'options' => array(),
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+    ),
     'module' => 'system',
     'hidden' => '0',
     'external' => '0',

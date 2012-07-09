@@ -1842,7 +1842,7 @@ function uom_staff_profiles_field_default_fields() {
           'Mr' => 'Mr',
           'Ms' => 'Ms',
           'Professor' => 'Professor',
-          'Associate Professor' => 'Associate Professor',
+          'Associate Professor' => 'Assoc. Professor',
           'Emeritus Professor' => 'Emeritus Professor',
         ),
         'allowed_values_function' => '',

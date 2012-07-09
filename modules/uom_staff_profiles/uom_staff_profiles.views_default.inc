@@ -23,8 +23,7 @@ function uom_staff_profiles_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Profiles';
-  $handler->display->display_options['access']['type'] = 'perm';
-  $handler->display->display_options['access']['perm'] = 'access user profiles';
+  $handler->display->display_options['access']['type'] = 'none';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['query_comment'] = FALSE;
@@ -2065,8 +2064,7 @@ function uom_staff_profiles_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'All Staff';
-  $handler->display->display_options['access']['type'] = 'perm';
-  $handler->display->display_options['access']['perm'] = 'access user profiles';
+  $handler->display->display_options['access']['type'] = 'none';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['distinct'] = TRUE;
@@ -2379,6 +2377,14 @@ function uom_staff_profiles_views_default_views() {
   $handler = $view->new_display('page', 'Academic Staff', 'page_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Academic Staff';
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: User: Discipline (field_discipline) */
+  $handler->display->display_options['relationships']['field_discipline_tid']['id'] = 'field_discipline_tid';
+  $handler->display->display_options['relationships']['field_discipline_tid']['table'] = 'field_data_field_discipline';
+  $handler->display->display_options['relationships']['field_discipline_tid']['field'] = 'field_discipline_tid';
+  $handler->display->display_options['relationships']['field_discipline_tid']['label'] = 'Discipline';
+  $handler->display->display_options['relationships']['field_discipline_tid']['required'] = 0;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: User: Position */
   $handler->display->display_options['fields']['field_position']['id'] = 'field_position';
@@ -2484,10 +2490,11 @@ function uom_staff_profiles_views_default_views() {
   $handler->display->display_options['fields']['field_discipline']['table'] = 'field_data_field_discipline';
   $handler->display->display_options['fields']['field_discipline']['field'] = 'field_discipline';
   $handler->display->display_options['fields']['field_discipline']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['field_discipline']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_discipline']['alter']['make_link'] = 1;
+  $handler->display->display_options['fields']['field_discipline']['alter']['path'] = 'about/staff/academic-staff/[field_discipline]';
   $handler->display->display_options['fields']['field_discipline']['alter']['absolute'] = 0;
   $handler->display->display_options['fields']['field_discipline']['alter']['external'] = 0;
-  $handler->display->display_options['fields']['field_discipline']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_discipline']['alter']['replace_spaces'] = 1;
   $handler->display->display_options['fields']['field_discipline']['alter']['trim_whitespace'] = 0;
   $handler->display->display_options['fields']['field_discipline']['alter']['nl2br'] = 0;
   $handler->display->display_options['fields']['field_discipline']['alter']['word_boundary'] = 1;
@@ -2572,10 +2579,27 @@ function uom_staff_profiles_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['hide_empty'] = 0;
   $handler->display->display_options['fields']['nothing_1']['empty_zero'] = 0;
   $handler->display->display_options['fields']['nothing_1']['hide_alter_empty'] = 0;
-  /* Field: User: Title */
-  $handler->display->display_options['fields']['field_title']['id'] = 'field_title';
-  $handler->display->display_options['fields']['field_title']['table'] = 'field_data_field_title';
-  $handler->display->display_options['fields']['field_title']['field'] = 'field_title';
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Taxonomy term: Name */
+  $handler->display->display_options['arguments']['name']['id'] = 'name';
+  $handler->display->display_options['arguments']['name']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['arguments']['name']['field'] = 'name';
+  $handler->display->display_options['arguments']['name']['relationship'] = 'field_discipline_tid';
+  $handler->display->display_options['arguments']['name']['title_enable'] = 1;
+  $handler->display->display_options['arguments']['name']['title'] = 'Academic Staff for %1';
+  $handler->display->display_options['arguments']['name']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['name']['default_argument_skip_url'] = 0;
+  $handler->display->display_options['arguments']['name']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['name']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['name']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['name']['glossary'] = 0;
+  $handler->display->display_options['arguments']['name']['limit'] = '0';
+  $handler->display->display_options['arguments']['name']['case'] = 'ucwords';
+  $handler->display->display_options['arguments']['name']['path_case'] = 'lower';
+  $handler->display->display_options['arguments']['name']['transform_dash'] = 1;
+  $handler->display->display_options['arguments']['name']['break_phrase'] = 0;
+  $handler->display->display_options['arguments']['name']['add_table'] = 0;
+  $handler->display->display_options['arguments']['name']['require_value'] = 0;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: User: Active */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -2603,6 +2627,13 @@ function uom_staff_profiles_views_default_views() {
   $handler = $view->new_display('page', 'Professional Staff', 'page_2');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Professional Staff';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: User: Organisation unit (field_org_unit) */
+  $handler->display->display_options['relationships']['field_org_unit_tid']['id'] = 'field_org_unit_tid';
+  $handler->display->display_options['relationships']['field_org_unit_tid']['table'] = 'field_data_field_org_unit';
+  $handler->display->display_options['relationships']['field_org_unit_tid']['field'] = 'field_org_unit_tid';
+  $handler->display->display_options['relationships']['field_org_unit_tid']['label'] = 'Organisational Unit';
+  $handler->display->display_options['relationships']['field_org_unit_tid']['required'] = 0;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: User: Position */
   $handler->display->display_options['fields']['field_position']['id'] = 'field_position';
@@ -2709,11 +2740,11 @@ function uom_staff_profiles_views_default_views() {
   $handler->display->display_options['fields']['field_org_unit']['field'] = 'field_org_unit';
   $handler->display->display_options['fields']['field_org_unit']['label'] = 'Unit';
   $handler->display->display_options['fields']['field_org_unit']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['field_org_unit']['alter']['make_link'] = 0;
-  $handler->display->display_options['fields']['field_org_unit']['alter']['path'] = 'staff/professional-staff/[field_org_unit]';
+  $handler->display->display_options['fields']['field_org_unit']['alter']['make_link'] = 1;
+  $handler->display->display_options['fields']['field_org_unit']['alter']['path'] = 'about/staff/professional-staff/[field_org_unit]';
   $handler->display->display_options['fields']['field_org_unit']['alter']['absolute'] = 0;
   $handler->display->display_options['fields']['field_org_unit']['alter']['external'] = 0;
-  $handler->display->display_options['fields']['field_org_unit']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_org_unit']['alter']['replace_spaces'] = 1;
   $handler->display->display_options['fields']['field_org_unit']['alter']['path_case'] = 'lower';
   $handler->display->display_options['fields']['field_org_unit']['alter']['trim_whitespace'] = 0;
   $handler->display->display_options['fields']['field_org_unit']['alter']['nl2br'] = 0;
@@ -2804,6 +2835,26 @@ function uom_staff_profiles_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['empty_zero'] = 0;
   $handler->display->display_options['fields']['nothing_1']['hide_alter_empty'] = 0;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Taxonomy term: Name */
+  $handler->display->display_options['arguments']['name']['id'] = 'name';
+  $handler->display->display_options['arguments']['name']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['arguments']['name']['field'] = 'name';
+  $handler->display->display_options['arguments']['name']['relationship'] = 'field_org_unit_tid';
+  $handler->display->display_options['arguments']['name']['title_enable'] = 1;
+  $handler->display->display_options['arguments']['name']['title'] = 'Professional Staff for %1';
+  $handler->display->display_options['arguments']['name']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['name']['default_argument_skip_url'] = 0;
+  $handler->display->display_options['arguments']['name']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['name']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['name']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['name']['glossary'] = 0;
+  $handler->display->display_options['arguments']['name']['limit'] = '0';
+  $handler->display->display_options['arguments']['name']['case'] = 'ucwords';
+  $handler->display->display_options['arguments']['name']['path_case'] = 'lower';
+  $handler->display->display_options['arguments']['name']['transform_dash'] = 1;
+  $handler->display->display_options['arguments']['name']['break_phrase'] = 0;
+  $handler->display->display_options['arguments']['name']['add_table'] = 0;
+  $handler->display->display_options['arguments']['name']['require_value'] = 0;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: User: Active */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -2831,6 +2882,13 @@ function uom_staff_profiles_views_default_views() {
   $handler = $view->new_display('page', 'Academic Administrators', 'page_3');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Academic Administrators';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: User: Discipline (field_discipline) */
+  $handler->display->display_options['relationships']['field_discipline_tid']['id'] = 'field_discipline_tid';
+  $handler->display->display_options['relationships']['field_discipline_tid']['table'] = 'field_data_field_discipline';
+  $handler->display->display_options['relationships']['field_discipline_tid']['field'] = 'field_discipline_tid';
+  $handler->display->display_options['relationships']['field_discipline_tid']['label'] = 'Discipline';
+  $handler->display->display_options['relationships']['field_discipline_tid']['required'] = 0;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: User: Position */
   $handler->display->display_options['fields']['field_position']['id'] = 'field_position';
@@ -2936,10 +2994,12 @@ function uom_staff_profiles_views_default_views() {
   $handler->display->display_options['fields']['field_discipline']['table'] = 'field_data_field_discipline';
   $handler->display->display_options['fields']['field_discipline']['field'] = 'field_discipline';
   $handler->display->display_options['fields']['field_discipline']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['field_discipline']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_discipline']['alter']['make_link'] = 1;
+  $handler->display->display_options['fields']['field_discipline']['alter']['path'] = 'about/staff/academic-administrators/[field_discipline-tid]';
   $handler->display->display_options['fields']['field_discipline']['alter']['absolute'] = 0;
   $handler->display->display_options['fields']['field_discipline']['alter']['external'] = 0;
-  $handler->display->display_options['fields']['field_discipline']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_discipline']['alter']['replace_spaces'] = 1;
+  $handler->display->display_options['fields']['field_discipline']['alter']['path_case'] = 'lower';
   $handler->display->display_options['fields']['field_discipline']['alter']['trim_whitespace'] = 0;
   $handler->display->display_options['fields']['field_discipline']['alter']['nl2br'] = 0;
   $handler->display->display_options['fields']['field_discipline']['alter']['word_boundary'] = 1;
@@ -3024,6 +3084,27 @@ function uom_staff_profiles_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['hide_empty'] = 0;
   $handler->display->display_options['fields']['nothing_1']['empty_zero'] = 0;
   $handler->display->display_options['fields']['nothing_1']['hide_alter_empty'] = 0;
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Taxonomy term: Name */
+  $handler->display->display_options['arguments']['name']['id'] = 'name';
+  $handler->display->display_options['arguments']['name']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['arguments']['name']['field'] = 'name';
+  $handler->display->display_options['arguments']['name']['relationship'] = 'field_discipline_tid';
+  $handler->display->display_options['arguments']['name']['title_enable'] = 1;
+  $handler->display->display_options['arguments']['name']['title'] = 'Academic Administrators for %1';
+  $handler->display->display_options['arguments']['name']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['name']['default_argument_skip_url'] = 0;
+  $handler->display->display_options['arguments']['name']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['name']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['name']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['name']['glossary'] = 0;
+  $handler->display->display_options['arguments']['name']['limit'] = '0';
+  $handler->display->display_options['arguments']['name']['case'] = 'ucwords';
+  $handler->display->display_options['arguments']['name']['path_case'] = 'lower';
+  $handler->display->display_options['arguments']['name']['transform_dash'] = 1;
+  $handler->display->display_options['arguments']['name']['break_phrase'] = 0;
+  $handler->display->display_options['arguments']['name']['add_table'] = 0;
+  $handler->display->display_options['arguments']['name']['require_value'] = 0;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: User: Active */
   $handler->display->display_options['filters']['status']['id'] = 'status';
