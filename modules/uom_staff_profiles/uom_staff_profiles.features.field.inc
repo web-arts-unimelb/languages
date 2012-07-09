@@ -1026,7 +1026,7 @@ function uom_staff_profiles_field_default_fields() {
         'active' => 1,
         'module' => 'text',
         'settings' => array(
-          'size' => '60',
+          'size' => '8',
         ),
         'type' => 'text_textfield',
         'weight' => '16',
