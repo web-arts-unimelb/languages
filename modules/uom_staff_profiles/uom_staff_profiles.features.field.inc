@@ -50,7 +50,11 @@ function uom_staff_profiles_field_default_fields() {
     ),
     'field_instance' => array(
       'bundle' => 'user',
-      'default_value' => NULL,
+      'default_value' => array(
+        0 => array(
+          'tid' => '20',
+        ),
+      ),
       'deleted' => '0',
       'description' => 'This field is used to further categorize academic staff. If the user is not a academic staff, you should select "none".',
       'display' => array(
@@ -160,7 +164,7 @@ function uom_staff_profiles_field_default_fields() {
             'icon' => '32c1419a9092fb94fcc30f95d7a66fb4',
             'label' => 'Document uploader',
           ),
-          'status' => 1,
+          'status' => 0,
         ),
       ),
       'widget' => array(

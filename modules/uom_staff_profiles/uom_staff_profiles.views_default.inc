@@ -1084,6 +1084,36 @@ function uom_staff_profiles_views_default_views() {
   $handler->display->display_options['fields']['field_discipline']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_discipline']['group_column'] = 'value';
   $handler->display->display_options['fields']['field_discipline']['field_api_classes'] = 0;
+  /* Field: User: Organisation unit */
+  $handler->display->display_options['fields']['field_org_unit']['id'] = 'field_org_unit';
+  $handler->display->display_options['fields']['field_org_unit']['table'] = 'field_data_field_org_unit';
+  $handler->display->display_options['fields']['field_org_unit']['field'] = 'field_org_unit';
+  $handler->display->display_options['fields']['field_org_unit']['label'] = '';
+  $handler->display->display_options['fields']['field_org_unit']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_org_unit']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_org_unit']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_org_unit']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_org_unit']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_org_unit']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_org_unit']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_org_unit']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_org_unit']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_org_unit']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_org_unit']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['field_org_unit']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_org_unit']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_org_unit']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_org_unit']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_org_unit']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_org_unit']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_org_unit']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_org_unit']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['field_org_unit']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_org_unit']['group_rows'] = 1;
+  $handler->display->display_options['fields']['field_org_unit']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_org_unit']['delta_reversed'] = 0;
+  $handler->display->display_options['fields']['field_org_unit']['delta_first_last'] = 0;
+  $handler->display->display_options['fields']['field_org_unit']['field_api_classes'] = 0;
   /* Field: User: E-mail */
   $handler->display->display_options['fields']['mail']['id'] = 'mail';
   $handler->display->display_options['fields']['mail']['table'] = 'users';
@@ -1434,7 +1464,7 @@ function uom_staff_profiles_views_default_views() {
   $handler->display->display_options['fields']['nothing_3']['alter']['text'] = '<div class="col-4 first">
 <h2>[field_title] [field_first_name] [field_last_name]</h2>
 <h5>[field_position]</h5>
-[field_discipline]<br /><br/>
+[field_discipline]<br />[field_org_unit]<br /><br/>
 
 <strong>Email:</strong> [mail]<br/>
 <strong>Location:</strong> [field_room] [field_building]<br/>
