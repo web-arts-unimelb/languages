@@ -211,7 +211,7 @@ function uom_custom_username_lookup_validate($form, &$form_state) {
     $form_state['complete form']['field_first_name'][$language][0]['value']['#value']
       = $form_state['complete form']['field_first_name'][$language][0]['value']['#default_value']
       = $result['givenname'];
-    form_set_value($form['field_first_name'], array(0 => $result['givenname']), $form_state);
+    form_set_value($form['field_first_name'], array($language => array(0 => array('value' => $result['givenname']))), $form_state);
 
     // Surname.
     $language =  $form_state['complete form']['field_last_name']['#language'];
@@ -219,7 +219,7 @@ function uom_custom_username_lookup_validate($form, &$form_state) {
     $form_state['complete form']['field_last_name'][$language][0]['value']['#value']
       = $form_state['complete form']['field_last_name'][$language][0]['value']['#default_value']
       = $result['sn'];
-    form_set_value($form['field_last_name'], array(0 => $result['sn']), $form_state);
+    form_set_value($form['field_last_name'], array($language => array(0 => array('value' => $result['sn']))), $form_state);
 
     // Set a random new password, LDAP pass will be used anyway.
     if (empty($form_state['values']['pass'])) {
