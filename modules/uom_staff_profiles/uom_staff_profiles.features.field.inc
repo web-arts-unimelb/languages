@@ -63,7 +63,7 @@ function uom_staff_profiles_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
-          'weight' => 48,
+          'weight' => '48',
         ),
       ),
       'entity_type' => 'user',
@@ -90,7 +90,7 @@ function uom_staff_profiles_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '13',
+        'weight' => '1',
       ),
     ),
   );
@@ -151,7 +151,7 @@ function uom_staff_profiles_field_default_fields() {
         'file_directory' => '',
         'file_extensions' => 'txt pdf doc docx xls xlsx ppt pptx odt ods odp',
         'max_filesize' => '',
-        'user_register_form' => 0,
+        'user_register_form' => 1,
         'wysiwyg_fields' => array(
           'settings' => array(
             'advanced' => array(
@@ -174,6 +174,7 @@ function uom_staff_profiles_field_default_fields() {
           'filefield_sources' => array(
             'filefield_sources' => array(
               'attach' => 0,
+              'imce' => 0,
               'reference' => 0,
               'remote' => 0,
               'views' => 0,
@@ -235,7 +236,7 @@ function uom_staff_profiles_field_default_fields() {
     'field_instance' => array(
       'bundle' => 'user',
       'deleted' => '0',
-      'description' => '',
+      'description' => 'Please attach any images (eg: book covers) that you want displayed on this profile.',
       'display' => array(
         'default' => array(
           'label' => 'hidden',
@@ -270,7 +271,7 @@ function uom_staff_profiles_field_default_fields() {
             'icon' => 'd50522754f0bc7cc44d2f5231a467fe8',
             'label' => 'Image uploader',
           ),
-          'status' => 1,
+          'status' => 0,
         ),
       ),
       'widget' => array(
@@ -280,6 +281,7 @@ function uom_staff_profiles_field_default_fields() {
           'filefield_sources' => array(
             'filefield_sources' => array(
               'attach' => 0,
+              'imce' => 0,
               'reference' => 0,
               'remote' => 0,
               'views' => 0,
@@ -300,7 +302,7 @@ function uom_staff_profiles_field_default_fields() {
           'progress_indicator' => 'throbber',
         ),
         'type' => 'image_image',
-        'weight' => '4',
+        'weight' => '6',
       ),
     ),
   );
@@ -621,7 +623,7 @@ function uom_staff_profiles_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
-          'weight' => 51,
+          'weight' => '51',
         ),
       ),
       'entity_type' => 'user',
@@ -648,7 +650,7 @@ function uom_staff_profiles_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '9',
+        'weight' => '10',
       ),
     ),
   );
@@ -698,7 +700,7 @@ function uom_staff_profiles_field_default_fields() {
           'module' => 'link',
           'settings' => array(),
           'type' => 'link_default',
-          'weight' => 49,
+          'weight' => '49',
         ),
       ),
       'entity_type' => 'user',
@@ -807,7 +809,7 @@ function uom_staff_profiles_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '7',
+        'weight' => '8',
       ),
     ),
   );
@@ -881,7 +883,7 @@ function uom_staff_profiles_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '8',
+        'weight' => '9',
       ),
     ),
   );
@@ -935,7 +937,7 @@ function uom_staff_profiles_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
-          'weight' => 47,
+          'weight' => '47',
         ),
       ),
       'entity_type' => 'user',
@@ -950,7 +952,7 @@ function uom_staff_profiles_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '11',
+        'weight' => '12',
       ),
     ),
   );
@@ -1097,7 +1099,7 @@ function uom_staff_profiles_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '10',
+        'weight' => '11',
       ),
     ),
   );
@@ -1273,7 +1275,7 @@ function uom_staff_profiles_field_default_fields() {
           'progress_indicator' => 'throbber',
         ),
         'type' => 'image_image',
-        'weight' => '3',
+        'weight' => '4',
       ),
     ),
   );
@@ -1618,7 +1620,7 @@ function uom_staff_profiles_field_default_fields() {
           'rows' => '10',
         ),
         'type' => 'text_textarea',
-        'weight' => '12',
+        'weight' => '13',
       ),
     ),
   );
@@ -1746,7 +1748,7 @@ function uom_staff_profiles_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_buttons',
-        'weight' => '1',
+        'weight' => '2',
       ),
     ),
   );
@@ -1868,7 +1870,7 @@ function uom_staff_profiles_field_default_fields() {
           'module' => 'list',
           'settings' => array(),
           'type' => 'list_default',
-          'weight' => 52,
+          'weight' => '52',
         ),
       ),
       'entity_type' => 'user',
@@ -1895,7 +1897,7 @@ function uom_staff_profiles_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '6',
+        'weight' => '7',
       ),
     ),
   );
@@ -1916,6 +1918,7 @@ function uom_staff_profiles_field_default_fields() {
   t('Image uploader');
   t('Organisation unit');
   t('Phone');
+  t('Please attach any images (eg: book covers) that you want displayed on this profile.');
   t('Position');
   t('Presentations');
   t('Profile image');

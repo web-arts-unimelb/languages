@@ -32,13 +32,13 @@ function uom_staff_profiles_strongarm() {
           'weight' => '0',
         ),
         'timezone' => array(
-          'weight' => '28',
+          'weight' => '29',
         ),
         'contact' => array(
           'weight' => '25',
         ),
         'wysiwyg' => array(
-          'weight' => '2',
+          'weight' => '3',
         ),
       ),
       'display' => array(

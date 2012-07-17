@@ -13,13 +13,13 @@ function uom_staff_profiles_user_default_roles() {
   // Exported role: academic staff.
   $roles['academic staff'] = array(
     'name' => 'academic staff',
-    'weight' => '3',
+    'weight' => '0',
   );
 
   // Exported role: professional staff.
   $roles['professional staff'] = array(
     'name' => 'professional staff',
-    'weight' => '2',
+    'weight' => '1',
   );
 
   return $roles;
