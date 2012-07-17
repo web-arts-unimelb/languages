@@ -331,7 +331,7 @@ function _uom_custom_profile_links($account) {
       $role_link = _uom_custom_staff_type_link($role);
       $profile_links[$role_link] = array(
         'title' => t('View @role profile.', array('@role' => $role)),
-        'href' => url('about-us/'. $role_link .'/'. check_plain($account->name), array('absolute' => TRUE)),
+        'href' => url($role_link .'/'. check_plain($account->name), array('absolute' => TRUE)),
       );
     }
   }
