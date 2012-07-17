@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the UoM Events feature.
+ */
+
+include_once 'uom_events.features.inc';
