@@ -50,6 +50,13 @@ function drush_uom_custom_replace() {
   drush_print(dt('Going perform a search & replace on all text fields in all bundles.'));
   drush_print(dt('  "@old" => "@new"', array('@old' => $old, '@new' => $new)));
   drush_print(dt(' '));
+
+  $continue = drush_confirm(dt('There is no undo. Have you just created a database backup?'));
+  if (empty($continue)) {
+    drush_log(dt('Aborting'), 'warning');
+    return 0;
+  }
+
   $continue = drush_confirm(dt('There is no undo. Are you sure this is what you want to do?'));
   if (empty($continue)) {
     drush_log(dt('Aborting'), 'warning');
