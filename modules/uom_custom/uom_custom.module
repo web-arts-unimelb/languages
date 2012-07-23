@@ -54,6 +54,9 @@ function uom_custom_init() {
   // Hide wysiwyg field original content.
   drupal_add_css('.insert.form-item.container-inline { display: none; }', array('type' => 'inline'));
   drupal_add_css('.filefield-source-views .field-container { display: none; }', array('type' => 'inline'));
+
+  // Add audio control javascript.
+  drupal_add_js(drupal_get_path('module', 'uom_custom') . '/js/audio.js');
 }
 
 /**
