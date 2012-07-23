@@ -105,6 +105,17 @@ function uom_custom_form_alter(&$form, &$form_state, $form_id) {
     $form['account']['pass']['pass1']['#attributes']['autocomplete'] = 'off';
     $form['account']['pass']['pass2']['#attributes']['autocomplete'] = 'off';
 
+    // Change the labels on the discipline field to the term DESCRIPTION.
+    $language_code = $form['field_discipline']['#language'];
+    foreach ($form['field_discipline'][$language_code]['#options'] as $tid => $name) {
+      if (is_numeric($tid)) {
+        $term = taxonomy_term_load($tid);
+        if (!empty($term)) {
+          $form['field_discipline'][$language_code]['#options'][$tid] = strip_tags($term->description);
+        }
+      }
+    }
+
     // Some fields should be mandatory *only* for academic staff editing their own profile.
     if (
         ($form['#user']->uid == $user->uid && !in_array('academic staff', $user->roles)) ||
@@ -191,6 +202,8 @@ function uom_custom_form_alter(&$form, &$form_state, $form_id) {
     if (!empty($form['actions']['preview_changes'])) {
       $form['actions']['preview_changes']['#access'] = FALSE;
     }
+    // Change line height on the date field, so the checkbox is accessible.
+    drupal_add_css('.fieldset-legend { line-height: 1em; }', array('type' => 'inline'));
   }
 }
 
