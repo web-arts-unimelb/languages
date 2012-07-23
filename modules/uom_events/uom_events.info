@@ -2,6 +2,7 @@ name = UoM Events
 description = This feature provides an event content type, its settings and some views to display them on a site.
 core = 7.x
 package = University of Melbourne
+php = 5.2.4
 version = 7.x-1.0
 project = uom_events
 dependencies[] = ctools
