@@ -1,0 +1,14 @@
+name = UoM Gallery Block
+description = Provides  gallery block seeded from images attached to pages.
+core = 7.x
+package = University of Melbourne
+version = 7.x-1.0
+project = uom_gallery_block
+dependencies[] = colorbox
+dependencies[] = features
+dependencies[] = image
+dependencies[] = views
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:1
+features[field][] = node-page-field_gallery
+features[views_view][] = gallery
