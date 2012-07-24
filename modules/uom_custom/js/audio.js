@@ -1,8 +1,10 @@
-// Get audio element
-var audio = document.getElementsByTagName("audio")[0];
-// jump to time offset action
 function jumpToTimeoffset(start, end) {
-  audio.currentTime = start;
-  audio.play();
-  setTimeout("audio.pause();", (end - start + 1)*1000);
+  // Jump to time offset action
+  $('audio').get(0).currentTime = start;
+
+  // Play.
+  $('audio').get(0).play();
+
+  // Pause when this offset has finished.
+  setInterval( function(){ $('audio').get(0).pause() } ,((end - start + 1)*1000));
 }
