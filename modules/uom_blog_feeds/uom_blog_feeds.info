@@ -1,7 +1,7 @@
 name = UoM Blog Feeds
 description = This feature provides an aggegator for blogs.unimelb.edu.au RSS feeds and node types to parse the content into.
 core = 7.x
-package = Features
+package = University of Melbourne
 version = 7.x-1.0
 project = uom_blog_feeds
 dependencies[] = ctools
