@@ -12,6 +12,7 @@
 function uom_custom_views_pre_render(&$view) {
   $replacements = array(
     'Linguistics and applied linguistics staff' => 'Linguistics and Applied Linguistics staff',
+    'Esl staff' => 'ESL staff',
   );
 
   // Fix the capitalisation on some view titles.
