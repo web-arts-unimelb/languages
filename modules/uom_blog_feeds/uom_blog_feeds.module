@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the UoM Blog Feeds feature.
+ */
+
+include_once 'uom_blog_feeds.features.inc';
