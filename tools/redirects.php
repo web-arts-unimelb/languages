@@ -14,18 +14,14 @@
   );
 
   while (!feof($fp)) {
-	  list ($site, $old, $new) = fgetcsv($fp, 1024);
+	 list ($site, $old, $new) = fgetcsv($fp, 1024);
 
-	  // Skip empty fields.
-	  if (empty($site) || empty($old) || empty($new)) {
+	 // Skip empty fields.
+	 if (empty($site) || empty($old) || empty($new)) {
 		  continue;
-	  }
+	 }
 
-	  // Skip where URL has not changed.
-	  if ($old == $new) {
-		  continue;
-	  }
-
-	  printf("Redirect permanent %s http://languages-linguistics.unimelb.edu.au%s\n", strtr($old, $escape), $new);
+	 printf("RewriteCond %%{HTTP_HOST} ^%s$ [NC]\n", strtr($site, $escape));
+	 printf("RewriteRule ^%s$ http://languages-linguistics.unimelb.edu.au%s [R=301]\n", strtr($old, $escape), $new);
   }
   fclose($fp);
