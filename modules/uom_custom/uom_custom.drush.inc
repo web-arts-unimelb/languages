@@ -90,5 +90,11 @@ function drush_uom_custom_replace() {
     drush_log(dt('  Updated @revision.', array('@revision' => format_plural($updated, '1 bundle revision', '@count bundle revisions'))), 'ok');
   }
 
+  // Do the blocks too.
+  $updated = db_update('block_custom')
+    ->expression('body', "REPLACE(body, :old, :new)", array(':old' => $old, ':new' => $new))
+    ->execute();
+    drush_log(dt('  Updated @block.', array('@block' => format_plural($updated, '1 custom block', '@count custom blocks'))), 'ok');
+
   return 1;
 }
