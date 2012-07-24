@@ -735,7 +735,7 @@ function uom_staff_profiles_field_default_fields() {
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_field',
-        'weight' => '17',
+        'weight' => '18',
       ),
     ),
   );
@@ -1048,6 +1048,9 @@ function uom_staff_profiles_field_default_fields() {
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_position',
+      'field_permissions' => array(
+        'type' => '0',
+      ),
       'foreign keys' => array(
         'format' => array(
           'columns' => array(
@@ -1087,10 +1090,26 @@ function uom_staff_profiles_field_default_fields() {
       'entity_type' => 'user',
       'field_name' => 'field_position',
       'label' => 'Position',
-      'required' => 1,
+      'required' => 0,
       'settings' => array(
+        'linkit' => array(
+          'enable' => 0,
+          'insert_plugin' => '',
+        ),
         'text_processing' => '0',
         'user_register_form' => 1,
+        'wysiwyg_fields' => array(
+          'settings' => array(
+            'advanced' => array(
+              'delete' => 1,
+              'hide' => 1,
+            ),
+            'formatters' => array(),
+            'icon' => '6f7621a02161e347e66d99d8ace540a3',
+            'label' => 'Position',
+          ),
+          'status' => 0,
+        ),
       ),
       'widget' => array(
         'active' => 1,
@@ -1413,7 +1432,7 @@ function uom_staff_profiles_field_default_fields() {
           'rows' => '8',
         ),
         'type' => 'text_textarea',
-        'weight' => '18',
+        'weight' => '19',
       ),
     ),
   );

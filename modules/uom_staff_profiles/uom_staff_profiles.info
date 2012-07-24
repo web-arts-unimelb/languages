@@ -166,4 +166,3 @@ features[variable][] = realname_pattern
 features[variable][] = uom-staff-roles
 features[views_view][] = profiles
 features[views_view][] = staff
-project status url = http://airship.arts.unimelb.edu.au/fserver

@@ -22,7 +22,7 @@ function uom_events_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Research Seminars';
+  $handler->display->display_options['title'] = 'Research seminars archive';
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -30,6 +30,89 @@ function uom_events_views_default_views() {
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['grouping'] = array(
+    0 => array(
+      'field' => 'field_dates_1',
+      'rendered' => 1,
+      'rendered_strip' => 0,
+    ),
+  );
+  $handler->display->display_options['style_options']['columns'] = array(
+    'field_event_speaker' => 'field_event_speaker',
+    'field_event_speaker_organisation' => 'field_event_speaker_organisation',
+    'title' => 'title',
+    'field_event_document' => 'field_event_document',
+    'field_event_detail' => 'field_event_detail',
+    'nothing' => 'nothing',
+    'field_dates' => 'field_dates',
+    'field_location' => 'field_location',
+    'field_dates_1' => 'field_dates_1',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'field_event_speaker' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_event_speaker_organisation' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'title' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_event_document' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_event_detail' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'nothing' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_dates' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_location' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_dates_1' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['style_options']['override'] = 1;
+  $handler->display->display_options['style_options']['sticky'] = 0;
+  $handler->display->display_options['style_options']['empty_table'] = 0;
   /* Header: Global: Text area */
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
@@ -62,6 +145,32 @@ function uom_events_views_default_views() {
   $handler->display->display_options['empty']['area']['content'] = 'No upcoming events were found.';
   $handler->display->display_options['empty']['area']['format'] = 'full_html';
   $handler->display->display_options['empty']['area']['tokenize'] = 0;
+  /* Field: Content: Event Type */
+  $handler->display->display_options['fields']['field_event_type']['id'] = 'field_event_type';
+  $handler->display->display_options['fields']['field_event_type']['table'] = 'field_data_field_event_type';
+  $handler->display->display_options['fields']['field_event_type']['field'] = 'field_event_type';
+  $handler->display->display_options['fields']['field_event_type']['label'] = '';
+  $handler->display->display_options['fields']['field_event_type']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_event_type']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_event_type']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_event_type']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_event_type']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_event_type']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_event_type']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_event_type']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_event_type']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_event_type']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_event_type']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['field_event_type']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_event_type']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_event_type']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_event_type']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_event_type']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_event_type']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_event_type']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_event_type']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['field_event_type']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_event_type']['field_api_classes'] = 0;
   /* Field: Content: Speaker */
   $handler->display->display_options['fields']['field_event_speaker']['id'] = 'field_event_speaker';
   $handler->display->display_options['fields']['field_event_speaker']['table'] = 'field_data_field_event_speaker';
@@ -95,7 +204,9 @@ function uom_events_views_default_views() {
   $handler->display->display_options['fields']['field_event_speaker_organisation']['label'] = 'Presenter';
   $handler->display->display_options['fields']['field_event_speaker_organisation']['alter']['alter_text'] = 1;
   $handler->display->display_options['fields']['field_event_speaker_organisation']['alter']['text'] = '[field_event_speaker]<br />
-[field_event_speaker_organisation]';
+[field_event_speaker_organisation]<br />
+<br />
+<em>[field_event_type]</em>';
   $handler->display->display_options['fields']['field_event_speaker_organisation']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['field_event_speaker_organisation']['alter']['absolute'] = 0;
   $handler->display->display_options['fields']['field_event_speaker_organisation']['alter']['external'] = 0;
@@ -175,8 +286,9 @@ function uom_events_views_default_views() {
   $handler->display->display_options['fields']['field_event_detail']['id'] = 'field_event_detail';
   $handler->display->display_options['fields']['field_event_detail']['table'] = 'field_data_field_event_detail';
   $handler->display->display_options['fields']['field_event_detail']['field'] = 'field_event_detail';
-  $handler->display->display_options['fields']['field_event_detail']['label'] = 'Title';
-  $handler->display->display_options['fields']['field_event_detail']['alter']['alter_text'] = 1;
+  $handler->display->display_options['fields']['field_event_detail']['label'] = '';
+  $handler->display->display_options['fields']['field_event_detail']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_event_detail']['alter']['alter_text'] = 0;
   $handler->display->display_options['fields']['field_event_detail']['alter']['text'] = '[title]<br />
 [field_event_detail]';
   $handler->display->display_options['fields']['field_event_detail']['alter']['make_link'] = 0;
@@ -188,10 +300,11 @@ function uom_events_views_default_views() {
   $handler->display->display_options['fields']['field_event_detail']['alter']['word_boundary'] = 1;
   $handler->display->display_options['fields']['field_event_detail']['alter']['ellipsis'] = 1;
   $handler->display->display_options['fields']['field_event_detail']['alter']['more_link'] = 0;
-  $handler->display->display_options['fields']['field_event_detail']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_event_detail']['alter']['strip_tags'] = 1;
   $handler->display->display_options['fields']['field_event_detail']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_event_detail']['alter']['preserve_tags'] = '<p><br>';
   $handler->display->display_options['fields']['field_event_detail']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['field_event_detail']['element_label_colon'] = 0;
+  $handler->display->display_options['fields']['field_event_detail']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_event_detail']['element_default_classes'] = 1;
   $handler->display->display_options['fields']['field_event_detail']['hide_empty'] = 0;
   $handler->display->display_options['fields']['field_event_detail']['empty_zero'] = 0;
@@ -201,6 +314,30 @@ function uom_events_views_default_views() {
     'trim_length' => '600',
   );
   $handler->display->display_options['fields']['field_event_detail']['field_api_classes'] = 0;
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = 'Title';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[title]<br />
+[field_event_detail]';
+  $handler->display->display_options['fields']['nothing']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['nothing']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['nothing']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['nothing']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['nothing']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['nothing']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['nothing']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['nothing']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['nothing']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['nothing']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['nothing']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['nothing']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['nothing']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['nothing']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['nothing']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['nothing']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['nothing']['hide_alter_empty'] = 0;
   /* Field: Content: Dates */
   $handler->display->display_options['fields']['field_dates']['id'] = 'field_dates';
   $handler->display->display_options['fields']['field_dates']['table'] = 'field_data_field_dates';
@@ -260,6 +397,38 @@ function uom_events_views_default_views() {
   $handler->display->display_options['fields']['field_location']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_location']['hide_alter_empty'] = 1;
   $handler->display->display_options['fields']['field_location']['field_api_classes'] = 0;
+  /* Field: Content: Dates */
+  $handler->display->display_options['fields']['field_dates_1']['id'] = 'field_dates_1';
+  $handler->display->display_options['fields']['field_dates_1']['table'] = 'field_data_field_dates';
+  $handler->display->display_options['fields']['field_dates_1']['field'] = 'field_dates';
+  $handler->display->display_options['fields']['field_dates_1']['label'] = '';
+  $handler->display->display_options['fields']['field_dates_1']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_dates_1']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_dates_1']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_dates_1']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_dates_1']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_dates_1']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_dates_1']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_dates_1']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_dates_1']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_dates_1']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_dates_1']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['field_dates_1']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_dates_1']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_dates_1']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_dates_1']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_dates_1']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_dates_1']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_dates_1']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_dates_1']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['field_dates_1']['settings'] = array(
+    'format_type' => 'month_and_year',
+    'fromto' => 'value',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+  );
+  $handler->display->display_options['fields']['field_dates_1']['field_api_classes'] = 0;
   /* Sort criterion: Content: Dates -  start date (field_dates) */
   $handler->display->display_options['sorts']['field_dates_value']['id'] = 'field_dates_value';
   $handler->display->display_options['sorts']['field_dates_value']['table'] = 'field_data_field_dates';
@@ -287,7 +456,7 @@ function uom_events_views_default_views() {
   $handler->display->display_options['filters']['field_dates_value2']['id'] = 'field_dates_value2';
   $handler->display->display_options['filters']['field_dates_value2']['table'] = 'field_data_field_dates';
   $handler->display->display_options['filters']['field_dates_value2']['field'] = 'field_dates_value2';
-  $handler->display->display_options['filters']['field_dates_value2']['operator'] = '>=';
+  $handler->display->display_options['filters']['field_dates_value2']['operator'] = '<=';
   $handler->display->display_options['filters']['field_dates_value2']['form_type'] = 'date_text';
   $handler->display->display_options['filters']['field_dates_value2']['default_date'] = 'now';
   $handler->display->display_options['filters']['field_dates_value2']['year_range'] = '-0:+0';
@@ -306,6 +475,20 @@ function uom_events_views_default_views() {
 
   /* Display: Research Seminars */
   $handler = $view->new_display('page', 'Research Seminars', 'page');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Research seminars';
+  $handler->display->display_options['defaults']['footer'] = FALSE;
+  /* Footer: Global: Text area */
+  $handler->display->display_options['footer']['area']['id'] = 'area';
+  $handler->display->display_options['footer']['area']['table'] = 'views';
+  $handler->display->display_options['footer']['area']['field'] = 'area';
+  $handler->display->display_options['footer']['area']['empty'] = TRUE;
+  $handler->display->display_options['footer']['area']['content'] = '<h3>Research seminars archive</h3>
+<ul>
+<li><a href="/research/seminars-archive">Previous research seminars</a></li>
+</ul>';
+  $handler->display->display_options['footer']['area']['format'] = 'full_html';
+  $handler->display->display_options['footer']['area']['tokenize'] = 0;
   $handler->display->display_options['path'] = 'research/seminars';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Research seminars';
@@ -430,7 +613,7 @@ function uom_events_views_default_views() {
   /* Display: Archived Events */
   $handler = $view->new_display('page', 'Archived Events', 'page_3');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Archived Events';
+  $handler->display->display_options['title'] = 'Archived events';
   $handler->display->display_options['defaults']['header'] = FALSE;
   $handler->display->display_options['defaults']['footer'] = FALSE;
   /* Footer: Global: Text area */
@@ -488,6 +671,41 @@ function uom_events_views_default_views() {
   $handler->display->display_options['filters']['field_event_type_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_event_type_tid']['vocabulary'] = 'event_type';
   $handler->display->display_options['path'] = 'about/events-archive';
+  $handler->display->display_options['menu']['type'] = 'normal';
+  $handler->display->display_options['menu']['title'] = 'Events archive';
+  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['name'] = 'main-menu';
+  $handler->display->display_options['menu']['context'] = 0;
+
+  /* Display: Archived Research Seminars */
+  $handler = $view->new_display('page', 'Archived Research Seminars', 'page_4');
+  $handler->display->display_options['defaults']['footer'] = FALSE;
+  /* Footer: Global: Text area */
+  $handler->display->display_options['footer']['area']['id'] = 'area';
+  $handler->display->display_options['footer']['area']['table'] = 'views';
+  $handler->display->display_options['footer']['area']['field'] = 'area';
+  $handler->display->display_options['footer']['area']['empty'] = TRUE;
+  $handler->display->display_options['footer']['area']['content'] = '<h3>Upcoming research seminars</h3>
+<ul>
+<li><a href="/research/seminars">Upcoming research seminars</a></li>
+</ul>';
+  $handler->display->display_options['footer']['area']['format'] = 'full_html';
+  $handler->display->display_options['footer']['area']['tokenize'] = 0;
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = FALSE;
+  $handler->display->display_options['empty']['area']['content'] = 'No archived research seminars were found.';
+  $handler->display->display_options['empty']['area']['format'] = 'full_html';
+  $handler->display->display_options['empty']['area']['tokenize'] = 0;
+  $handler->display->display_options['path'] = 'research/seminars-archive';
+  $handler->display->display_options['menu']['type'] = 'normal';
+  $handler->display->display_options['menu']['title'] = 'Research seminars archive';
+  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['name'] = 'main-menu';
+  $handler->display->display_options['menu']['context'] = 0;
   $export['events'] = $view;
 
   return $export;

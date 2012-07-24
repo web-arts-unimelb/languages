@@ -26,13 +26,13 @@ function uom_staff_profiles_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'redirect' => array(
-          'weight' => '19',
+          'weight' => '20',
         ),
         'account' => array(
           'weight' => '0',
         ),
         'timezone' => array(
-          'weight' => '29',
+          'weight' => '30',
         ),
         'contact' => array(
           'weight' => '25',
@@ -57,7 +57,7 @@ function uom_staff_profiles_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_user_pattern';
-  $strongarm->value = '[user:uom-staff-type]/[user:name]';
+  $strongarm->value = '[user:uom-staff-type]/[user:field-first-name]-[user:field-last-name]';
   $export['pathauto_user_pattern'] = $strongarm;
 
   $strongarm = new stdClass();
