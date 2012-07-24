@@ -12,11 +12,12 @@
  */
 function uom_custom_drush_command() {
   $items['uom-custom-replace'] = array(
+    'aliases' => array('sar'),
     'callback' => 'drush_uom_custom_replace',
-    'description' => dt('Replace hardcoded file paths in all content.'),
+    'description' => dt('Replace strings in all text fields in all content.'),
     'arguments' => array(
-      'old-path' => dt('Existing path in the database.'),
-      'new-path' => dt('The optional path to update to. If not set, the configure files path will be used.'),
+      'old-path' => dt('Text to search.'),
+      'new-path' => dt('Text to substitute.'),
     ),
     'bootstrap' => DRUSH_DRUPAL_BOOTSTRAP,
   );
@@ -29,8 +30,8 @@ function uom_custom_drush_command() {
  */
 function drush_uom_custom_replace_validate() {
   $args = func_get_args();
-  if (empty($args[0])) {
-    drush_set_error('NO_OLD_PATH', dt('You must specify a path to replace.'));
+  if (empty($args[1])) {
+    drush_set_error('NO_OLD_PATH', dt('You must specify text to search and text to substitute.'));
   }
 }
 
@@ -38,17 +39,10 @@ function drush_uom_custom_replace_validate() {
  * Command callback.
  */
 function drush_uom_custom_replace() {
-  $args = func_get_args();
-  $old = $args[0];
-  if (empty($args[1])) {
-    $new = variable_get('file_public_path', '');
-  }
-  else {
-    $new = $args[1];
-  }
+  list($old, $new) = func_get_args();
 
   drush_print(dt('Going perform a search & replace on all text fields in all bundles.'));
-  drush_print(dt('  "@old" => "@new"', array('@old' => $old, '@new' => $new)));
+  drush_print(dt('  !old => !new', array('!old' => $old, '!new' => $new)));
   drush_print(dt(' '));
 
   $continue = drush_confirm(dt('There is no undo. Have you just created a database backup?'));
