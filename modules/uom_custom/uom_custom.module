@@ -981,7 +981,8 @@ function uom_custom_theme($existing, $type, $theme, $path) {
 function _uom_custom_staff_type($account) {
   // Which roles to create links for.
   $staff_rids = array_filter(variable_get('uom-staff-roles', array()));
-  foreach ($account->roles as $rid) {
+
+  foreach ($account->roles as $rid => $name) {
     if (in_array($rid, $staff_rids)) {
       return db_select('role', 'r')->fields('r', array('name'))->condition('rid', $rid, '=')->execute()->fetchField();
     }
