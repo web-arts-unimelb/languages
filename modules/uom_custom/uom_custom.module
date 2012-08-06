@@ -903,18 +903,18 @@ function uom_custom_field_formatter_uom_html5_phone_link($variables) {
   if (strpos($variables['#items'][0]['safe_value'], '04') === 0) {
     $phone = substr($variables['#items'][0]['safe_value'], 1);
     $phone = strtr($phone, array(' ' => ''));
-    return '<a href="tel:+61'. $phone .'">'. $variables['#items'][0]['safe_value'] .'</a>';
+    return '<a href="tel:+61'. $phone .'">+61 '. $variables['#items'][0]['safe_value'] .'</a>';
   }
   // Check for a landline number with the Victoria/Tassie prefix.
   else if (strpos($variables['#items'][0]['safe_value'], '03') === 0) {
     $phone = substr($variables['#items'][0]['safe_value'], 1);
     $phone = strtr($phone, array(' ' => ''));
-    return '<a href="tel:+61'. $phone .'">'. $variables['#items'][0]['safe_value'] .'</a>';
+    return '<a href="tel:+61'. $phone .'">+61 '. $variables['#items'][0]['safe_value'] .'</a>';
   }
   // Check for an interstate number.
   else if (strpos($variables['#items'][0]['safe_value'], '0') === 0) {
     $phone = strtr($variables['#items'][0]['safe_value'], array(' ' => ''));
-    return '<a href="tel:'. $phone .'">'. $variables['#items'][0]['safe_value'] .'</a>';
+    return '<a href="tel:'. $phone .'">+61 '. $variables['#items'][0]['safe_value'] .'</a>';
   }
   // Check for an international number.
   else if (strpos($variables['#items'][0]['safe_value'], '+') === 0) {
@@ -924,7 +924,7 @@ function uom_custom_field_formatter_uom_html5_phone_link($variables) {
   // Assuming unprefixed local. Just add prefix.
   else if (is_numeric($variables['#items'][0]['safe_value']{0})) {
     $phone = strtr($variables['#items'][0]['safe_value'], array(' ' => ''));
-    return '<a href="tel:+613'. $phone .'">'. $variables['#items'][0]['safe_value'] .'</a>';
+    return '<a href="tel:+613'. $phone .'">+61 3 '. $variables['#items'][0]['safe_value'] .'</a>';
   }
 
   // Not numeric, just return it and don't link it to anything.
