@@ -32,7 +32,7 @@ function uom_staff_profiles_strongarm() {
           'weight' => '1',
         ),
         'timezone' => array(
-          'weight' => '32',
+          'weight' => '31',
         ),
         'contact' => array(
           'weight' => '25',
