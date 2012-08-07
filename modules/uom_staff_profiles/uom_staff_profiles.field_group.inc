@@ -21,7 +21,7 @@ function uom_staff_profiles_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Awards and grants',
-    'weight' => '25',
+    'weight' => '26',
     'children' => array(
       0 => 'field_awards_and_grants',
     ),
@@ -77,7 +77,7 @@ function uom_staff_profiles_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Bibliography',
-    'weight' => '28',
+    'weight' => '29',
     'children' => array(
       0 => 'field_bibliography',
     ),
@@ -105,7 +105,7 @@ function uom_staff_profiles_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Biography',
-    'weight' => '22',
+    'weight' => '23',
     'children' => array(
       0 => 'field_biography',
     ),
@@ -133,7 +133,7 @@ function uom_staff_profiles_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Presentations',
-    'weight' => '27',
+    'weight' => '28',
     'children' => array(
       0 => 'field_presentations',
     ),
@@ -161,7 +161,7 @@ function uom_staff_profiles_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Publications',
-    'weight' => '24',
+    'weight' => '25',
     'children' => array(
       0 => 'field_publications',
     ),
@@ -189,7 +189,7 @@ function uom_staff_profiles_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Research interests/areas of supervision',
-    'weight' => '21',
+    'weight' => '22',
     'children' => array(
       0 => 'field_research_interest',
     ),
@@ -217,7 +217,7 @@ function uom_staff_profiles_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Research projects',
-    'weight' => '23',
+    'weight' => '24',
     'children' => array(
       0 => 'field_research_projects',
     ),
@@ -245,7 +245,7 @@ function uom_staff_profiles_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Teaching',
-    'weight' => '26',
+    'weight' => '27',
     'children' => array(
       0 => 'field_teaching',
     ),

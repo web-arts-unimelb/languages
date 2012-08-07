@@ -10,6 +10,89 @@
 function uom_staff_profiles_field_default_fields() {
   $fields = array();
 
+  // Exported field: 'user-user-field_academic_admin_role'.
+  $fields['user-user-field_academic_admin_role'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_academic_admin_role',
+      'field_permissions' => array(
+        'type' => '0',
+      ),
+      'foreign keys' => array(
+        'format' => array(
+          'columns' => array(
+            'format' => 'format',
+          ),
+          'table' => 'filter_format',
+        ),
+      ),
+      'global_block_settings' => '1',
+      'indexes' => array(
+        'format' => array(
+          0 => 'format',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'text',
+      'settings' => array(
+        'max_length' => '255',
+      ),
+      'translatable' => '0',
+      'type' => 'text',
+    ),
+    'field_instance' => array(
+      'bundle' => 'user',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => 'If you select "Academic administrator" in "Academic staff category", this field becomes mandatory.',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => 54,
+        ),
+      ),
+      'entity_type' => 'user',
+      'field_name' => 'field_academic_admin_role',
+      'label' => 'Academic administrator role',
+      'required' => 1,
+      'settings' => array(
+        'linkit' => array(
+          'enable' => 0,
+          'insert_plugin' => '',
+        ),
+        'text_processing' => '0',
+        'user_register_form' => 1,
+        'wysiwyg_fields' => array(
+          'settings' => array(
+            'advanced' => array(
+              'delete' => 1,
+              'hide' => 1,
+            ),
+            'formatters' => array(),
+            'icon' => '6f7621a02161e347e66d99d8ace540a3',
+            'label' => 'Academic administrator role',
+          ),
+          'status' => 0,
+        ),
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'text',
+        'settings' => array(
+          'size' => '60',
+        ),
+        'type' => 'text_textfield',
+        'weight' => '3',
+      ),
+    ),
+  );
+
   // Exported field: 'user-user-field_academic_staff_type'.
   $fields['user-user-field_academic_staff_type'] = array(
     'field_config' => array(
@@ -56,7 +139,7 @@ function uom_staff_profiles_field_default_fields() {
         ),
       ),
       'deleted' => '0',
-      'description' => 'This field is used to further categorize academic staff. If the user is not a academic staff, you should select "none".',
+      'description' => 'This field is used to further categorise academic staff.',
       'display' => array(
         'default' => array(
           'label' => 'above',
@@ -90,7 +173,7 @@ function uom_staff_profiles_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '1',
+        'weight' => '2',
       ),
     ),
   );
@@ -194,7 +277,7 @@ function uom_staff_profiles_field_default_fields() {
           'progress_indicator' => 'throbber',
         ),
         'type' => 'file_generic',
-        'weight' => '5',
+        'weight' => '7',
       ),
     ),
   );
@@ -302,7 +385,7 @@ function uom_staff_profiles_field_default_fields() {
           'progress_indicator' => 'throbber',
         ),
         'type' => 'image_image',
-        'weight' => '6',
+        'weight' => '8',
       ),
     ),
   );
@@ -569,7 +652,7 @@ function uom_staff_profiles_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '15',
+        'weight' => '17',
       ),
     ),
   );
@@ -650,7 +733,7 @@ function uom_staff_profiles_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '10',
+        'weight' => '12',
       ),
     ),
   );
@@ -735,7 +818,7 @@ function uom_staff_profiles_field_default_fields() {
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_field',
-        'weight' => '18',
+        'weight' => '19',
       ),
     ),
   );
@@ -809,7 +892,7 @@ function uom_staff_profiles_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '8',
+        'weight' => '10',
       ),
     ),
   );
@@ -883,7 +966,90 @@ function uom_staff_profiles_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '9',
+        'weight' => '11',
+      ),
+    ),
+  );
+
+  // Exported field: 'user-user-field_notice'.
+  $fields['user-user-field_notice'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_notice',
+      'field_permissions' => array(
+        'type' => '0',
+      ),
+      'foreign keys' => array(
+        'format' => array(
+          'columns' => array(
+            'format' => 'format',
+          ),
+          'table' => 'filter_format',
+        ),
+      ),
+      'global_block_settings' => '1',
+      'indexes' => array(
+        'format' => array(
+          0 => 'format',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'text',
+      'settings' => array(
+        'max_length' => '255',
+      ),
+      'translatable' => '0',
+      'type' => 'text',
+    ),
+    'field_instance' => array(
+      'bundle' => 'user',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => 'If you are away or not contactable, please add a short note in the form "Away on sabbatical from July 2012 until October 2013"',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => 53,
+        ),
+      ),
+      'entity_type' => 'user',
+      'field_name' => 'field_notice',
+      'label' => 'Notice',
+      'required' => 0,
+      'settings' => array(
+        'linkit' => array(
+          'enable' => 0,
+          'insert_plugin' => '',
+        ),
+        'text_processing' => '0',
+        'user_register_form' => 0,
+        'wysiwyg_fields' => array(
+          'settings' => array(
+            'advanced' => array(
+              'delete' => 1,
+              'hide' => 1,
+            ),
+            'formatters' => array(),
+            'icon' => '6f7621a02161e347e66d99d8ace540a3',
+            'label' => 'Notice',
+          ),
+          'status' => 0,
+        ),
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'text',
+        'settings' => array(
+          'size' => '60',
+        ),
+        'type' => 'text_textfield',
+        'weight' => '0',
       ),
     ),
   );
@@ -952,7 +1118,88 @@ function uom_staff_profiles_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '12',
+        'weight' => '14',
+      ),
+    ),
+  );
+
+  // Exported field: 'user-user-field_other_information'.
+  $fields['user-user-field_other_information'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_other_information',
+      'field_permissions' => array(
+        'type' => '0',
+      ),
+      'foreign keys' => array(
+        'format' => array(
+          'columns' => array(
+            'format' => 'format',
+          ),
+          'table' => 'filter_format',
+        ),
+      ),
+      'global_block_settings' => '1',
+      'indexes' => array(
+        'format' => array(
+          0 => 'format',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'text',
+      'settings' => array(),
+      'translatable' => '0',
+      'type' => 'text_long',
+    ),
+    'field_instance' => array(
+      'bundle' => 'user',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => 'Enter any other information that should be shown on the profile page.',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => 55,
+        ),
+      ),
+      'entity_type' => 'user',
+      'field_name' => 'field_other_information',
+      'label' => 'Other information',
+      'required' => 0,
+      'settings' => array(
+        'linkit' => array(
+          'enable' => 0,
+          'insert_plugin' => '',
+        ),
+        'text_processing' => '1',
+        'user_register_form' => 0,
+        'wysiwyg_fields' => array(
+          'settings' => array(
+            'advanced' => array(
+              'delete' => 1,
+              'hide' => 1,
+            ),
+            'formatters' => array(),
+            'icon' => '6f7621a02161e347e66d99d8ace540a3',
+            'label' => 'Other information',
+          ),
+          'status' => 0,
+        ),
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'text',
+        'settings' => array(
+          'rows' => '10',
+        ),
+        'type' => 'text_textarea',
+        'weight' => '30',
       ),
     ),
   );
@@ -1035,7 +1282,7 @@ function uom_staff_profiles_field_default_fields() {
           'size' => '8',
         ),
         'type' => 'text_textfield',
-        'weight' => '16',
+        'weight' => '18',
       ),
     ),
   );
@@ -1118,7 +1365,7 @@ function uom_staff_profiles_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '11',
+        'weight' => '13',
       ),
     ),
   );
@@ -1294,7 +1541,7 @@ function uom_staff_profiles_field_default_fields() {
           'progress_indicator' => 'throbber',
         ),
         'type' => 'image_image',
-        'weight' => '4',
+        'weight' => '6',
       ),
     ),
   );
@@ -1432,7 +1679,7 @@ function uom_staff_profiles_field_default_fields() {
           'rows' => '8',
         ),
         'type' => 'text_textarea',
-        'weight' => '19',
+        'weight' => '20',
       ),
     ),
   );
@@ -1501,7 +1748,7 @@ function uom_staff_profiles_field_default_fields() {
           'rows' => '10',
         ),
         'type' => 'text_textarea',
-        'weight' => '23',
+        'weight' => '27',
       ),
     ),
   );
@@ -1639,7 +1886,7 @@ function uom_staff_profiles_field_default_fields() {
           'rows' => '10',
         ),
         'type' => 'text_textarea',
-        'weight' => '13',
+        'weight' => '15',
       ),
     ),
   );
@@ -1703,7 +1950,7 @@ function uom_staff_profiles_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '14',
+        'weight' => '16',
       ),
     ),
   );
@@ -1767,7 +2014,7 @@ function uom_staff_profiles_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_buttons',
-        'weight' => '2',
+        'weight' => '4',
       ),
     ),
   );
@@ -1916,13 +2163,14 @@ function uom_staff_profiles_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '7',
+        'weight' => '9',
       ),
     ),
   );
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Academic administrator role');
   t('Academic staff category');
   t('Add an optional external profile link. E.g.: Your <em>Find an expert</em> page. Enter the whole link address, including http://');
   t('Awards and grants');
@@ -1931,11 +2179,16 @@ function uom_staff_profiles_field_default_fields() {
   t('Building');
   t('Discipline');
   t('Document uploader');
+  t('Enter any other information that should be shown on the profile page.');
   t('External Profile');
   t('Family name');
   t('Given name');
+  t('If you are away or not contactable, please add a short note in the form "Away on sabbatical from July 2012 until October 2013"');
+  t('If you select "Academic administrator" in "Academic staff category", this field becomes mandatory.');
   t('Image uploader');
+  t('Notice');
   t('Organisation unit');
+  t('Other information');
   t('Phone');
   t('Please attach any images (eg: book covers) that you want displayed on this profile.');
   t('Position');
@@ -1949,7 +2202,7 @@ function uom_staff_profiles_field_default_fields() {
   t('Room');
   t('Share Profile');
   t('Teaching');
-  t('This field is used to further categorize academic staff. If the user is not a academic staff, you should select "none".');
+  t('This field is used to further categorise academic staff.');
   t('Title');
   t('e.g. 1234 5678');
 

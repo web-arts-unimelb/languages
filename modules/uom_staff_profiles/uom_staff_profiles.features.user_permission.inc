@@ -10,6 +10,16 @@
 function uom_staff_profiles_user_default_permissions() {
   $permissions = array();
 
+  // Exported permission: create field_academic_staff_type.
+  $permissions['create field_academic_staff_type'] = array(
+    'name' => 'create field_academic_staff_type',
+    'roles' => array(
+      0 => 'admin',
+      1 => 'site admin',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: create field_account_document.
   $permissions['create field_account_document'] = array(
     'name' => 'create field_account_document',
@@ -83,6 +93,16 @@ function uom_staff_profiles_user_default_permissions() {
       0 => 'admin',
       1 => 'authenticated user',
       2 => 'site admin',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: create field_org_unit.
+  $permissions['create field_org_unit'] = array(
+    'name' => 'create field_org_unit',
+    'roles' => array(
+      0 => 'admin',
+      1 => 'site admin',
     ),
     'module' => 'field_permissions',
   );
@@ -197,6 +217,16 @@ function uom_staff_profiles_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: edit field_academic_staff_type.
+  $permissions['edit field_academic_staff_type'] = array(
+    'name' => 'edit field_academic_staff_type',
+    'roles' => array(
+      0 => 'admin',
+      1 => 'site admin',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: edit field_account_document.
   $permissions['edit field_account_document'] = array(
     'name' => 'edit field_account_document',
@@ -265,6 +295,16 @@ function uom_staff_profiles_user_default_permissions() {
       0 => 'admin',
       1 => 'editor',
       2 => 'site admin',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: edit field_org_unit.
+  $permissions['edit field_org_unit'] = array(
+    'name' => 'edit field_org_unit',
+    'roles' => array(
+      0 => 'admin',
+      1 => 'site admin',
     ),
     'module' => 'field_permissions',
   );
@@ -371,6 +411,16 @@ function uom_staff_profiles_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: edit own field_academic_staff_type.
+  $permissions['edit own field_academic_staff_type'] = array(
+    'name' => 'edit own field_academic_staff_type',
+    'roles' => array(
+      0 => 'admin',
+      1 => 'site admin',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: edit own field_account_document.
   $permissions['edit own field_account_document'] = array(
     'name' => 'edit own field_account_document',
@@ -445,6 +495,16 @@ function uom_staff_profiles_user_default_permissions() {
       1 => 'authenticated user',
       2 => 'editor',
       3 => 'site admin',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: edit own field_org_unit.
+  $permissions['edit own field_org_unit'] = array(
+    'name' => 'edit own field_org_unit',
+    'roles' => array(
+      0 => 'admin',
+      1 => 'site admin',
     ),
     'module' => 'field_permissions',
   );
@@ -560,6 +620,16 @@ function uom_staff_profiles_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: view field_academic_staff_type.
+  $permissions['view field_academic_staff_type'] = array(
+    'name' => 'view field_academic_staff_type',
+    'roles' => array(
+      0 => 'admin',
+      1 => 'site admin',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: view field_account_document.
   $permissions['view field_account_document'] = array(
     'name' => 'view field_account_document',
@@ -641,6 +711,20 @@ function uom_staff_profiles_user_default_permissions() {
     'roles' => array(
       0 => 'anonymous user',
       1 => 'authenticated user',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: view field_org_unit.
+  $permissions['view field_org_unit'] = array(
+    'name' => 'view field_org_unit',
+    'roles' => array(
+      0 => 'academic staff',
+      1 => 'admin',
+      2 => 'anonymous user',
+      3 => 'authenticated user',
+      4 => 'professional staff',
+      5 => 'site admin',
     ),
     'module' => 'field_permissions',
   );
@@ -770,6 +854,17 @@ function uom_staff_profiles_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: view own field_academic_staff_type.
+  $permissions['view own field_academic_staff_type'] = array(
+    'name' => 'view own field_academic_staff_type',
+    'roles' => array(
+      0 => 'academic staff',
+      1 => 'admin',
+      2 => 'site admin',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: view own field_account_document.
   $permissions['view own field_account_document'] = array(
     'name' => 'view own field_account_document',
@@ -842,6 +937,20 @@ function uom_staff_profiles_user_default_permissions() {
       0 => 'admin',
       1 => 'editor',
       2 => 'site admin',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: view own field_org_unit.
+  $permissions['view own field_org_unit'] = array(
+    'name' => 'view own field_org_unit',
+    'roles' => array(
+      0 => 'academic staff',
+      1 => 'admin',
+      2 => 'anonymous user',
+      3 => 'authenticated user',
+      4 => 'professional staff',
+      5 => 'site admin',
     ),
     'module' => 'field_permissions',
   );
