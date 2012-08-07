@@ -1564,8 +1564,11 @@ function uom_staff_profiles_views_default_views() {
   $handler->display->display_options['fields']['field_other_information']['id'] = 'field_other_information';
   $handler->display->display_options['fields']['field_other_information']['table'] = 'field_data_field_other_information';
   $handler->display->display_options['fields']['field_other_information']['field'] = 'field_other_information';
+  $handler->display->display_options['fields']['field_other_information']['label'] = '';
   $handler->display->display_options['fields']['field_other_information']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_other_information']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_other_information']['alter']['alter_text'] = 1;
+  $handler->display->display_options['fields']['field_other_information']['alter']['text'] = '<h3>Other information</h3>
+[field_other_information]';
   $handler->display->display_options['fields']['field_other_information']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['field_other_information']['alter']['absolute'] = 0;
   $handler->display->display_options['fields']['field_other_information']['alter']['external'] = 0;
@@ -1578,7 +1581,7 @@ function uom_staff_profiles_views_default_views() {
   $handler->display->display_options['fields']['field_other_information']['alter']['strip_tags'] = 0;
   $handler->display->display_options['fields']['field_other_information']['alter']['trim'] = 0;
   $handler->display->display_options['fields']['field_other_information']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['field_other_information']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_other_information']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_other_information']['element_default_classes'] = 1;
   $handler->display->display_options['fields']['field_other_information']['hide_empty'] = 0;
   $handler->display->display_options['fields']['field_other_information']['empty_zero'] = 0;
