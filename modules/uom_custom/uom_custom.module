@@ -119,6 +119,14 @@ function uom_custom_form_alter(&$form, &$form_state, $form_id) {
       }
     }
 
+    // If you are academic staff only
+    if(__is_academic_staff_only($user))
+    {
+	// Hide --> "if you want to change your E-mail address or Password, you must enter your current password to confirm"
+	$form['account']['current_pass']['#disabled'] = true;
+	$form['account']['current_pass_required_values']['#disabled'] = true;	
+    }
+
     // Some fields should be mandatory *only* for academic staff editing their own profile.
     if (
         ($form['#user']->uid == $user->uid && !in_array('academic staff', $user->roles)) ||
@@ -1165,3 +1173,19 @@ function uom_custom_views_api() {
   return array("version" => "3.0");
 }
 
+
+function __is_academic_staff_only($user)
+{
+  if(
+	in_array('academic staff', $user->roles) &&
+	!in_array('admin', $user->roles) &&
+	!in_array('site-admin', $user->roles)
+  )
+  {
+	return true;
+  }
+  else
+  {
+	return false;
+  }
+}
