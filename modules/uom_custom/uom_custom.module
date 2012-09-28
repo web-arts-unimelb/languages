@@ -1173,6 +1173,18 @@ function uom_custom_views_api() {
   return array("version" => "3.0");
 }
 
+/**
+ * Implements hook_user_presave()
+ */
+function uom_custom_user_presave(&$edit, $account, $category) 
+{
+	// Record time stamp for last save user profile.
+	if(isset($edit['field_last_edit'])) 
+	{
+		$edit['field_last_edit']['und'][0] = array('value' => time());
+	}
+}
+
 
 function __is_academic_staff_only($user)
 {
