@@ -154,7 +154,7 @@ function uom_custom_form_alter(&$form, &$form_state, $form_id) {
         $ldap = variable_get('ldap_authentication_conf', array());
         $form['account']['ldap'] = array(
           '#type' => 'markup',
-          '#markup' => t('You cannot change your password here. You must reset your @password via the directions at <a href="!link">@title</a>.', array('@password' => strtolower($ldap['loginUIPasswordTxt']), '!link' => $ldap['ldapUserHelpLinkUrl'], '@title' => $ldap['ldapUserHelpLinkText'])),
+          '#markup' => t('You cannot change your password here. You must reset your @password via the directions at <a href="!link">@title</a>.', array('@password' => $ldap['loginUIPasswordTxt'], '!link' => $ldap['ldapUserHelpLinkUrl'], '@title' => $ldap['ldapUserHelpLinkText'])),
           '#weight' => -8,
         );
       }
