@@ -2,6 +2,7 @@ name = UoM Gallery Block
 description = Provides  gallery block seeded from images attached to pages.
 core = 7.x
 package = University of Melbourne
+php = 5.2.4
 version = 7.x-1.0
 project = uom_gallery_block
 dependencies[] = colorbox

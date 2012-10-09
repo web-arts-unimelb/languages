@@ -73,7 +73,7 @@ function uom_gallery_block_field_default_fields() {
       'label' => 'Gallery',
       'required' => 0,
       'settings' => array(
-        'alt_field' => 0,
+        'alt_field' => 1,
         'default_image' => 0,
         'file_directory' => 'gallery',
         'file_extensions' => 'png gif jpg jpeg',

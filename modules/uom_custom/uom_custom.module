@@ -119,6 +119,14 @@ function uom_custom_form_alter(&$form, &$form_state, $form_id) {
       }
     }
 
+    // If you are academic staff only
+    if(__is_academic_staff_only($user))
+    {
+	// Hide --> "if you want to change your E-mail address or Password, you must enter your current password to confirm"
+	$form['account']['current_pass']['#disabled'] = true;
+	$form['account']['current_pass_required_values']['#disabled'] = true;	
+    }
+
     // Some fields should be mandatory *only* for academic staff editing their own profile.
     if (
         ($form['#user']->uid == $user->uid && !in_array('academic staff', $user->roles)) ||
@@ -146,7 +154,7 @@ function uom_custom_form_alter(&$form, &$form_state, $form_id) {
         $ldap = variable_get('ldap_authentication_conf', array());
         $form['account']['ldap'] = array(
           '#type' => 'markup',
-          '#markup' => t('You cannot change your password here. You must reset your @password via the directions at <a href="!link">@title</a>.', array('@password' => strtolower($ldap['loginUIPasswordTxt']), '!link' => $ldap['ldapUserHelpLinkUrl'], '@title' => $ldap['ldapUserHelpLinkText'])),
+          '#markup' => t('You cannot change your password here. You must reset your @password via the directions at <a href="!link">@title</a>.', array('@password' => $ldap['loginUIPasswordTxt'], '!link' => $ldap['ldapUserHelpLinkUrl'], '@title' => $ldap['ldapUserHelpLinkText'])),
           '#weight' => -8,
         );
       }
@@ -1188,3 +1196,31 @@ function uom_custom_views_api() {
   return array("version" => "3.0");
 }
 
+/**
+ * Implements hook_user_presave()
+ */
+function uom_custom_user_presave(&$edit, $account, $category) 
+{
+	// Record time stamp for last save user profile.
+	if(isset($edit['field_last_edit'])) 
+	{
+		$edit['field_last_edit']['und'][0] = array('value' => time());
+	}
+}
+
+
+function __is_academic_staff_only($user)
+{
+  if(
+	in_array('academic staff', $user->roles) &&
+	!in_array('admin', $user->roles) &&
+	!in_array('site-admin', $user->roles)
+  )
+  {
+	return true;
+  }
+  else
+  {
+	return false;
+  }
+}
