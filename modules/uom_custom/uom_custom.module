@@ -1052,6 +1052,7 @@ function uom_custom_entity_info_alter(&$entity_info) {
  * Implements hook_wysiwyg_editor_settings_alter()
  */
 function uom_custom_wysiwyg_editor_settings_alter(&$settings, $context) {
+
   // The $context variable contains information about the wysiwyg profile we're using
   // In this case we just need to check that the editor being used is ckeditor
   if ($context['profile']->editor == 'ckeditor') {
@@ -1077,19 +1078,27 @@ function uom_custom_wysiwyg_editor_settings_alter(&$settings, $context) {
     // These are our desired groupings. Buttons that aren't listed here will be
     // Grouped in one big group at the end
     $preferred_groupings[] = array('Source', 'Format', 'Styles');
-    $preferred_groupings[] = array('Bold', 'Italic', 'Underline', 'Strike', 'Blockquote');
+    $preferred_groupings[] = array('Bold', 'Italic', 'Underline', 'Strike', 'Blockquote', 'RemoveFormat');
     $preferred_groupings[] = array('JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', 'BulletedList', 'NumberedList', 'Outdent', 'Indent');
     $preferred_groupings[] = array('Undo', 'Redo');
     $preferred_groupings[] = array('TextColor', 'BGColor');
     $preferred_groupings[] = array('Superscript', 'Subscript');
-    $preferred_groupings[] = array('HorizontalRule', 'break');
-    $preferred_groupings[] = array('Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord');
-    $preferred_groupings[] = array('ShowBlocks', 'RemoveFormat', 'SpecialChar', '/');
+    if (in_array('site admin', $GLOBALS['user']->roles)) {
+      $preferred_groupings[] = array('HorizontalRule', 'break');
+    }
+    $preferred_groupings[] = array('Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', 'SpellCheck', 'Scayt');
+    $preferred_groupings[] = array('ShowBlocks', 'SpecialChar', '/');
     $preferred_groupings[] = array('Font', 'FontSize', 'Table');
     $preferred_groupings[] = array('SelectAll', 'Find', 'Replace');
     $preferred_groupings[] = array('Flash', 'Smiley');
-	$preferred_groupings[] = array('Anchor', 'Image', 'linkit', 'Link', 'Unlink', 'wysiwyg_fields_field_page_image', 'wysiwyg_fields_field_page_document', 'wysiwyg_fields_field_event_image', 'wysiwyg_fields_field_event_document', 'wysiwyg_fields_field_landingpage_doc_uploader', 'wysiwyg_fields_field_account_document', 'wysiwyg_fields_field_account_image',);
-    $preferred_groupings[] = array('CreateDiv', 'SpellChecker', 'Scayt', 'Maximize');
+    // Create a grouping without Image (and IMCE) in case of not site admin.
+    if (in_array('site admin', $GLOBALS['user']->roles)) {
+      $preferred_groupings[] = array('Anchor', 'Image', 'linkit', 'Link', 'Unlink', 'wysiwyg_fields_field_page_image', 'wysiwyg_fields_field_page_document', 'wysiwyg_fields_field_event_image', 'wysiwyg_fields_field_event_document', 'wysiwyg_fields_field_landingpage_doc_uploader', 'wysiwyg_fields_field_account_document', 'wysiwyg_fields_field_account_image',);
+    }
+    else {
+      $preferred_groupings[] = array('linkit', 'Link', 'Unlink', 'wysiwyg_fields_field_page_image', 'wysiwyg_fields_field_page_document', 'wysiwyg_fields_field_event_image', 'wysiwyg_fields_field_event_document', 'wysiwyg_fields_field_landingpage_doc_uploader', 'wysiwyg_fields_field_account_document', 'wysiwyg_fields_field_account_image',);
+    }
+    $preferred_groupings[] = array('CreateDiv', 'Maximize');
 
     // An array to hold our newly grouped buttons
     $new_grouped_toolbar = array();
@@ -1130,6 +1139,20 @@ function uom_custom_wysiwyg_editor_settings_alter(&$settings, $context) {
 
     // Replace the toolbar with our new, grouped toolbar.
     $settings['toolbar'] = $new_grouped_toolbar;
+  }
+
+  // Unfortunately, unsetting the 'Image' button means the whole group it is
+  // a part of is no longer displayed. Thus, 'Image' is put in a group by
+  // istself further up.
+  if (!in_array('site admin', $GLOBALS['user']->roles)) {
+    foreach ($settings['toolbar'] as $group => $toolbar) {
+      foreach ($toolbar as $idx => $button) {
+        if ($button == 'Image') {
+          unset($settings['toolbar'][$group][$idx]);
+        }
+      }
+    }
+    unset($settings['filebrowserBrowseUrl']);
   }
 }
 
