@@ -1086,7 +1086,8 @@ function uom_custom_wysiwyg_editor_settings_alter(&$settings, $context) {
     // These are our desired groupings. Buttons that aren't listed here will be
     // Grouped in one big group at the end
     $preferred_groupings[] = array('Source', 'Format', 'Styles');
-    $preferred_groupings[] = array('Bold', 'Italic', 'Underline', 'Strike', 'Blockquote', 'RemoveFormat');
+    $preferred_groupings[] = array('Bold', 'Italic', 'Underline', 'Strike', 'Blockquote');
+    $preferred_groupings[] = array('RemoveFormat');
     $preferred_groupings[] = array('JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', 'BulletedList', 'NumberedList', 'Outdent', 'Indent');
     $preferred_groupings[] = array('Undo', 'Redo');
     $preferred_groupings[] = array('TextColor', 'BGColor');
@@ -1094,7 +1095,8 @@ function uom_custom_wysiwyg_editor_settings_alter(&$settings, $context) {
     if (in_array('site admin', $GLOBALS['user']->roles)) {
       $preferred_groupings[] = array('HorizontalRule', 'break');
     }
-    $preferred_groupings[] = array('Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', 'SpellCheck', 'Scayt');
+    $preferred_groupings[] = array('Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord');
+    $preferred_groupings[] = array('SpellCheck', 'Scayt');
     $preferred_groupings[] = array('ShowBlocks', 'SpecialChar', '/');
     $preferred_groupings[] = array('Font', 'FontSize', 'Table');
     $preferred_groupings[] = array('SelectAll', 'Find', 'Replace');
