@@ -102,7 +102,7 @@ function uom_staff_profiles_field_default_fields() {
       'entity_types' => array(),
       'field_name' => 'field_academic_staff_type',
       'field_permissions' => array(
-        'type' => '2',
+        'type' => '0',
       ),
       'foreign keys' => array(
         'tid' => array(
@@ -2073,8 +2073,20 @@ function uom_staff_profiles_field_default_fields() {
           'enable' => 0,
           'insert_plugin' => '',
         ),
-        'text_processing' => '0',
+        'text_processing' => '1',
         'user_register_form' => 1,
+        'wysiwyg_fields' => array(
+          'settings' => array(
+            'advanced' => array(
+              'delete' => 1,
+              'hide' => 1,
+            ),
+            'formatters' => array(),
+            'icon' => '6f7621a02161e347e66d99d8ace540a3',
+            'label' => 'Teaching',
+          ),
+          'status' => 0,
+        ),
       ),
       'widget' => array(
         'active' => 1,

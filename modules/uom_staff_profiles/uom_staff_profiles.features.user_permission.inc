@@ -10,16 +10,6 @@
 function uom_staff_profiles_user_default_permissions() {
   $permissions = array();
 
-  // Exported permission: create field_academic_staff_type.
-  $permissions['create field_academic_staff_type'] = array(
-    'name' => 'create field_academic_staff_type',
-    'roles' => array(
-      0 => 'admin',
-      1 => 'site admin',
-    ),
-    'module' => 'field_permissions',
-  );
-
   // Exported permission: create field_account_document.
   $permissions['create field_account_document'] = array(
     'name' => 'create field_account_document',
@@ -217,16 +207,6 @@ function uom_staff_profiles_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
-  // Exported permission: edit field_academic_staff_type.
-  $permissions['edit field_academic_staff_type'] = array(
-    'name' => 'edit field_academic_staff_type',
-    'roles' => array(
-      0 => 'admin',
-      1 => 'site admin',
-    ),
-    'module' => 'field_permissions',
-  );
-
   // Exported permission: edit field_account_document.
   $permissions['edit field_account_document'] = array(
     'name' => 'edit field_account_document',
@@ -404,16 +384,6 @@ function uom_staff_profiles_user_default_permissions() {
   // Exported permission: edit field_teaching.
   $permissions['edit field_teaching'] = array(
     'name' => 'edit field_teaching',
-    'roles' => array(
-      0 => 'admin',
-      1 => 'site admin',
-    ),
-    'module' => 'field_permissions',
-  );
-
-  // Exported permission: edit own field_academic_staff_type.
-  $permissions['edit own field_academic_staff_type'] = array(
-    'name' => 'edit own field_academic_staff_type',
     'roles' => array(
       0 => 'admin',
       1 => 'site admin',
@@ -616,16 +586,6 @@ function uom_staff_profiles_user_default_permissions() {
       0 => 'academic staff',
       1 => 'admin',
       2 => 'site admin',
-    ),
-    'module' => 'field_permissions',
-  );
-
-  // Exported permission: view field_academic_staff_type.
-  $permissions['view field_academic_staff_type'] = array(
-    'name' => 'view field_academic_staff_type',
-    'roles' => array(
-      0 => 'admin',
-      1 => 'site admin',
     ),
     'module' => 'field_permissions',
   );
@@ -850,17 +810,6 @@ function uom_staff_profiles_user_default_permissions() {
       2 => 'anonymous user',
       3 => 'authenticated user',
       4 => 'site admin',
-    ),
-    'module' => 'field_permissions',
-  );
-
-  // Exported permission: view own field_academic_staff_type.
-  $permissions['view own field_academic_staff_type'] = array(
-    'name' => 'view own field_academic_staff_type',
-    'roles' => array(
-      0 => 'academic staff',
-      1 => 'admin',
-      2 => 'site admin',
     ),
     'module' => 'field_permissions',
   );
