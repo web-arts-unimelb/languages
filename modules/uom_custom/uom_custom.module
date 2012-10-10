@@ -150,6 +150,7 @@ function uom_custom_form_alter(&$form, &$form_state, $form_id) {
           $element['#access'] = FALSE;
         }
       }
+
       if ($ldap_link) {
         $ldap = variable_get('ldap_authentication_conf', array());
         $form['account']['ldap'] = array(
