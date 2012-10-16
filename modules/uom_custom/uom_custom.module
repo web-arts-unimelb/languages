@@ -120,11 +120,10 @@ function uom_custom_form_alter(&$form, &$form_state, $form_id) {
     }
 
     // If you are academic staff only
-    if(__is_academic_staff_only($user))
-    {
-	// Hide --> "if you want to change your E-mail address or Password, you must enter your current password to confirm"
-	$form['account']['current_pass']['#disabled'] = true;
-	$form['account']['current_pass_required_values']['#disabled'] = true;	
+    if(uom_custom_is_academic_staff_only($user)) {
+      // Hide --> "if you want to change your E-mail address or Password, you must enter your current password to confirm"
+      $form['account']['current_pass']['#disabled'] = true;
+      $form['account']['current_pass_required_values']['#disabled'] = true;	
     }
 
     // Some fields should be mandatory *only* for academic staff editing their own profile.
@@ -188,7 +187,7 @@ function uom_custom_form_alter(&$form, &$form_state, $form_id) {
       drupal_add_css('.page-admin-people .form-item-name label { font-weight: normal; }', array('type' => 'inline'));
 
       // And add our extra validator :-)
-      array_unshift($form['#validate'], 'uom_custom_username_lookup_validate');
+      $form['account']['name']['#element_validate'] = array('uom_custom_username_lookup_validate');
     }
   }
 
@@ -224,7 +223,7 @@ function uom_custom_form_alter(&$form, &$form_state, $form_id) {
  * Extra validation handler that tries to fetch a username from the Central ITS
  * LDAP databse, based on the given email address.
  */
-function uom_custom_username_lookup_validate($form, &$form_state) {
+function uom_custom_username_lookup_validate($element, &$form_state, $form) {
   if ($result = uom_custom_username_lookup($form_state['values']['mail'])) {
     drupal_set_message(t('Found staff details for %mail, please check that they are correct', array('%name' => $result['name'], '%mail' => $form_state['values']['mail'])), 'warning');
 
@@ -1203,28 +1202,26 @@ function uom_custom_views_api() {
 /**
  * Implements hook_user_presave()
  */
-function uom_custom_user_presave(&$edit, $account, $category) 
-{
-	// Record time stamp for last save user profile.
-	if(isset($edit['field_last_edit'])) 
-	{
-		$edit['field_last_edit']['und'][0] = array('value' => time());
-	}
+function uom_custom_user_presave(&$edit, $account, $category) {
+  // Record time stamp for last save user profile.
+  if(isset($edit['field_last_edit'])) {
+    $edit['field_last_edit']['und'][0] = array('value' => time());
+  }
 }
 
-
-function __is_academic_staff_only($user)
-{
-  if(
-	in_array('academic staff', $user->roles) &&
-	!in_array('admin', $user->roles) &&
-	!in_array('site-admin', $user->roles)
-  )
-  {
-	return true;
-  }
-  else
-  {
-	return false;
-  }
+/**
+ * Helper that checks whether a user is academic staff only or other as well.
+ *
+ * @param $account
+ *   A user object.
+ *
+ * @return
+ *   TRUE if the user is academic staff only, otherwise FALSE.
+ */
+function uom_custom_is_academic_staff_only($account) {
+  return (
+    in_array('academic staff', $account->roles) &&
+    !in_array('admin', $account->roles) &&
+    !in_array('site-admin', $account->roles)
+  );
 }
