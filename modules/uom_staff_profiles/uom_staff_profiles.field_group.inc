@@ -76,14 +76,14 @@ function uom_staff_profiles_field_group_info() {
   $field_group->mode = 'form';
   $field_group->parent_name = '';
   $field_group->data = array(
-    'label' => 'Bibliography',
+    'label' => 'Full publications',
     'weight' => '29',
     'children' => array(
       0 => 'field_bibliography',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
-      'label' => 'Bibliography',
+      'label' => 'Full publications',
       'instance_settings' => array(
         'required_fields' => 0,
         'classes' => '',
@@ -160,14 +160,14 @@ function uom_staff_profiles_field_group_info() {
   $field_group->mode = 'form';
   $field_group->parent_name = '';
   $field_group->data = array(
-    'label' => 'Publications',
+    'label' => 'Selected publications',
     'weight' => '25',
     'children' => array(
       0 => 'field_publications',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
-      'label' => 'Publications',
+      'label' => 'Selected publications',
       'instance_settings' => array(
         'required_fields' => 0,
         'classes' => '',

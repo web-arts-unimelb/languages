@@ -23,7 +23,7 @@ function uom_staff_profiles_quicktabs_default_quicktabs() {
       'vid' => 'profiles',
       'display' => 'academic_staff',
       'args' => '%1',
-      'title' => 'Academic Staff Profile',
+      'title' => 'Academic staff profile',
       'weight' => '-100',
       'type' => 'view',
     ),
@@ -31,7 +31,7 @@ function uom_staff_profiles_quicktabs_default_quicktabs() {
       'vid' => 'profiles',
       'display' => 'academic_staff_bibliography',
       'args' => '%1',
-      'title' => 'Bibliography',
+      'title' => 'Full publications',
       'weight' => '-99',
       'type' => 'view',
     ),
@@ -39,7 +39,7 @@ function uom_staff_profiles_quicktabs_default_quicktabs() {
       'vid' => 'profiles',
       'display' => 'professional_staff',
       'args' => '%1',
-      'title' => 'Professional Staff Profile',
+      'title' => 'Professional staff profile',
       'weight' => '-98',
       'type' => 'view',
     ),
@@ -50,9 +50,9 @@ function uom_staff_profiles_quicktabs_default_quicktabs() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Academic Staff Profile');
-  t('Bibliography');
-  t('Professional Staff Profile');
+  t('Academic staff profile');
+  t('Full publications');
+  t('Professional staff profile');
   t('Staff Profile');
 
   $export['staff_profile'] = $quicktabs;
