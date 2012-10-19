@@ -762,6 +762,87 @@ function uom_staff_profiles_field_default_fields() {
     ),
   );
 
+  // Exported field: 'user-user-field_engagement'.
+  $fields['user-user-field_engagement'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_engagement',
+      'field_permissions' => array(
+        'type' => '0',
+      ),
+      'foreign keys' => array(
+        'format' => array(
+          'columns' => array(
+            'format' => 'format',
+          ),
+          'table' => 'filter_format',
+        ),
+      ),
+      'global_block_settings' => '1',
+      'indexes' => array(
+        'format' => array(
+          0 => 'format',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'text',
+      'settings' => array(),
+      'translatable' => '0',
+      'type' => 'text_long',
+    ),
+    'field_instance' => array(
+      'bundle' => 'user',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => 56,
+        ),
+      ),
+      'entity_type' => 'user',
+      'field_name' => 'field_engagement',
+      'label' => 'Engagement',
+      'required' => 0,
+      'settings' => array(
+        'linkit' => array(
+          'enable' => 0,
+          'insert_plugin' => '',
+        ),
+        'text_processing' => '1',
+        'user_register_form' => 0,
+        'wysiwyg_fields' => array(
+          'settings' => array(
+            'advanced' => array(
+              'delete' => 1,
+              'hide' => 1,
+            ),
+            'formatters' => array(),
+            'icon' => '6f7621a02161e347e66d99d8ace540a3',
+            'label' => 'Engagement',
+          ),
+          'status' => 0,
+        ),
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'text',
+        'settings' => array(
+          'rows' => '10',
+        ),
+        'type' => 'text_textarea',
+        'weight' => '34',
+      ),
+    ),
+  );
+
   // Exported field: 'user-user-field_external_profile'.
   $fields['user-user-field_external_profile'] = array(
     'field_config' => array(
@@ -2253,6 +2334,7 @@ function uom_staff_profiles_field_default_fields() {
   t('Building');
   t('Discipline');
   t('Document uploader');
+  t('Engagement');
   t('Enter any other information that should be shown on the profile page.');
   t('External profile');
   t('Family name');
