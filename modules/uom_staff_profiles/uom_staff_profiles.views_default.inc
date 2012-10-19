@@ -42,7 +42,7 @@ function uom_staff_profiles_views_default_views() {
   $handler->display->display_options['fields']['uid']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['uid']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['uid']['link_to_user'] = FALSE;
-  /* Field: User: Bibliography */
+  /* Field: User: Full publications */
   $handler->display->display_options['fields']['field_bibliography']['id'] = 'field_bibliography';
   $handler->display->display_options['fields']['field_bibliography']['table'] = 'field_data_field_bibliography';
   $handler->display->display_options['fields']['field_bibliography']['field'] = 'field_bibliography';
@@ -64,7 +64,7 @@ function uom_staff_profiles_views_default_views() {
   $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['filters']['status']['group'] = 0;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: User: Share Profile (field_share_profile) */
+  /* Filter criterion: User: Share profile (field_share_profile) */
   $handler->display->display_options['filters']['field_share_profile_value']['id'] = 'field_share_profile_value';
   $handler->display->display_options['filters']['field_share_profile_value']['table'] = 'field_data_field_share_profile';
   $handler->display->display_options['filters']['field_share_profile_value']['field'] = 'field_share_profile_value';
@@ -78,7 +78,7 @@ function uom_staff_profiles_views_default_views() {
   $handler->display->display_options['filters']['rid']['value'] = array(
     6 => '6',
   );
-  /* Filter criterion: User: Bibliography (field_bibliography) */
+  /* Filter criterion: User: Full publications (field_bibliography) */
   $handler->display->display_options['filters']['field_bibliography_value']['id'] = 'field_bibliography_value';
   $handler->display->display_options['filters']['field_bibliography_value']['table'] = 'field_data_field_bibliography';
   $handler->display->display_options['filters']['field_bibliography_value']['field'] = 'field_bibliography_value';
@@ -234,7 +234,7 @@ function uom_staff_profiles_views_default_views() {
   $handler->display->display_options['filters']['uid']['operator'] = 'not in';
   $handler->display->display_options['filters']['uid']['value'] = '';
   $handler->display->display_options['filters']['uid']['group'] = '0';
-  /* Filter criterion: User: Share Profile (field_share_profile) */
+  /* Filter criterion: User: Share profile (field_share_profile) */
   $handler->display->display_options['filters']['field_share_profile_value']['id'] = 'field_share_profile_value';
   $handler->display->display_options['filters']['field_share_profile_value']['table'] = 'field_data_field_share_profile';
   $handler->display->display_options['filters']['field_share_profile_value']['field'] = 'field_share_profile_value';
@@ -405,7 +405,7 @@ function uom_staff_profiles_views_default_views() {
   $handler->display->display_options['filters']['uid']['operator'] = 'not in';
   $handler->display->display_options['filters']['uid']['value'] = '';
   $handler->display->display_options['filters']['uid']['group'] = '0';
-  /* Filter criterion: User: Share Profile (field_share_profile) */
+  /* Filter criterion: User: Share profile (field_share_profile) */
   $handler->display->display_options['filters']['field_share_profile_value']['id'] = 'field_share_profile_value';
   $handler->display->display_options['filters']['field_share_profile_value']['table'] = 'field_data_field_share_profile';
   $handler->display->display_options['filters']['field_share_profile_value']['field'] = 'field_share_profile_value';
@@ -554,7 +554,7 @@ function uom_staff_profiles_views_default_views() {
   $handler->display->display_options['fields']['field_phone']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_phone']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_phone']['type'] = 'uom_html5_phone_link';
-  /* Field: User: External Profile */
+  /* Field: User: External profile */
   $handler->display->display_options['fields']['field_external_profile']['id'] = 'field_external_profile';
   $handler->display->display_options['fields']['field_external_profile']['table'] = 'field_data_field_external_profile';
   $handler->display->display_options['fields']['field_external_profile']['field'] = 'field_external_profile';
@@ -638,14 +638,14 @@ function uom_staff_profiles_views_default_views() {
 [field_research_projects]';
   $handler->display->display_options['fields']['field_research_projects']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_research_projects']['hide_empty'] = TRUE;
-  /* Field: User: Publications */
+  /* Field: User: Selected publications */
   $handler->display->display_options['fields']['field_publications']['id'] = 'field_publications';
   $handler->display->display_options['fields']['field_publications']['table'] = 'field_data_field_publications';
   $handler->display->display_options['fields']['field_publications']['field'] = 'field_publications';
   $handler->display->display_options['fields']['field_publications']['label'] = '';
   $handler->display->display_options['fields']['field_publications']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_publications']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['field_publications']['alter']['text'] = '<h3>Publications</h3>
+  $handler->display->display_options['fields']['field_publications']['alter']['text'] = '<h3>Selected publications</h3>
 <div class="account-images">[field_account_image]</div>
 [field_publications]';
   $handler->display->display_options['fields']['field_publications']['element_label_colon'] = FALSE;
@@ -683,6 +683,16 @@ function uom_staff_profiles_views_default_views() {
 [field_presentations]';
   $handler->display->display_options['fields']['field_presentations']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_presentations']['hide_empty'] = TRUE;
+  /* Field: User: Engagement */
+  $handler->display->display_options['fields']['field_engagement']['id'] = 'field_engagement';
+  $handler->display->display_options['fields']['field_engagement']['table'] = 'field_data_field_engagement';
+  $handler->display->display_options['fields']['field_engagement']['field'] = 'field_engagement';
+  $handler->display->display_options['fields']['field_engagement']['label'] = '';
+  $handler->display->display_options['fields']['field_engagement']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_engagement']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_engagement']['alter']['text'] = '<h3>Engagement</h3>
+[field_engagement]';
+  $handler->display->display_options['fields']['field_engagement']['element_label_colon'] = FALSE;
   /* Field: User: Other information */
   $handler->display->display_options['fields']['field_other_information']['id'] = 'field_other_information';
   $handler->display->display_options['fields']['field_other_information']['table'] = 'field_data_field_other_information';
@@ -723,6 +733,7 @@ function uom_staff_profiles_views_default_views() {
 [field_awards_and_grants]
 [field_teaching]
 [field_presentations]
+[field_engagement]
 [field_other_information]';
   $handler->display->display_options['fields']['nothing_3']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['nothing_3']['element_default_classes'] = FALSE;
@@ -735,7 +746,7 @@ function uom_staff_profiles_views_default_views() {
   $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['filters']['status']['group'] = 0;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: User: Share Profile (field_share_profile) */
+  /* Filter criterion: User: Share profile (field_share_profile) */
   $handler->display->display_options['filters']['field_share_profile_value']['id'] = 'field_share_profile_value';
   $handler->display->display_options['filters']['field_share_profile_value']['table'] = 'field_data_field_share_profile';
   $handler->display->display_options['filters']['field_share_profile_value']['field'] = 'field_share_profile_value';
@@ -789,7 +800,7 @@ function uom_staff_profiles_views_default_views() {
     'image_style' => 'thumbnail',
     'image_link' => '',
   );
-  /* Field: User: Bibliography */
+  /* Field: User: Full publications */
   $handler->display->display_options['fields']['field_bibliography']['id'] = 'field_bibliography';
   $handler->display->display_options['fields']['field_bibliography']['table'] = 'field_data_field_bibliography';
   $handler->display->display_options['fields']['field_bibliography']['field'] = 'field_bibliography';
@@ -802,7 +813,7 @@ function uom_staff_profiles_views_default_views() {
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = '';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="col-5 first">
-<h2>Bibliography</h2>
+<h2>Full publications</h2>
 <h5>[field_title] [field_first_name] [field_last_name]</h5>
 </div>
 
@@ -955,7 +966,7 @@ function uom_staff_profiles_views_default_views() {
   $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['filters']['status']['group'] = 0;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: User: Share Profile (field_share_profile) */
+  /* Filter criterion: User: Share profile (field_share_profile) */
   $handler->display->display_options['filters']['field_share_profile_value']['id'] = 'field_share_profile_value';
   $handler->display->display_options['filters']['field_share_profile_value']['table'] = 'field_data_field_share_profile';
   $handler->display->display_options['filters']['field_share_profile_value']['field'] = 'field_share_profile_value';
@@ -1172,7 +1183,7 @@ function uom_staff_profiles_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing_1']['label'] = 'Office';
   $handler->display->display_options['fields']['nothing_1']['alter']['text'] = ' [field_room] [field_building]';
-  /* Field: User: Share Profile */
+  /* Field: User: Share profile */
   $handler->display->display_options['fields']['field_share_profile']['id'] = 'field_share_profile';
   $handler->display->display_options['fields']['field_share_profile']['table'] = 'field_data_field_share_profile';
   $handler->display->display_options['fields']['field_share_profile']['field'] = 'field_share_profile';
@@ -1196,7 +1207,7 @@ function uom_staff_profiles_views_default_views() {
     7 => '7',
     6 => '6',
   );
-  /* Filter criterion: User: Share Profile (field_share_profile) */
+  /* Filter criterion: User: Share profile (field_share_profile) */
   $handler->display->display_options['filters']['field_share_profile_value']['id'] = 'field_share_profile_value';
   $handler->display->display_options['filters']['field_share_profile_value']['table'] = 'field_data_field_share_profile';
   $handler->display->display_options['filters']['field_share_profile_value']['field'] = 'field_share_profile_value';
@@ -1324,7 +1335,7 @@ function uom_staff_profiles_views_default_views() {
   );
   $handler->display->display_options['filters']['field_academic_staff_type_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_academic_staff_type_tid']['vocabulary'] = 'academic_staff_type';
-  /* Filter criterion: User: Share Profile (field_share_profile) */
+  /* Filter criterion: User: Share profile (field_share_profile) */
   $handler->display->display_options['filters']['field_share_profile_value']['id'] = 'field_share_profile_value';
   $handler->display->display_options['filters']['field_share_profile_value']['table'] = 'field_data_field_share_profile';
   $handler->display->display_options['filters']['field_share_profile_value']['field'] = 'field_share_profile_value';
@@ -1449,7 +1460,7 @@ function uom_staff_profiles_views_default_views() {
   );
   $handler->display->display_options['filters']['field_academic_staff_type_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_academic_staff_type_tid']['vocabulary'] = 'academic_staff_type';
-  /* Filter criterion: User: Share Profile (field_share_profile) */
+  /* Filter criterion: User: Share profile (field_share_profile) */
   $handler->display->display_options['filters']['field_share_profile_value']['id'] = 'field_share_profile_value';
   $handler->display->display_options['filters']['field_share_profile_value']['table'] = 'field_data_field_share_profile';
   $handler->display->display_options['filters']['field_share_profile_value']['field'] = 'field_share_profile_value';
@@ -1533,7 +1544,7 @@ function uom_staff_profiles_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing_1']['label'] = 'Office';
   $handler->display->display_options['fields']['nothing_1']['alter']['text'] = '[field_room] [field_building]';
-  /* Field: User: Share Profile */
+  /* Field: User: Share profile */
   $handler->display->display_options['fields']['field_share_profile']['id'] = 'field_share_profile';
   $handler->display->display_options['fields']['field_share_profile']['table'] = 'field_data_field_share_profile';
   $handler->display->display_options['fields']['field_share_profile']['field'] = 'field_share_profile';
@@ -1581,7 +1592,7 @@ function uom_staff_profiles_views_default_views() {
   );
   $handler->display->display_options['filters']['field_academic_staff_type_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_academic_staff_type_tid']['vocabulary'] = 'academic_staff_type';
-  /* Filter criterion: User: Share Profile (field_share_profile) */
+  /* Filter criterion: User: Share profile (field_share_profile) */
   $handler->display->display_options['filters']['field_share_profile_value']['id'] = 'field_share_profile_value';
   $handler->display->display_options['filters']['field_share_profile_value']['table'] = 'field_data_field_share_profile';
   $handler->display->display_options['filters']['field_share_profile_value']['field'] = 'field_share_profile_value';
@@ -1658,7 +1669,7 @@ function uom_staff_profiles_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing_1']['label'] = 'Office';
   $handler->display->display_options['fields']['nothing_1']['alter']['text'] = '[field_building] [field_room]';
-  /* Field: User: Share Profile */
+  /* Field: User: Share profile */
   $handler->display->display_options['fields']['field_share_profile']['id'] = 'field_share_profile';
   $handler->display->display_options['fields']['field_share_profile']['table'] = 'field_data_field_share_profile';
   $handler->display->display_options['fields']['field_share_profile']['field'] = 'field_share_profile';
@@ -1697,7 +1708,7 @@ function uom_staff_profiles_views_default_views() {
   $handler->display->display_options['filters']['rid']['value'] = array(
     6 => '6',
   );
-  /* Filter criterion: User: Share Profile (field_share_profile) */
+  /* Filter criterion: User: Share profile (field_share_profile) */
   $handler->display->display_options['filters']['field_share_profile_value']['id'] = 'field_share_profile_value';
   $handler->display->display_options['filters']['field_share_profile_value']['table'] = 'field_data_field_share_profile';
   $handler->display->display_options['filters']['field_share_profile_value']['field'] = 'field_share_profile_value';

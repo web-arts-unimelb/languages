@@ -502,7 +502,7 @@ function uom_staff_profiles_field_default_fields() {
       ),
       'entity_type' => 'user',
       'field_name' => 'field_bibliography',
-      'label' => 'Bibliography',
+      'label' => 'Full publications',
       'required' => 0,
       'settings' => array(
         'linkit' => array(
@@ -511,6 +511,18 @@ function uom_staff_profiles_field_default_fields() {
         ),
         'text_processing' => '1',
         'user_register_form' => 1,
+        'wysiwyg_fields' => array(
+          'settings' => array(
+            'advanced' => array(
+              'delete' => 1,
+              'hide' => 1,
+            ),
+            'formatters' => array(),
+            'icon' => '6f7621a02161e347e66d99d8ace540a3',
+            'label' => 'Bibliography',
+          ),
+          'status' => 0,
+        ),
       ),
       'widget' => array(
         'active' => 1,
@@ -580,6 +592,18 @@ function uom_staff_profiles_field_default_fields() {
         ),
         'text_processing' => '1',
         'user_register_form' => 1,
+        'wysiwyg_fields' => array(
+          'settings' => array(
+            'advanced' => array(
+              'delete' => 1,
+              'hide' => 1,
+            ),
+            'formatters' => array(),
+            'icon' => '6f7621a02161e347e66d99d8ace540a3',
+            'label' => 'Biography',
+          ),
+          'status' => 0,
+        ),
       ),
       'widget' => array(
         'active' => 1,
@@ -788,7 +812,7 @@ function uom_staff_profiles_field_default_fields() {
       ),
       'entity_type' => 'user',
       'field_name' => 'field_external_profile',
-      'label' => 'External Profile',
+      'label' => 'External profile',
       'required' => 0,
       'settings' => array(
         'attributes' => array(
@@ -812,6 +836,18 @@ function uom_staff_profiles_field_default_fields() {
         'url' => 0,
         'user_register_form' => 1,
         'validate_url' => 1,
+        'wysiwyg_fields' => array(
+          'settings' => array(
+            'advanced' => array(
+              'delete' => 1,
+              'hide' => 1,
+            ),
+            'formatters' => array(),
+            'icon' => '6f7621a02161e347e66d99d8ace540a3',
+            'label' => 'External Profile',
+          ),
+          'status' => 0,
+        ),
       ),
       'widget' => array(
         'active' => 0,
@@ -1199,7 +1235,7 @@ function uom_staff_profiles_field_default_fields() {
           'rows' => '10',
         ),
         'type' => 'text_textarea',
-        'weight' => '30',
+        'weight' => '31',
       ),
     ),
   );
@@ -1593,7 +1629,7 @@ function uom_staff_profiles_field_default_fields() {
       ),
       'entity_type' => 'user',
       'field_name' => 'field_publications',
-      'label' => 'Publications',
+      'label' => 'Selected publications',
       'required' => 0,
       'settings' => array(
         'linkit' => array(
@@ -1602,6 +1638,18 @@ function uom_staff_profiles_field_default_fields() {
         ),
         'text_processing' => '1',
         'user_register_form' => 1,
+        'wysiwyg_fields' => array(
+          'settings' => array(
+            'advanced' => array(
+              'delete' => 1,
+              'hide' => 1,
+            ),
+            'formatters' => array(),
+            'icon' => '6f7621a02161e347e66d99d8ace540a3',
+            'label' => 'Publications',
+          ),
+          'status' => 0,
+        ),
       ),
       'widget' => array(
         'active' => 1,
@@ -1963,6 +2011,9 @@ function uom_staff_profiles_field_default_fields() {
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_share_profile',
+      'field_permissions' => array(
+        'type' => '0',
+      ),
       'foreign keys' => array(),
       'global_block_settings' => '1',
       'indexes' => array(
@@ -2004,10 +2055,22 @@ function uom_staff_profiles_field_default_fields() {
       ),
       'entity_type' => 'user',
       'field_name' => 'field_share_profile',
-      'label' => 'Share Profile',
+      'label' => 'Share profile',
       'required' => 1,
       'settings' => array(
         'user_register_form' => 1,
+        'wysiwyg_fields' => array(
+          'settings' => array(
+            'advanced' => array(
+              'delete' => 1,
+              'hide' => 1,
+            ),
+            'formatters' => array(),
+            'icon' => '6f7621a02161e347e66d99d8ace540a3',
+            'label' => 'Share Profile',
+          ),
+          'status' => 0,
+        ),
       ),
       'widget' => array(
         'active' => 1,
@@ -2186,14 +2249,14 @@ function uom_staff_profiles_field_default_fields() {
   t('Academic staff category');
   t('Add an optional external profile link. E.g.: Your <em>Find an expert</em> page. Enter the whole link address, including http://');
   t('Awards and grants');
-  t('Bibliography');
   t('Biography');
   t('Building');
   t('Discipline');
   t('Document uploader');
   t('Enter any other information that should be shown on the profile page.');
-  t('External Profile');
+  t('External profile');
   t('Family name');
+  t('Full publications');
   t('Given name');
   t('If you are away or not contactable, please add a short note in the form "Away on sabbatical from July 2012 until October 2013"');
   t('If you select "Academic administrator" in "Academic staff category", this field becomes mandatory.');
@@ -2206,13 +2269,13 @@ function uom_staff_profiles_field_default_fields() {
   t('Position');
   t('Presentations');
   t('Profile image');
-  t('Publications');
   t('Qualifications');
   t('Research interests/areas of supervision');
   t('Research projects');
   t('Responsibilities');
   t('Room');
-  t('Share Profile');
+  t('Selected publications');
+  t('Share profile');
   t('Teaching');
   t('This field is used to further categorise academic staff.');
   t('Title');
