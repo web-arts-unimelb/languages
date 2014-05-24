@@ -1103,9 +1103,12 @@ function uom_custom_wysiwyg_editor_settings_alter(&$settings, $context) {
     $preferred_groupings[] = array('SelectAll', 'Find', 'Replace');
     $preferred_groupings[] = array('Flash', 'Smiley');
     // Create a grouping without Image (and IMCE) in case of not site admin.
-    if (in_array('site admin', $GLOBALS['user']->roles)) {
+		if (in_array('site admin', $GLOBALS['user']->roles)) {
       $preferred_groupings[] = array('Anchor', 'Image', 'linkit', 'Link', 'Unlink', 'wysiwyg_fields_field_page_image', 'wysiwyg_fields_field_page_document', 'wysiwyg_fields_field_event_image', 'wysiwyg_fields_field_event_document', 'wysiwyg_fields_field_landingpage_doc_uploader', 'wysiwyg_fields_field_account_document', 'wysiwyg_fields_field_account_image',);
-    }
+		}
+		else if(in_array('admin', $GLOBALS['user']->roles)) {
+			$preferred_groupings[] = array('Anchor', 'Image', 'linkit', 'Link', 'Unlink', 'wysiwyg_fields_field_page_image', 'wysiwyg_fields_field_page_document', 'wysiwyg_fields_field_event_image', 'wysiwyg_fields_field_event_document', 'wysiwyg_fields_field_landingpage_doc_uploader', 'wysiwyg_fields_field_account_document', 'wysiwyg_fields_field_account_image',);
+		}				
     else {
       $preferred_groupings[] = array('linkit', 'Link', 'Unlink', 'wysiwyg_fields_field_page_image', 'wysiwyg_fields_field_page_document', 'wysiwyg_fields_field_event_image', 'wysiwyg_fields_field_event_document', 'wysiwyg_fields_field_landingpage_doc_uploader', 'wysiwyg_fields_field_account_document', 'wysiwyg_fields_field_account_image',);
     }
@@ -1154,8 +1157,11 @@ function uom_custom_wysiwyg_editor_settings_alter(&$settings, $context) {
 
   // Unfortunately, unsetting the 'Image' button means the whole group it is
   // a part of is no longer displayed. Thus, 'Image' is put in a group by
-  // istself further up.
-  if (!in_array('site admin', $GLOBALS['user']->roles)) {
+	// istself further up.
+	if (in_array('site admin', $GLOBALS['user']->roles) or in_array('admin', $GLOBALS['user']->roles)) {
+
+	}
+	else {	
     foreach ($settings['toolbar'] as $group => $toolbar) {
       foreach ($toolbar as $idx => $button) {
         if ($button == 'Image') {
@@ -1164,7 +1170,9 @@ function uom_custom_wysiwyg_editor_settings_alter(&$settings, $context) {
       }
     }
     unset($settings['filebrowserBrowseUrl']);
-  }
+	}
+
+
 }
 
 /**
